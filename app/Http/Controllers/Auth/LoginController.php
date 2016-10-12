@@ -27,7 +27,7 @@ class LoginController extends Controller
      * @var string
      */
 
-    //protected $redirectTo = '/manage/users/dashboard';
+    protected $redirectTo;
 
 
     /**
@@ -37,6 +37,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        //$this->redirectTo = '/manage/users/'.Auth::user()->getUsername().'/dashboard';
         $this->middleware('guest', ['except' => 'logout']);
+
     }
 }
