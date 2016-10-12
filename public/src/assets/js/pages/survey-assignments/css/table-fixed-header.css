@@ -1,0 +1,51 @@
+/*table .header-fixed {*/
+    /*position: fixed;*/
+    /*top: 50px;*/
+    /*!*left: 0;*!*/
+    /*!*right: 0;*!*/
+    /*z-index: 1020; !* 10 less than .navbar-fixed to prevent any overlap *!*/
+
+/*}*/
+/*thead {*/
+    /*background-color: #eaeaea;*/
+/*}*/
+
+.table-fixed-header tbody {
+    display:block;
+    height:200px;
+    overflow:auto;
+}
+.table-fixed-header thead, .table-fixed-header tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+.table-fixed-header thead {
+    /*width: calc( 100% - 1em )*/
+    width: 100%;
+}
+
+#searchClient{
+    display: block !important;
+    width: 100%;
+    padding: .9rem .75rem !important;
+    font-size: 1.3rem;
+    line-height: 1.25 !important;
+    color: #55595c !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    -webkit-background-clip: padding-box !important;
+    background-clip: padding-box !important;
+    border: 1px solid rgba(0,0,0,.15) !important;
+    border-radius: .25rem !important;
+}
+
+.table-fixed-header tbody tr td, .table-fixed-header thead tr th{
+    padding: 0px;
+    padding-top: 10px;
+}
+
+body.modal-open {
+    overflow: auto;
+    padding-right: 0 !important;
+}

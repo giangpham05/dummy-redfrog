@@ -1,0 +1,183 @@
+/*.table-striped tbody > tr:hover {*/
+    /*background-color: #b598ea;*/
+/*}*/
+
+/*.table-striped > tbody > tr:nth-of-type(2n+1) {*/
+    /*background: white;*/
+/*}*/
+
+/*.table-striped > tbody > tr:nth-of-type(2n+1):hover {*/
+    /*background-color: #b598ea;*/
+/*}*/
+
+/*.table-bordered > thead > tr > th,*/
+/*.table-bordered > tbody > tr > th,*/
+/*.table-bordered > tfoot > tr > th,*/
+/*.table-bordered > thead > tr > td,*/
+/*.table-bordered > tbody > tr > td,*/
+/*.table-bordered > tfoot > tr > td*/
+/*{*/
+    /*border: 0px solid #ddd;*/
+    /*!*cursor: hand;*!*/
+    /*outline: 0;*/
+/*}*/
+
+/*.table-bordered > tbody > tr > td*/
+/*{*/
+    /*!*border-top: 1px solid #ddd !important;*!*/
+    /*border-bottom: 1px solid #ddd !important;*/
+/*}*/
+
+/*.table-bordered > thead> tr > th{*/
+    /*border-bottom: 1px solid #ddd !important;*/
+/*}*/
+/*.table-bordered thead tr th {*/
+    /*padding: 10px;*/
+    /*border: 0px solid #eee;*/
+/*}*/
+
+.container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.col-lg-half-1{
+    width:4.166666665%;
+}
+.col-lg-5-half{
+    width:45.833333315%;
+}
+.surveys-homescreen-list-header, .surveys-homescreen-item-section{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/* ==========ALL SURVEYS============= */
+.surveys-homescreen-item-section .header-dropdown {
+    position: relative;
+    /*top: 20px;*/
+    right: 15px;
+    list-style: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.surveys-homescreen-item-section .header-dropdown i{
+    font-size: 20px;
+    color: #999;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.surveys-homescreen-list-item-cell .dropdown i:hover{
+    color: black;
+}
+.surveys-homescreen-list-header {
+    background: #eeeeee;
+    bottom: auto;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 500;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    outline: none;
+    /*position: relative;*/
+}
+
+.surveys-homescreen-item-section {
+    /*border-top: 1px solid #c4c4c4;*/
+    /*border-left: 1px solid #d3d3d3;*/
+    /*border-right: 1px solid #d3d3d3;*/
+    /*border-top: 1px solid #d3d3d3;*/
+    box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+}
+
+.surveys-homescreen-list-item {
+    background-color: #fff;
+    border-top: 1px solid #e3e3e3;
+    color: #444;
+    cursor: pointer;
+    /*display: -webkit-box;*/
+    /*display: -moz-box;*/
+    /*display: -ms-flexbox;*/
+    /*display: -webkit-flex;*/
+    /*display: flex;*/
+
+}
+
+.surveys-homescreen-list-item:hover{
+    background-color: #b099db;
+}
+
+.surveys-homescreen-list-item-surveyname .icon-empty:before{
+    left: 4px;
+    vertical-align: middle;
+    margin-right: 3px;
+    height: 18px;
+    width: 18px;
+    /*position: absolute;*/
+    display: inline-block;
+    margin-top: 1px;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50px;
+    box-shadow: 0 0 3px #444;
+    box-sizing: content-box;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 18px;
+    content: '-';
+    background-color: red;
+    /*display: none;*/
+}
+
+.surveys-homescreen-list-item-surveyname .special:before{
+    content: '+';
+    background-color: #337ab7;
+}
+
+.surveys-homescreen-list-item-cell .icon .material-icons
+{
+    /*margin-top: 2px;*/
+}
+
+.surveys-homescreen-list-item-cell{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* ==========SURVEY ASSIGNMENTS============= */
+
+
+.card .survey-assign-container{
+    padding: 20px;
+    cursor: pointer;
+}
+
+
+/*.survey-assignments-container .overflow-cell{*/
+    /*white-space: nowrap;*/
+    /*width: 100%;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+/*}*/
+#clientFromDialog{
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-top: 1px solid rgb(238, 238, 238);
+    font-weight: bold;
+    margin-top: 3px;
+    padding-top:10px;
+    padding-bottom:10px;
+    display: none;
+}
+
+.surveys-homescreen-list-item-cell{
+    padding: 10px;
+    border-top: 1px solid #e3e3e3;
+    /*border-bottom: 1px solid #e3e3e3;*/
+    color: #444;
+}
