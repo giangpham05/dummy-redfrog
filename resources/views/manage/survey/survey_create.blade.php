@@ -52,7 +52,7 @@
 
 
         }
-        load_js();
+        //load_js();
     </script>
 @stop
 @section('allSurveyCss')
