@@ -283,6 +283,6 @@
 
 
     <script type="text/javascript" src="{{ URL::asset('src/assets/js/demo.js') }}"></script>
-    <script id="customScript" type="text/javascript" src="{{ URL::asset('src/assets/js/survey_create.js') }}?v=<?php echo date("YmdHis"); ?>"></script>
+    <script id="customScript" type="text/javascript" src="/src/assets/js/survey_create.js?v=<?php echo date("YmdHis"); ?>"></script>
 @stop
 
