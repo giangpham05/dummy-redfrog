@@ -25,7 +25,7 @@ class CreateQuestionsTable extends Migration
             $table->timestamp('created_at');
 
             $table->tinyInteger('inheritFlag')->default(0);
-            $table->tinyInteger('orderNo')->default(null);
+            $table->tinyInteger('orderNo')->nullable();
 
             $table->foreign('question_types_id')
                 ->references('id')->on('question_types')

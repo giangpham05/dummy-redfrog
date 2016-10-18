@@ -28,11 +28,13 @@ class SurveyAssignmentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($username)
+    public function create()
     {
         $user = Auth::user();
         $clients = $user->clients;
-        return view('manage/therapy/survey_assignments/therapy_survey_assign_create')->with('clients',$clients);
+        $surveys = $user->surveys;
+        return view('manage/therapy/survey_assignments/therapy_survey_assign_create')
+            ->with(['surveys' => $surveys, 'clients' => $clients]);
     }
 
     /**

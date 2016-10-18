@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
+    @yield('header_script')
     @yield('css')
 
 </head>
@@ -35,15 +36,15 @@
 <div class="overlay"></div>
 <!-- #END# Overlay For Sidebars -->
 <!-- Search Bar -->
-<div class="search-bar">
-    <div class="search-icon">
-        <i class="material-icons">search</i>
-    </div>
-    <input type="text" placeholder="START TYPING...">
-    <div class="close-search">
-        <i class="material-icons">close</i>
-    </div>
-</div>
+{{--<div class="search-bar">--}}
+    {{--<div class="search-icon">--}}
+        {{--<i class="material-icons">search</i>--}}
+    {{--</div>--}}
+    {{--<input type="text" placeholder="START TYPING...">--}}
+    {{--<div class="close-search">--}}
+        {{--<i class="material-icons">close</i>--}}
+    {{--</div>--}}
+{{--</div>--}}
 <!-- #END# Search Bar -->
 
 
@@ -80,7 +81,7 @@
 
 <script type="text/javascript">
     var token = '{{Session::token()}}';
-    var url = '{{route('updateTheme')}}';
+    var url_theme = '{{route('updateTheme')}}';
 </script>
 
 </body>

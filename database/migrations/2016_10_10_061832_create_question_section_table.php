@@ -19,7 +19,7 @@ class CreateQuestionSectionTable extends Migration
             $table->integer('question_id')->unsigned();
 
             $table->tinyInteger('inheritFlag')->default(0);
-            $table->tinyInteger('orderNo')->default(null);
+            $table->tinyInteger('orderNo')->nullable();
 
             $table->primary(['section_id', 'question_id']);
             $table->foreign('section_id')

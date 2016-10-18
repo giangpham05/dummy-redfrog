@@ -24,7 +24,7 @@ function skinChanger() {
         $body.addClass('theme-' + $this.data('theme'));
 
         $.ajax({
-            url: url,
+            url: url_theme,
             method: "POST",
             data: {theme: 'theme-' + $this.data('theme'), _token: token, active:'active', id: this.id}
 

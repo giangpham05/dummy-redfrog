@@ -8,6 +8,12 @@ class Survey extends Model
 {
     //protected $table = 'surveys';
     //protected $sections;
+
+    public $timestamps = false;
+    protected $fillable = [
+        'user_id', 'strSurveyName', 'strSurveyDesc','slug'
+    ];
+
     public function sections()
     {
         //return $this->belongsToMany('App\Models\Section');

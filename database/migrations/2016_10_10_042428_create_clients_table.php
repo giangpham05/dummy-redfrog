@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('id',128);
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('activeFlag')->default(0);
-            $table->date('date_activated')->default(null);
+            $table->date('date_activated')->nullable();
             $table->timestamps();
             $table->primary('id');
 

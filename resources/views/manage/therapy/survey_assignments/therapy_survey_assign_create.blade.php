@@ -123,81 +123,86 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="select-surveys">
-                                {{-- MAIN FORM--}}
-                                <form id="form_validation" onsubmit="return validate_form();"
-                                      action="" method="post">
-                                    {{--{{ URL::route('users.survey-assignments.store',['user' => Auth::user()->getUsername]) }}--}}
-                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                    <div>
-                                        <div class="row" id="clients-selected">
-                                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-3"><h5 style="padding-left: 10px">Client</h5></div>
-                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-2">
-                                                        <button type="button" class="btn btn-info btn-circle waves-effect waves-circle waves-light" id="btnClientSelected">
-                                                            <i class="material-icons">touch_app</i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-2">
-                                                        <button type="button" class="btn bg-deep-orange btn-circle waves-effect waves-circle waves-light">
-                                                            <i class="material-icons">add</i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <div id="clientFromDialog">
-                                                            {{--<input name="radClientSelect" type="radio" id="radClientSelect" value="" class="radio-col-red"/>--}}
-                                                            {{--<label for="radClientSelect" style="position: relative"></label>--}}
-                                                            <p type="text" name="clientSelect" id="clientSelect"/>
+                            {{--@if($surveys->isEmpty())--}}
+                                {{--<h1>There is no survey select. Click here to create one</h1>--}}
+                            {{--@else--}}
+                                <div class="select-surveys">
+                                    {{-- MAIN FORM--}}
+                                    <form id="form_validation" onsubmit="return validate_form();"
+                                          action="" method="post">
+                                        {{--{{ URL::route('users.survey-assignments.store',['user' => Auth::user()->getUsername]) }}--}}
+                                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                        <div>
+                                            <div class="row" id="clients-selected">
+                                                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 col-md-2 col-sm-1 col-xs-3"><h5 style="padding-left: 10px">Client</h5></div>
+                                                        <div class="col-lg-2 col-md-2 col-sm-1 col-xs-2">
+                                                            <button type="button" class="btn btn-info btn-circle waves-effect waves-circle waves-light" id="btnClientSelected">
+                                                                <i class="material-icons">touch_app</i>
+                                                            </button>
                                                         </div>
-                                                        <input type="hidden" name="clientSelectHidden" id="clientSelectHidden" class="form-control"/>
+                                                        <div class="col-lg-2 col-md-2 col-sm-1 col-xs-2">
+                                                            <button type="button" class="btn bg-deep-orange btn-circle waves-effect waves-circle waves-light">
+                                                                <i class="material-icons">add</i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div id="clientFromDialog">
+                                                                {{--<input name="radClientSelect" type="radio" id="radClientSelect" value="" class="radio-col-red"/>--}}
+                                                                {{--<label for="radClientSelect" style="position: relative"></label>--}}
+                                                                <p type="text" name="clientSelect" id="clientSelect"/>
+                                                            </div>
+                                                            <input type="hidden" name="clientSelectHidden" id="clientSelectHidden" class="form-control"/>
+                                                        </div>
                                                     </div>
-                                                </div>
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <table class="table table-responsive" id="surveySelect">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    Survey Name
-                                                </th>
-                                                <th>Due</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {{--@foreach($surveys as $survey)--}}
-                                                {{--<tr>--}}
-                                                    {{--<td>--}}
-                                                        {{--<input type="checkbox" id="survey{{$survey->id}}" name="surveyChecked[]" value="{{$survey->id}}"--}}
-                                                               {{--class="filled-in chk-col-green" />--}}
-                                                        {{--<label for="survey{{$survey->id}}">{{$survey->strSurveyName}}</label>--}}
+                                        <div>
+                                            <table class="table table-responsive" id="surveySelect">
+                                                <thead>
+                                                <tr>
+                                                    <th>
+                                                        Survey Name
+                                                    </th>
+                                                    <th>Due</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($surveys as $survey)
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" id="survey{{$survey->id}}" name="surveyChecked[]" value="{{$survey->id}}"
+                                                                   class="filled-in chk-col-green" />
+                                                            <label for="survey{{$survey->id}}">{{$survey->strSurveyName}}</label>
 
-                                                    {{--</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--<div class="form-line">--}}
-                                                            {{--<input type="text" class="datepicker form-control" data-survey="{{$survey->strSurveyName}}"--}}
-                                                                   {{--name="dueDate[]" placeholder="Please choose a date...">--}}
-                                                        {{--</div>--}}
-                                                    {{--</td>--}}
-                                                {{--</tr>--}}
-                                            {{--@endforeach--}}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-line">
+                                                                <input type="text" class="datepicker form-control" data-survey="{{$survey->strSurveyName}}"
+                                                                       name="dueDate[]" placeholder="Please choose a date...">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 col-lg-2 col-md-2 col-sm-3">
-                                            <button class="btn bg-red btn-block btn-lg waves-effect" type="reset" id="resetlAll">RESET</button>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-lg-2 col-md-2 col-sm-3">
+                                                <button class="btn bg-red btn-block btn-lg waves-effect" type="reset" id="resetlAll">RESET</button>
+                                            </div>
+                                            <div class="col-xs-6 col-lg-2 col-md-2 col-sm-3">
+                                                <button class="btn bg-red btn-block btn-lg waves-effect" id="btnAssign" type="submit">ASSIGN</button>
+                                            </div>
                                         </div>
-                                        <div class="col-xs-6 col-lg-2 col-md-2 col-sm-3">
-                                            <button class="btn bg-red btn-block btn-lg waves-effect" id="btnAssign" type="submit">ASSIGN</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                            {{--@endif--}}
+
 
                         </div>
                     </div>

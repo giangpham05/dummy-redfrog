@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Survey;
 use App\Http\Requests;
-//use Symfony\Component\HttpFoundation\Session\Session;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class SurveysController extends Controller
 {
@@ -17,33 +16,15 @@ class SurveysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() //like showStatistics
+    public function index()
     {
-        //showStatistics needs to be implemented here.
-        return view('manage/dashboard');
+        $surveys = Auth::user()->surveys;
+        return view('manage/survey/survey_show')->with('surveys',$surveys);;
     }
 
     public function showCurrentSurveys()
     {
-        $id = Auth::user()->getId();
 
-        //get surveys belongs to the current user
-        $surveys = \App\Models\User::findOrFail($id)->surveys();
-        if(Auth::user()->isAdmin())
-        {
-            return view('manage/admin/survey/admin_survey_show.blade.php')
-                ->with('surveys',$surveys);
-        }
-        else
-        {
-            //therapy user
-            //get template surveys
-            $templateSurveys = Survey::where('role', '<', 2)->get();
-
-            return view('manage/therapy/survey/therapy_survey_show.blade.php')
-                ->with(['survey' => $surveys, 'templateSurveys' => $templateSurveys]);
-
-        }
     }
 
     /**
@@ -51,7 +32,24 @@ class SurveysController extends Controller
      */
     public function create()
     {
+        $id = Auth::user()->getId();
 
+        //get surveys belongs to the current user
+
+        if(Auth::user()->isAdmin())
+        {
+            return view('manage/survey/survey_create');
+        }
+        else if(Auth::user()->isTherapist())
+        {
+            //therapy user
+            //get template surveys
+            $templateSurveys = Survey::where('inheritFlag', '=', 0)->get();
+
+            return view('manage/survey/survey_create')
+                ->with(['templateSurveys' => $templateSurveys]);
+
+        }
     }
 
     /**

@@ -42,29 +42,52 @@
 @stop
 
 @section('main')
+    <?php $username = Auth::user()->getUsername();?>
     <section class="content">
         <div class="container-fluid">
             @include('manage.includes.block-header', ['title' => 'Surveys', 'icon'=>'view_list'])
-            <div class="row clearfix">
+            <div class="row clearfix" style="margin-top: 50px">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>
-                                ALL SURVEYS
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                        @if(Auth::user()->isAdmin())
+                            <div class="header row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h2 style="display: inline-block; padding-right: 5px">
+                                        ALL SURVEYS
+                                    </h2>
+                                    <a href="{{URL::route('users.surveys.create',['user'=>$username])}}" class="btn bg-red waves-effect waves-light">+ Create survey</a>
+                                </div>
+
+                                {{--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">--}}
+                                   {{----}}
+                                {{--</div>--}}
+                                {{--<div class="col-lg-4 col-md-4 col-sm-8 col-xs-8" style="display:inline-block">--}}
+                                    {{--<button type="button" class="btn bg-deep-orange btn-circle waves-effect waves-circle waves-light">--}}
+                                        {{--<i class="material-icons">add</i>Create survey--}}
+                                    {{--</button>--}}
+
+                                {{--</div>--}}
+                            </div>
+                        @else
+                            {{-- Need to have something to do with survey selection created by admins --}}
+                            <div class="header">
+                                <h2>
+                                    ALL SURVEYS
+                                </h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);">Action</a></li>
+                                            <li><a href="javascript:void(0);">Another action</a></li>
+                                            <li><a href="javascript:void(0);">Something else here</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                         {{-- For loop to get surveys go here --}}
 
                         <div class="surveys-homescreen-itemholder-content">
@@ -75,108 +98,49 @@
                                         Survey By Title
                                     </div>
                                     <div class="surveys-homescreen-cell surveys-homescreen-cell-created-at col-lg-3 col-md-3 col-sm-3 hidden-xs">
-                                        create at
+                                        Created At
                                     </div>
                                     <div class="surveys-homescreen-cell surveys-homescreen-cell-updated-at col-lg-3 col-md-3 col-sm-3 hidden-xs">
-                                        update at
+                                        Updated At
                                     </div>
                                     <div class="surveys-homescreen-cell surveys-homescreen-cell-buttons col-lg-1 col-md-1 col-sm-1 col-xs-2" style="text-align: right;">
                                         <i class="material-icons" style="vertical-align: middle; display: inline-block;">sort_by_alpha</i>
                                     </div>
                                 </div>
                                 <div class="surveys-homescreen-item-section row">
-                                    <div class="surveys-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10" style="display: inline-flex;">
-                                                <div class="icon-empty special visible-xs-inline"></div>
-                                                <i class="material-icons" style="display: inline-block">view_list</i>
-                                                <span class="surveys-homescreen-list-item-survey-value" style="display: inline-block; margin-top: 2px;">
-                                                    Untitled form
+                                    @foreach($surveys as $survey)
+                                        <div class="surveys-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10" style="display: inline-flex;">
+                                                    <div class="icon-empty special visible-xs-inline"></div>
+                                                    <i class="material-icons" style="display: inline-block">view_list</i>
+                                                    <span class="surveys-homescreen-list-item-survey-value" style="display: inline-block; margin-top: 2px;">
+                                                    {{$survey->strSurveyName}}
                                                 </span>
+                                                </div>
+                                                <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-created-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Created at">{{$survey->created_at}}</div>
+                                                <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-updated-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Updated at">{{$survey->updated_at}}</div>
+                                                <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-popup col-lg-1 col-md-1 col-sm-1 col-xs-2"
+                                                     role="button" aria-haspopup="true"
+                                                     aria-label="More actions. Popup button." aria-expanded="false" style="padding-right: 0px">
+                                                    <ul class="header-dropdown m-r--5" style="float: right;">
+                                                        <li class="dropdown">
+                                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="material-icons">more_vert</i>
+                                                            </a>
+                                                            <ul class="dropdown-menu pull-right">
+                                                                <li><a href="javascript:void(0);">Action</a></li>
+                                                                <li><a href="javascript:void(0);">Another action</a></li>
+                                                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-created-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Owned by me">me</div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-updated-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Last opened by me 3:02 PM">3:02 PM</div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-popup col-lg-1 col-md-1 col-sm-1 col-xs-2"
-                                                 role="button" aria-haspopup="true"
-                                                 aria-label="More actions. Popup button." aria-expanded="false" style="padding-right: 0px">
-                                                <ul class="header-dropdown m-r--5" style="float: right;">
-                                                    <li class="dropdown">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="material-icons">more_vert</i>
-                                                        </a>
-                                                        <ul class="dropdown-menu pull-right">
-                                                            <li><a href="javascript:void(0);">Action</a></li>
-                                                            <li><a href="javascript:void(0);">Another action</a></li>
-                                                            <li><a href="javascript:void(0);">Something else here</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
+
                                         </div>
+                                    @endforeach
 
-                                    </div>
-
-                                    <div class="surveys-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10" style="display: inline-flex;">
-                                                <div class="icon-empty special visible-xs-inline"></div>
-                                                <i class="material-icons" style="display: inline-block">view_list</i>
-                                                <span class="surveys-homescreen-list-item-survey-value" style="display: inline-block; margin-top: 2px;">
-                                                    Untitled form
-                                                </span>
-                                            </div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-created-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Owned by me">me</div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-updated-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Last opened by me 3:02 PM">3:02 PM</div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-popup col-lg-1 col-md-1 col-sm-1 col-xs-2"
-                                                 role="button" aria-haspopup="true"
-                                                 aria-label="More actions. Popup button." aria-expanded="false" style="padding-right: 0px">
-                                                <ul class="header-dropdown m-r--5" style="float: right;">
-                                                    <li class="dropdown">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="material-icons">more_vert</i>
-                                                        </a>
-                                                        <ul class="dropdown-menu pull-right">
-                                                            <li><a href="javascript:void(0);">Action</a></li>
-                                                            <li><a href="javascript:void(0);">Another action</a></li>
-                                                            <li><a href="javascript:void(0);">Something else here</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="surveys-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10" style="display: inline-flex;">
-                                                <div class="icon-empty special visible-xs-inline"></div>
-                                                <i class="material-icons" style="display: inline-block">view_list</i>
-                                                <span class="surveys-homescreen-list-item-survey-value" style="display: inline-block; margin-top: 2px;">
-                                                    Untitled form
-                                                </span>
-                                            </div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-created-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Owned by me">me</div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-updated-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Last opened by me 3:02 PM">3:02 PM</div>
-                                            <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-popup col-lg-1 col-md-1 col-sm-1 col-xs-2"
-                                                 role="button" aria-haspopup="true"
-                                                 aria-label="More actions. Popup button." aria-expanded="false" style="padding-right: 0px">
-                                                <ul class="header-dropdown m-r--5" style="float: right;">
-                                                    <li class="dropdown">
-                                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="material-icons">more_vert</i>
-                                                        </a>
-                                                        <ul class="dropdown-menu pull-right">
-                                                            <li><a href="javascript:void(0);">Action</a></li>
-                                                            <li><a href="javascript:void(0);">Another action</a></li>
-                                                            <li><a href="javascript:void(0);">Something else here</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                    </div>
 
                                 </div>
                             </div>
@@ -222,24 +186,6 @@
     <!-- Custom Js -->
     <script type="text/javascript" src="{{ URL::asset('src/assets/js/admin.js') }}"></script>
     <script>
-        //        $(document).ready(function() {
-        //            $('#example').DataTable( {
-        //                responsive: {
-        //                    details: {
-        //                        display: $.fn.dataTable.Responsive.display.modal( {
-        //                            header: function ( row ) {
-        //                                var data = row.data();
-        //                                return 'Details for '+data[0]+' '+data[1];
-        //                            }
-        //                        } ),
-        //                        renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-        //                            tableClass: 'table'
-        //                        } )
-        //                    }
-        //                }
-        //            } );
-        //        } );
-
         $(document).ready(function() {
             $('.surveys-homescreen-list-item-surveyname').find('.icon-empty').click( function(){
                 $(this).toggleClass('special');

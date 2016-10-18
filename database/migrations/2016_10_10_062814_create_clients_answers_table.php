@@ -22,7 +22,7 @@ class CreateClientsAnswersTable extends Migration
 
             $table->timestamp('created_at');
             $table->tinyInteger('isActive')->default(1);
-            $table->date('date_deactivated')->default(null);
+            $table->date('date_deactivated')->nullable();
 
             $table->primary(['uuid', 'survey_id', 'question_id']);
 

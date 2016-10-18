@@ -41,48 +41,53 @@
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
                 <li class="{{ Route::is('manage_dashboard') ? 'active': null }}">
-                    <a href="{{ URL::route('manage_dashboard',['user' => Auth::user()->getUsername()]) }}">
+                    <a href="{{ URL::route('manage_dashboard') }}">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </a>
                 </li>
-
-                <li class="{{ set_active(['all-surveys', 'all-surveys/*']) }}">
-                    <a href="javascript:void(0);" class="menu-toggle">
+                <?php $username = Auth::user()->getUsername();
+                    $survey_route = 'manage/users/'.$username.'/surveys';
+                $survey_route_append = $survey_route.'/*';
+                ?>
+                <li class="{{ set_active([$survey_route, $survey_route_append]) }}">
+                    <a href="{{URL::route('users.surveys.index',['user'=>$username])}}">
                         <i class="material-icons">view_list</i>
                         <span>Surveys</span>
                     </a>
-                    <ul class="ml-menu">
+                    {{--<ul class="ml-menu">--}}
+                        {{--<li class="{{ set_active([$survey_route]) }}">--}}
+                            {{--<a href="{{URL::route('users.surveys.index',['user'=>$username])}}">Show current</a>--}}
+                        {{--</li>--}}
+
                         {{--{{ Route::is('admin.surveys.show') ? 'active': null }}--}}
-                        <li class="">
-                            <a href="">Survey Normal Tables</a>
+                        {{--<li class="{{ set_active([$survey_route.'/create']) }}">--}}
+                            {{--<a href="{{URL::route('users.surveys.create', ['user' => $username])}}">Create new</a>--}}
                             {{--{{ URL::route('admin.surveys.show') }}--}}
-                        </li>
-                        <li>
-                            <a href="pages/tables/jquery-datatable.html">Jquery Datatables</a>
-                        </li>
-                        <li>
-                            <a href="pages/tables/editable-table.html">Editable Tables</a>
-                        </li>
-                    </ul>
+                        {{--</li>--}}
+
+                        {{--<li>--}}
+                            {{--<a href="pages/tables/editable-table.html">Edit</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
                 </li>
 
                 @if(Auth::user()->isTherapist())
                     <?php
-                        $username = Auth::user()->getUsername();
-                    $user_assignment_route = 'manage/users/'.$username.'/survey-assignments';
-                    $user_assignment_route_append = $user_assignment_route.'/*';
+
+                    $survey_assignment_route = 'manage/users/'.$username.'/survey-assignments';
+                    $survey_assignment_route_append = $survey_assignment_route.'/*';
                     ?>
-                    <li class="{{ set_active([$user_assignment_route, $user_assignment_route_append]) }}">
+                    <li class="{{ set_active([$survey_assignment_route, $survey_assignment_route_append]) }}">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Survey Assignments</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class="{{ set_active([$user_assignment_route]) }}">
+                            <li class="{{ set_active([$survey_assignment_route]) }}">
                                 <a href="{{ URL::route('users.survey-assignments.index',['user' => $username]) }}">Show All</a>
                             </li>
-                            <li class="{{ set_active([$user_assignment_route.'/create']) }}">
+                            <li class="{{ set_active([$survey_assignment_route.'/create']) }}">
                                 <a href="{{ URL::route('users.survey-assignments.create',['user' => $username]) }}">Create New</a>
                             </li>
                         </ul>

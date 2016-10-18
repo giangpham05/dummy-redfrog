@@ -17,12 +17,10 @@
 
 
 Route::get('/', function (){
-//    $faker = \Faker\Factory::create();
-//    for($i = 0; $i<10;$i++){
-//        var_dump($faker->safeEmail);
-//    }
-    return view('welcome');
-})->middleware('guest');;
+    //return view('welcome');
+    return redirect(route('login'));
+
+})->middleware('guest');
 
 //Route::get('/login',function (){
 //    return view('auth/login');
@@ -38,6 +36,17 @@ Route::get('/script-disabled', function (){
         session(['id' => $request['id']]);
         return response()->json(['message' => $request['theme']]);
     })->name('updateTheme');
+
+//GET QUESTION
+Route::get('/survey/question', function (){
+    return response()->json(['question' => view('manage/ui_render/question_render')->render()]);
+})->name('getQuestion');
+
+Route::get('/survey/question/question_type', function (\Illuminate\Http\Request $request){
+
+    $view = view('manage/ui_render/question_type_render')->with('question_option', $request['question_option'])->render();
+    return response()->json(['questionOption' => $view]);
+})->name('getQuestionOption');
 
 //Route::group(['middleware' => ['web']], function (){
 //
@@ -146,7 +155,7 @@ Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginF
 Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory']],function (){
 
 
-    Route::get('users/{user}/dashboard', 'HomeController@index')->name('manage_dashboard');
+    Route::get('users/dashboard', 'HomeController@index')->name('manage_dashboard');
     //Route::resource('{username}','UsersController');
     //Route::resource('survey-assignments','SurveyAssignmentsController');
     Route::resource('users','UsersController');

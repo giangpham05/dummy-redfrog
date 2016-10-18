@@ -20,7 +20,7 @@ class CreateSectionSurveyTable extends Migration
 
             $table->timestamp('created_at');
             $table->tinyInteger('inheritFlag')->default(0);
-            $table->tinyInteger('orderNo')->default(null);
+            $table->tinyInteger('orderNo')->nullable();
 
             $table->primary(['section_id', 'survey_id']);
             $table->foreign('section_id')

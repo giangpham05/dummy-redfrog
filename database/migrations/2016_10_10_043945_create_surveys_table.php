@@ -20,7 +20,7 @@ class CreateSurveysTable extends Migration
             $table->string('strSurveyName',200);
             $table->text('strSurveyDesc');
             $table->string('slug',128)->unique();
-            $table->date('date_activated')->default(null);
+            $table->date('date_activated')->nullable();
             $table->tinyInteger('isActive')->default(0);
             $table->tinyInteger('inheritFlag')->default(0);
             $table->timestamps();

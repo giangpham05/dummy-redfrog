@@ -4004,7 +4004,7 @@ section.content {
 /* Bootstrap Select ============================ */
 .bootstrap-select {
   box-shadow: none !important;
-  border-bottom: 1px solid #ddd !important;
+  /*border-bottom: 1px solid #ddd !important;*/
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;

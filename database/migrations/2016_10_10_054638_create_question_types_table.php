@@ -17,7 +17,7 @@ class CreateQuestionTypesTable extends Migration
         Schema::create('question_types', function (Blueprint $table) {
             $table->tinyInteger('id')->autoIncrement();
             $table->string('strTypeName',50);
-            $table->text('strTypeDesc');
+            $table->text('strTypeDesc')->nullable();
         });
     }
 

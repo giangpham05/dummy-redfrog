@@ -20,7 +20,7 @@ class CreateSurveyAssignmentsTable extends Migration
             $table->timestamp('assign_timestamp');
             $table->dateTime('due_timestamp');
             $table->enum('assign_status', ['Complete', 'Incomplete'])->default('Incomplete');
-            $table->date('date_activated')->default(null);
+            $table->date('date_activated')->nullable();
             $table->tinyInteger('active_flag')->default(1);
             $table->primary(['uuid', 'survey_id']);
 

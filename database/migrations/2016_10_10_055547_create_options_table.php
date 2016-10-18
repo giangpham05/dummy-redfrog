@@ -17,10 +17,10 @@ class CreateOptionsTable extends Migration
         Schema::create('options', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('questionOption',100);
-            $table->tinyInteger('question_types_id');
+            $table->tinyInteger('question_id');
             $table->tinyInteger('inheritFlag');
-            $table->foreign('question_types_id')
-                ->references('id')->on('question_types')
+            $table->foreign('question_id')
+                ->references('id')->on('questions')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

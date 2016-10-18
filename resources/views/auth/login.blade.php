@@ -33,20 +33,20 @@
     </div>
     <div class="card">
         <div class="body">
+            @if ($errors->has('email'))
+                <div class="alert alert-danger">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </div>
+            @endif
             <form id="sign_in" role="form" method="POST" action="{{ url('/login') }}">
                 {{ csrf_field() }}
-                <div class="msg">Sign in to start your session</div>
+                <div class="msg">Log in to start your session</div>
                 <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                     <div class="form-line">
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                        @if ($errors->has('email'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
                 <div class="input-group">
@@ -69,7 +69,7 @@
                         <label for="rememberme">Remember Me</label>
                     </div>
                     <div class="col-xs-4">
-                        <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+                        <button class="btn btn-block bg-pink waves-effect" type="submit">LOG IN</button>
                     </div>
                 </div>
                 <div class="row m-t-15 m-b--20">
