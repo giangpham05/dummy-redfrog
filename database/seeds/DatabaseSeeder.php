@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         //$this->call(ClientsTableSeeder::class);
-        $this->call(SurveysTableSeeder::class);
+        //$this->call(SurveysTableSeeder::class);
+        $this->call(UsersSeeder::class);
 
         // supposed to only apply to a single connection and reset it's self
         // but I like to explicitly undo what I've done for clarity
