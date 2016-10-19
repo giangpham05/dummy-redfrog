@@ -54,6 +54,7 @@ $(document).ready(function () {
 
                 jlist.find('.survey_row_question').removeClass('survey_row_question_active');
                 jlist.find('.survey_row_question').last().addClass('survey_row_question_active');
+                jlist.find('.survey_row_question').show();
                 //survey_row_question
                 fireReorder();
             }
