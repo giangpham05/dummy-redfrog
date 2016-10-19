@@ -14,7 +14,6 @@
     </div>
 @elseif($question_option ==='short_answer')
     <div class="form-group">
-
         <div class="form-line" style="border-bottom-style: dotted;">
 
             <input type="text" class="" placeholder="Short-answer text"
@@ -23,13 +22,23 @@
     </div>
 @elseif($question_option ==='check_boxes')
     <div class="input-group">
-            <span class="input-group-addon">
-                <i class="material-icons">check_box_outline_blank</i>
-            </span>
+        <span class="input-group-addon">
+            <i class="material-icons">check_box_outline_blank</i>
+        </span>
         <div class="form-line">
-            <input type="text" class="form-control" value="Option 1">
+            <input type="text" class="form-control" value="" placeholder="Enter an answer choice">
         </div>
     </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="material-icons">check_box_outline_blank</i>
+        </span>
+        <div class="form-line">
+            <input type="text" class="form-control" value="" placeholder="Enter an answer choice">
+        </div>
+    </div>
+
 
 
 @elseif($question_option ==='multiple')
