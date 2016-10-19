@@ -20,12 +20,13 @@ class CreateQuestionsTable extends Migration
 
             $table->tinyInteger('question_types_id');
 
-            $table->tinyInteger('intAgeLower');
-            $table->tinyInteger('intAgeUpper');
+            $table->tinyInteger('intAgeLower')->nullable();
+            $table->tinyInteger('intAgeUpper')->nullable();
             $table->timestamp('created_at');
 
             $table->tinyInteger('inheritFlag')->default(0);
             $table->tinyInteger('orderNo')->nullable();
+            $table->tinyInteger('required')->default(0);
 
             $table->foreign('question_types_id')
                 ->references('id')->on('question_types')
