@@ -163,7 +163,18 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory
      * Survey routes for both admin and therapy
      */
     Route::get('users/{user}/surveys/current','SurveysController@showCurrentSurveys')->name('users.surveys.current');
-    Route::resource('users.surveys','SurveysController');
+
+//    Route::get(' manage/users/{user}/surveys','SurveysController@create')
+//        ->name('SurveysController@create');
+//
+//    Route::get('users/{user}/surveys/create/{survey}','SurveysController@create')
+//        ->name('users.surveys.create');
+//
+//    Route::get('users/{user}/surveys/create/{survey}','SurveysController@create')
+//        ->name('users.surveys.create');
+
+
+   Route::resource('users.surveys','SurveysController');
 
     /**
      * Routes belong to therapists
@@ -181,10 +192,10 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory
         /**
          * Survey response routes
          */
-        Route::get('survey-response','SurveyResponsesController@index')->name('survey-response.index');
-        Route::get('survey-response/{id}','SurveyResponsesController@show')->name('survey-response.show');
+        Route::get('users/{username}/survey-response','SurveyResponsesController@index')->name('survey-response.index');
+        Route::get('users/{username}/survey-response/{id}','SurveyResponsesController@show')->name('survey-response.show');
 
-        Route::delete('survey-response/{id}','SurveyResponsesController@destroy')->name('survey-response.destroy');
+        Route::delete('users/{username}/survey-response/{id}','SurveyResponsesController@destroy')->name('survey-response.destroy');
 
         /**
          * Client management routes
