@@ -52,8 +52,16 @@
 
 
         }
-        load_js();
+        //load_js();
     </script>
+
+    {{--<script language="JavaScript">--}}
+        {{--window.onbeforeunload = confirmExit;--}}
+        {{--function confirmExit()--}}
+        {{--{--}}
+            {{--return "You have attempted to leave this page.  If you have made any changes to the fields without clicking the Save button, your changes will be lost.  Are you sure you want to exit this page?";--}}
+        {{--}--}}
+    {{--</script>--}}
 @stop
 @section('allSurveyCss')
     <!-- JQuery DataTable Css -->
@@ -69,7 +77,7 @@
             {{-- @include('manage.includes.block-header', ['title' => 'Surveys', 'icon'=>'view_list'])--}}
 
             <div class="row clearfix" style="margin-top: -30px">
-                <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header" style="padding: 10px">
                             <h2 style="display: inline-block; padding-right: 5px">
@@ -105,63 +113,113 @@
 
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="survey-question-container">
                                         <div class="row" id="all_questions">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_row_question demo-no-swipe survey_row_question_active">
-                                                <div class="handle instant">&#9776;</div>
-                                                <div class="row">
-                                                    <div class="question-container" id="qID">
-                                                        <div class="col-lg-6 col-sm-12 col-xs-12" style="font-size: 24px">
-                                                            <select class="selectpicker" id="">
-                                                                <option value="paragraph" data-content="<span><i class='material-icons'>subject</i>Paragraph</span>">Paragraph</option>
-                                                                <option value="short_answer" data-content="<span><i class='material-icons'>short_text</i>Short answer</span>">Short answer</option>
-                                                                <option data-divider="true">divider</option>
-                                                                <option value="check_boxes" data-content="<span><i class='material-icons'>check_box</i>Checkboxes</span>">Checkboxes</option>
-                                                                <option value="multiple" data-content="<span><i class='material-icons'>radio_button_checked</i>Multiple choice</span>">Multiple choice</option>
-                                                                <option data-divider="true">divider</option>
-                                                                <option value="linear_scale" data-content="<span><i class='material-icons'>linear_scale</i>Linear scale</span>">Linear scale</option>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: 15px;">
-                                                            <div class="form-group">
-                                                                <div class="form-line">
-                                                                    <input id="" type="text" class="form-control" placeholder="Question" required autofocus style="font-size: 20px;"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 qs_options">
-                                                            <div class="form-group">
-
-                                                                <div class="form-line" style="border-bottom-style: dotted;">
-
-                                                                    <input type="text" class="" placeholder="Long-answer text"
-                                                                           disabled="true" aria-label="Long-answer text" style="border: none"/>
-                                                                </div>
-                                                                <div class="form-line" style="border-bottom-style: dotted;">
-
-                                                                    <input type="text" class="" disabled="true" aria-label="Long-answer text" style="border: none"/>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <div class="row more_options">
-                                                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 headerDivider">
-                                                                    <span><i class="material-icons">content_copy</i></span>
-                                                                    <span><i class="material-icons">delete</i></span>
-                                                                </div>
-                                                                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
-                                                                    <div class="switch">
-                                                                        <span style="font-weight: bold">Required</span>
-                                                                        <label><input type="checkbox"><span class="lever switch-col-red"></span></label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                            <div data-question-type="single-choice" class="question_container">
+                                                <div id="question-field-idnumber" data-question-id="question-id">
+                                                    <div class="no-editing">
+                                                        <h4>Question title</h4>
+                                                        <div>Question body</div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                        <div class="row" style="text-align: center; width:50%;margin:0 auto;">
+                                            <button type="button" id="create_question"
+                                                    class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Add a new
+                                                question
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        {{-- CREATATION OF SURVEY GOES HERE --}}
+
+                        <div class="">
+                            <article class="survey-page">
+                                <header>
+                                    <div class="survey-title-container">
+
+                                    </div>
+                                    <div class="survey-instructions-container">
+
+                                    </div>
+                                    <div class="section-title-container">
+
+                                    </div>
+                                </header>
+                                <section id="test">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                    </div>
+                                </section>
+                                <footer></footer>
+
+
+                            </article>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <div class="header" style="padding: 10px">
+                            <h2 style="display: inline-block; padding-right: 5px">
+                                CREATE SURVEY
+                            </h2>
+                            {{--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">--}}
+                            {{----}}
+                            {{--</div>--}}
+                            {{--<div class="col-lg-4 col-md-4 col-sm-8 col-xs-8" style="display:inline-block">--}}
+                            {{--<button type="button" class="btn bg-deep-orange btn-circle waves-effect waves-circle waves-light">--}}
+                            {{--<i class="material-icons">add</i>Create survey--}}
+                            {{--</button>--}}
+
+                            {{--</div>--}}
+
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="someid">
+                                <div class="row survey_container" id="survey_container">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_row_title">
+                                        <div class="form-group">
+                                            <div class="form-line" style="font-size: 28px">
+                                                <input type="text" class="form-control" placeholder="Survey name"
+                                                       value="Untitled Survey" style="font-size: 24px;font-weight: bold">
+                                            </div>
+
+                                            <div class="form-line" style="font-size: 28px">
+                                                <input type="text" class="form-control" placeholder="Survey description">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="survey-question-container">
+                                        <div class="row" id="all_questions">
+                                            <div data-question-type="single-choice" class="question_container">
+                                                <div id="question-field-idnumber" data-question-id="question-id">
+                                                    <div class="no-editing">
+                                                        <h4>Question title</h4>
+                                                        <div>Question body</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                        <div class="row" style="text-align: center; width:50%;margin:0 auto;">
+                                            <button type="button" id="create_question"
+                                                    class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Add a new
+                                                question
+                                            </button>
                                         </div>
                                     </div>
 
@@ -199,25 +257,25 @@
 
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 0px">
-                    <div class="col_sidebar" style="position: relative">
-                        <div id="sidebar">
+                {{--<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 0px">--}}
+                    {{--<div class="col_sidebar" style="position: relative">--}}
+                        {{--<div id="sidebar">--}}
                             {{--<button type="button" id="create_question"--}}
                                     {{--class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Add a new--}}
                                 {{--question--}}
                             {{--</button>--}}
 
-                            <button type="button" id="create_question" class="btn btn-default btn-circle waves-effect waves-circle waves-flat">
-                                <i class="material-icons">add_circle</i>
-                            </button>
+                            {{--<button type="button" id="create_question" class="btn btn-default btn-circle waves-effect waves-circle waves-flat">--}}
+                                {{--<i class="material-icons">add_circle</i>--}}
+                            {{--</button>--}}
 
-                            <button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-flat">
-                                <i class="material-icons">view_stream</i>
-                            </button>
+                            {{--<button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-flat">--}}
+                                {{--<i class="material-icons">view_stream</i>--}}
+                            {{--</button>--}}
 
-                        </div>
-                    </div>
-                </div>
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
             <!-- #END# Basic Examples -->
         </div>
