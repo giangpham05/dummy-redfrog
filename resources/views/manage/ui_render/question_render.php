@@ -52,6 +52,19 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="float: right">
+                        <div class="col-xs-4" style="float: right">
+                            <Button class="btn btn-block bg-black waves-effect" type="submit">CANCEL</Button>
+                        </div>
+                        <div class="col-xs-4" style="float: right">
+                            <button class="btn btn-block bg-black waves-effect" type="submit">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
