@@ -92,23 +92,27 @@
                             </li>
                         </ul>
                     </li>
+                        <?php
 
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
+                        $survey_response_route = 'manage/users/'.$username.'/survey-response';
+                        $survey_response_route_append = $survey_response_route.'/*';
+                        ?>
+                    <li class="{{ set_active([$survey_response_route, $survey_response_route_append]) }}">
+                        <a href="{{URL::route('survey-response.index',['users' => $username])}}">
                             <i class="material-icons">assignment_turned_in</i>
                             <span>Survey Response</span>
                         </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="">Show</a>
-                            </li>
-                            <li>
-                                <a href="">Delete</a>
-                            </li>
-                            <li>
-                                <a href="">Edit</a>
-                            </li>
-                        </ul>
+                        {{--<ul class="ml-menu">--}}
+                            {{--<li>--}}
+                                {{--<a href="">S</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="">Delete</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="">Edit</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
                     </li>
                 @endif
 
