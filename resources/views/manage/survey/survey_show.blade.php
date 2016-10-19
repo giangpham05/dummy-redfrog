@@ -55,7 +55,7 @@
                                     <h2 style="display: inline-block; padding-right: 5px">
                                         ALL SURVEYS
                                     </h2>
-                                    <a href="{{URL::route('users.surveys.create',['user'=>$username])}}" class="btn bg-red waves-effect waves-light">+ Create survey</a>
+                                    <a href="{{URL::route('users.surveys.store',['user'=>$username])}}" class="btn bg-red waves-effect waves-light">+ Create survey</a>
                                 </div>
 
                                 {{--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">--}}
