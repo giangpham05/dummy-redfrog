@@ -15,7 +15,7 @@ class SurveyResponsesController extends Controller
      */
     public function index()
     {
-        //
+        return view('manage/therapy/survey_response/show_all_responses');
     }
 
     /**
@@ -47,7 +47,7 @@ class SurveyResponsesController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('manage/therapy/survey_response/show_each');
     }
 
     /**
