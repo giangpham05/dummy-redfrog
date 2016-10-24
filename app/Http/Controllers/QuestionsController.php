@@ -53,7 +53,7 @@ class QuestionsController extends Controller
             'question'=>'required|max:255',
         ]);
         //return response()->json(['test' => $request->all()]);
-        $new_question = new Question();
+        $new_question = new Question;
         $new_question->strQuestionTitle = Input::get('question');
         $new_question->question_types_id = Input::get('question_type');
         $new_question->save();
