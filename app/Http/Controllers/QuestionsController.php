@@ -53,66 +53,66 @@ class QuestionsController extends Controller
             'question'=>'required|max:255',
         ]);
         //return response()->json(['test' => $request->all()]);
-        $new_question = new Question;
-        $new_question->strQuestionTitle = Input::get('question');
-        $new_question->question_types_id = Input::get('question_type');
-        $new_question->save();
-//
-//        if($request->has('require_answer')){
-//            $question->required = 1;
-//        }
-//
-//        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
-//
-//            $question->save();
-//
-//        }
-//
-//        else if($request->has('radio_input')){
-//
-//            $question->save();
-//            $radios = $request->get('radio_input');
-//
-//            foreach ($radios as $rad){
-//                if($rad!==''){
-//                    Option::create([
-//                        'questionOption' => $rad,
-//                        'question_id' => $question->id,
-//                        'inheritFlag' => 0,
-//                    ]);
-//                }
-//            }
-//
-//        }
-//
-//        else if($request->has('checkbox_input')){
-//
-//            $question->save();
-//            $checkboxes = $request->get('checkbox_input');
-//
-//            foreach ($checkboxes as $check){
-//                if($check!==''){
-//                    Option::create([
-//                        'questionOption' => $check,
-//                        'question_id' => $question->id,
-//                        'inheritFlag' => 0,
-//                    ]);
-//                }
-//            }
-//        }
-            //return 'dsdsd';
-        //$question->sections->attach($section);
-        //$questions = Section::findOrFail($section)->questions;
-        //$count = sizeof($questions);
+        $question = new Question;
+        $question['strQuestionTitle'] = $request->input('question');
+        $question['question_types_id'] = $request->input('question_type');
+        $question->save();
+
+        if($request->has('require_answer')){
+            $question['required'] = 1;
+        }
+
+        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
+
+            $question->save();
+
+        }
+
+        else if($request->has('radio_input')){
+
+            $question->save();
+            $radios = $request->get('radio_input');
+
+            foreach ($radios as $rad){
+                if($rad!==''){
+                    Option::create([
+                        'questionOption' => $rad,
+                        'question_id' => $question->id,
+                        'inheritFlag' => 0,
+                    ]);
+                }
+            }
+
+        }
+
+        else if($request->has('checkbox_input')){
+
+            $question->save();
+            $checkboxes = $request->get('checkbox_input');
+
+            foreach ($checkboxes as $check){
+                if($check!==''){
+                    Option::create([
+                        'questionOption' => $check,
+                        'question_id' => $question->id,
+                        'inheritFlag' => 0,
+                    ]);
+                }
+            }
+        }
+
+        $question->sections->attach($section);
+        $questions = Section::findOrFail($section)->questions;
+        $count = sizeof($questions);
 //        if($count>0){
 //            $view = view('manage/ui_render/question_show')
 //                ->with(['question'=>$question,'question_number'=>$count])->render();
 //            return response()->json(['question'=>$view, 'question_number'=>$count]);
 //        }
         //else{
-//            $view = view('manage/ui_render/question_show')
-//                ->with(['question'=>$question,'question_number'=>$count])->render();
-//            return response()->json(['question'=>$view, 'question_number'=>$count]);
+            $view = view('manage/ui_render/question_show')
+                ->with(['question'=>$question,'question_number'=>$count])->render();
+            return response()->json(['question'=>$view, 'question_number'=>$count]);
         //}
 
     }
