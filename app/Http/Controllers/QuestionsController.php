@@ -54,8 +54,8 @@ class QuestionsController extends Controller
         ]);
         //return response()->json(['test' => $request->all()]);
         $question = new Question;
-        $question['strQuestionTitle'] = $request->get('question');
-        $question['question_types_id'] = $request->get('question_type');
+        $question['strQuestionTitle'] = $request->question;
+        $question['question_types_id'] = $request->question_type;
         $question->save();
 
         if($request->has('require_answer')){
