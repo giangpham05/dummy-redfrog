@@ -52,10 +52,10 @@ class QuestionsController extends Controller
             'question'=>'required|max:255',
         ]);
         //return response()->json(['test' => $request->all()]);
-        $question = new Question();
-        $question->strQuestionTitle = $request->question;
-        $question->question_types_id = $request->question_type;
-        $question->save();
+        $new_question = new Question();
+        $new_question->strQuestionTitle = $request->question;
+        $new_question->question_types_id = $request->question_type;
+        $new_question->save();
 //
 //        if($request->has('require_answer')){
 //            $question->required = 1;
