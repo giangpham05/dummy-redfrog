@@ -378,7 +378,7 @@ $(document).ready(function () {
                 error: function (data) {
                     form.closest('.question_editing').find('.option_error').remove();
                     var errors = data.responseJSON;
-                    //console.log(errors);
+                    console.log(errors);
                     var begin ='<div class="option_error alert alert-danger"><ul>';
                     var li ='';
                     var end = '</ul></div>';
@@ -386,7 +386,7 @@ $(document).ready(function () {
                     //     li +='<li>'+item[0]+'</li>';
                     // });
 
-                    var messages = begin + data + end;
+                    var messages = begin + errors + end;
                     //console.log(messages);
 
                     $(messages).insertBefore(form);
