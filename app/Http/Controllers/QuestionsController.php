@@ -8,6 +8,7 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 class QuestionsController extends Controller
 {
@@ -53,8 +54,8 @@ class QuestionsController extends Controller
         ]);
         //return response()->json(['test' => $request->all()]);
         $new_question = new Question();
-        $new_question->strQuestionTitle = $request->question;
-        $new_question->question_types_id = $request->question_type;
+        $new_question->strQuestionTitle = Input::get('question');
+        $new_question->question_types_id = Input::get('question_type');
         $new_question->save();
 //
 //        if($request->has('require_answer')){
