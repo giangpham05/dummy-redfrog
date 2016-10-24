@@ -54,8 +54,8 @@ class QuestionsController extends Controller
         ]);
         //return response()->json(['test' => $request->all()]);
         $question = new Question;
-        $question['strQuestionTitle'] = $request->question;
-        $question['question_types_id'] = $request->question_type;
+        $question['strQuestionTitle'] = $request->get('question');
+        $question['question_types_id'] = $request->get('question_type');
         $question->save();
 
         if($request->has('require_answer')){
@@ -101,7 +101,7 @@ class QuestionsController extends Controller
             }
         }
 
-        $question->sections->attach($section);
+        $question->sections()->attach($section);
         $questions = Section::findOrFail($section)->questions;
         $count = sizeof($questions);
 //        if($count>0){
