@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SectionToSurvey extends Model
 {
+    protected $table = 'section_survey';
 //    public function survey()
 //    {
 //        return $this->has_one('Survey');

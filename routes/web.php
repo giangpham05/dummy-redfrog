@@ -38,9 +38,9 @@ Route::get('/script-disabled', function (){
     })->name('updateTheme');
 
 //GET QUESTION
-Route::get('/survey/question', function (){
-    return response()->json(['question' => view('manage/ui_render/question_render')->render()]);
-})->name('getQuestion');
+//Route::get('/survey/question', function (){
+//    return response()->json(['question' => view('manage/ui_render/question_render')->render()]);
+//})->name('getQuestion');
 
 Route::get('/survey/question/question_type', function (\Illuminate\Http\Request $request){
 
@@ -164,17 +164,33 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory
      */
     Route::get('users/{user}/surveys/current','SurveysController@showCurrentSurveys')->name('users.surveys.current');
 
-//    Route::get(' manage/users/{user}/surveys','SurveysController@create')
-//        ->name('SurveysController@create');
-//
-//    Route::get('users/{user}/surveys/create/{survey}','SurveysController@create')
+    Route::post('users/{user}/surveys','SurveysController@store')
+        ->name('users.surveys.store');
+
+    Route::get('users/{user}/surveys','SurveysController@index')->name('users.surveys.index');
+
+//    Route::get('users/{user}/surveys/create','SurveysController@create')
 //        ->name('users.surveys.create');
 //
-//    Route::get('users/{user}/surveys/create/{survey}','SurveysController@create')
-//        ->name('users.surveys.create');
+//    Route::put('users/{user}/surveys/{survey}','SurveysController@update')
+//        ->name('users.surveys.update');
+//
+//    Route::get('users/{user}/surveys/{survey}','SurveysController@show')
+//        ->name('users.surveys.show');
+//
+//    Route::delete('users/{user}/surveys/{survey}','SurveysController@destroy')
+//        ->name('users.surveys.destroy');
+//
+//    Route::get('users/{user}/surveys/{survey}/edit','SurveysController@edit')
+//        ->name('users.surveys.edit');
 
 
-   Route::resource('users.surveys','SurveysController');
+
+  Route::resource('users.surveys','SurveysController');
+
+    Route::resource('users.surveys.sections','SectionsController',['except' => ['index']]);
+
+    Route::resource('users.surveys.sections.questions','QuestionsController',['except' => ['index']]);
 
     /**
      * Routes belong to therapists

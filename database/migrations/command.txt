@@ -1,15 +1,25 @@
+php artisan make:migration create_users_table --create="users";
+
+php artisan make:migration create_password_resets_table --create="password_resets";
+
+php artisan make:migration create_clients_table --create="clients";
+
 php artisan make:migration create_surveys_table --create="surveys";
-php artisan make:migration create_surveys_table --create="surveys";
-php artisan make:migration create_survey_assignments_table --create="survey_assignments";
+
+
+php artisan make:migration create_sections_table --create="sections";
+
 php artisan make:migration create_question_types_table --create="question_types";
-php artisan make:migration create_options_table --create="options";
 
 php artisan make:migration create_questions_table --create="questions";
 
-php artisan make:migration create_sections_table --create="sections";
+php artisan make:migration create_options_table --create="options";
+
 
 php artisan make:migration create_question_section_table --create="question_section";
 
 php artisan make:migration create_section_survey_table --create="section_survey";
+
+php artisan make:migration create_survey_assignments_table --create="survey_assignments";
 
 php artisan make:migration create_clients_answers_table --create="clients_answers";

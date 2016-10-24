@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Survey;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-
+use Input;
 class SurveysController extends Controller
 {
     /**
@@ -16,6 +17,7 @@ class SurveysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $surveys = Auth::user()->surveys;
@@ -32,24 +34,25 @@ class SurveysController extends Controller
      */
     public function create()
     {
-        $id = Auth::user()->getId();
+        return view('manage/survey/survey_form');
 
-        //get surveys belongs to the current user
+//        if(Auth::user()->isAdmin())
+//        {
+//
+//            return view('manage/survey/survey_create');
+//        }
+//        else if(Auth::user()->isTherapist())
+//        {
+//            //therapy user
+//            //get template surveys
+//            $templateSurveys = Survey::where('inheritFlag', '=', 0)->get();
+//
+//            return view('manage/survey/survey_create')
+//                ->with(['templateSurveys' => $templateSurveys]);
+//
+//       }
 
-        if(Auth::user()->isAdmin())
-        {
-            return view('manage/survey/survey_create');
-        }
-        else if(Auth::user()->isTherapist())
-        {
-            //therapy user
-            //get template surveys
-            $templateSurveys = Survey::where('inheritFlag', '=', 0)->get();
 
-            return view('manage/survey/survey_create')
-                ->with(['templateSurveys' => $templateSurveys]);
-
-        }
     }
 
     /**
@@ -60,44 +63,128 @@ class SurveysController extends Controller
      */
     public function store(Request $request)
     {
+        //need to store survey here and redirect to edit page
+        $this->validate($request, [
+            'survey_name' => 'required|max:255',
+        ]);
+        $survey = new Survey();
+        $strSurveyName = $request['survey_name'];
+        $survey['user_id'] = Auth::user()->getId();
+        $survey['strSurveyName'] = $strSurveyName;
+        $survey['slug'] = str_slug($strSurveyName, '-');
+        $survey['created_at'] = \Carbon\Carbon::now();
+        $survey['updated_at'] = \Carbon\Carbon::now();
 
+        if($request['survey_description'] === '' || $request['survey_description']===null){
+            $survey['strSurveyDesc'] = 'Not provided';
+            $survey->save();
+        }
+        else{
+            $this->validate($request, [
+                'survey_description' => 'required',
+            ]);
+
+            $survey['strSurveyDesc'] = $request['survey_description'];
+
+            $survey->save();
+        }
+
+        DB::table('surveys')
+            ->where('id', $survey->id)
+            ->update(['hash_id' => md5($survey->id)]);
+
+
+        //return $request->all();
+
+        $current = Survey::findOrFail($survey->id);
+        $hash = $current->hash_id;
+
+        $section = new Section();
+        $section['strSectionDesc'] = 'Not provided';
+        $section['created_at'] = \Carbon\Carbon::now();
+        $section->save();
+
+        $current->sections()->attach($section->id);
+        return redirect(route('users.surveys.edit', ['user'=> Auth::user()->getUsername(), 'survey' => $hash]));
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $survey
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($username,$survey)
     {
-        $survey = Survey::findOrFail($id);
-        return view('manage/therapy/survey_assignments/therapy_survey_assign_show_each')
-            ->with('$survey',$survey);
+        $id = Auth::user()->getId();
+        //$survey = Survey::findOrFail($id);
+        $this_survey = \App\Models\User::find($id)->surveys()->where('hash_id', '=', $survey)->firstOrFail();
+//        return view('manage/therapy/survey_assignments/therapy_survey_assign_show_each')
+//            ->with('$survey',$survey);
+        return response()->json(['survey_name' => $this_survey->strSurveyName, 'survey_desc'=>$this_survey->strSurveyDesc]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $survey
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($username, $survey)
     {
-        //
+        $id = Auth::user()->getId();
+
+        //get surveys belongs to the current user
+
+        $this_survey = \App\Models\User::find($id)->surveys()->where('hash_id', '=', $survey)->firstOrFail();
+
+
+
+        return view('manage/survey/survey_create')->with('survey',$this_survey);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $survey_hash
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$user, $survey_hash)
     {
-        //
+        $id = Auth::user()->getId();
+
+        $this->validate($request, [
+            'survey-name' => 'required|max:255',
+        ]);
+
+        $this_survey = \App\Models\User::find($id)->surveys()->where('hash_id', '=', $survey_hash)->firstOrFail();
+
+        $strSurveyName = $request['survey-name'];
+        $this_survey['strSurveyName'] = $strSurveyName;
+        $this_survey['slug'] = str_slug($strSurveyName, '-');
+        $this_survey['updated_at'] = \Carbon\Carbon::now();
+
+        if($request['survey-description'] === '' || $request['survey-description']===null){
+            $this_survey->save();
+        }
+        else{
+            $this->validate($request, [
+                'survey-description' => 'required',
+            ]);
+
+            $this_survey['strSurveyDesc'] = $request['survey-description'];
+
+            $this_survey->save();
+        }
+
+        //get surveys belongs to the current user
+
+        return response()->json(['questionOption' => $request['survey-name']]);
     }
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -17,7 +17,7 @@ class Survey extends Model
     public function sections()
     {
         //return $this->belongsToMany('App\Models\Section');
-        return $this->belongsToMany('App\Models\Section');
+        return $this->belongsToMany('App\Models\Section')->withPivot('inheritFlag', 'orderNo','created_at');
     }
 
     public function clients(){

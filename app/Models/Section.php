@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
+    public $timestamps = false;
     public function surveys()
     {
-        return $this->belongsToMany('App\Models\Survey','App\Models\SectionToSurvey','intSectionID','intSurveyID');
+        return $this->belongsToMany('App\Models\Survey')->withPivot('inheritFlag', 'orderNo','created_at');
     }
 
     public function questions()
     {
-        return $this->hasMany('App\Models\Question');
+        return $this->belongsToMany('App\Models\Question')->withPivot('inheritFlag', 'orderNo');
     }
 }
