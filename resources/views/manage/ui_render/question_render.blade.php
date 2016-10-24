@@ -11,7 +11,8 @@
                 <form class="question_form" tabindex="5"
                       action="{{route('users.surveys.sections.questions.store',['user'=>$username, 'survey'=>$survey,'section'=>$section])}}"
                       id="new_question_in_section_{{$section}}" method="post">
-                    {{ csrf_field() }}
+                    {{--{{ csrf_field() }}--}}
+                    {{ csrf_token() }}
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 demo-no-swipe">
                         <div class="handle instant">&#9776;</div>
                         <div class="row">
