@@ -102,9 +102,17 @@ class QuestionsController extends Controller
         $question->sections()->attach($section);
         $questions = Section::findOrFail($section)->questions;
         $count = sizeof($questions);
-        $view = view('manage/ui_render/question_show')
-            ->with(['question'=>$question,'question_number'=>$count])->render();
-        return response()->json(['question'=>$view, 'question_number'=>$count]);
+//        if($count>0){
+//            $view = view('manage/ui_render/question_show')
+//                ->with(['question'=>$question,'question_number'=>$count])->render();
+//            return response()->json(['question'=>$view, 'question_number'=>$count]);
+//        }
+        //else{
+//            $view = view('manage/ui_render/question_show')
+//                ->with(['question'=>$question,'question_number'=>$count])->render();
+//            return response()->json(['question'=>$view, 'question_number'=>$count]);
+        //}
+
     }
 
     /**
