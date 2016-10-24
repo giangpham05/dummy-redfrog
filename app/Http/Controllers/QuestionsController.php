@@ -65,43 +65,43 @@ class QuestionsController extends Controller
             $question->save();
 
         }
-
-        else if($request->has('radio_input')){
-
-            $question->save();
-            $radios = $request->get('radio_input');
-
-            foreach ($radios as $rad){
-                if($rad!==''){
-                    Option::create([
-                        'questionOption' => $rad,
-                        'question_id' => $question->id,
-                        'inheritFlag' => 0,
-                    ]);
-                }
-            }
-
-        }
-
-        else if($request->has('checkbox_input')){
-
-            $question->save();
-            $checkboxes = $request->get('checkbox_input');
-
-            foreach ($checkboxes as $check){
-                if($check!==''){
-                    Option::create([
-                        'questionOption' => $check,
-                        'question_id' => $question->id,
-                        'inheritFlag' => 0,
-                    ]);
-                }
-            }
-        }
+//
+//        else if($request->has('radio_input')){
+//
+//            $question->save();
+//            $radios = $request->get('radio_input');
+//
+//            foreach ($radios as $rad){
+//                if($rad!==''){
+//                    Option::create([
+//                        'questionOption' => $rad,
+//                        'question_id' => $question->id,
+//                        'inheritFlag' => 0,
+//                    ]);
+//                }
+//            }
+//
+//        }
+//
+//        else if($request->has('checkbox_input')){
+//
+//            $question->save();
+//            $checkboxes = $request->get('checkbox_input');
+//
+//            foreach ($checkboxes as $check){
+//                if($check!==''){
+//                    Option::create([
+//                        'questionOption' => $check,
+//                        'question_id' => $question->id,
+//                        'inheritFlag' => 0,
+//                    ]);
+//                }
+//            }
+//        }
 
         $question->sections()->attach($section);
-        $questions = Section::findOrFail($section)->questions;
-        $count = sizeof($questions);
+        //$questions = Section::findOrFail($section)->questions;
+        //$count = sizeof($questions);
 //        if($count>0){
 //            $view = view('manage/ui_render/question_show')
 //                ->with(['question'=>$question,'question_number'=>$count])->render();
