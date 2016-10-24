@@ -108,9 +108,9 @@ class QuestionsController extends Controller
 //            return response()->json(['question'=>$view, 'question_number'=>$count]);
 //        }
         //else{
-            $view = view('manage/ui_render/question_show')
-                ->with(['question'=>$question,'question_number'=>$count])->render();
-            return response()->json(['question'=>$view, 'question_number'=>$count]);
+//            $view = view('manage/ui_render/question_show')
+//                ->with(['question'=>$question,'question_number'=>$count])->render();
+//            return response()->json(['question'=>$view, 'question_number'=>$count]);
         //}
 
     }
