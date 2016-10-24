@@ -51,55 +51,55 @@ class QuestionsController extends Controller
         $this->validate($request, [
             'question'=>'required|max:255',
         ]);
-
-        $question = new Question();
-        $question['strQuestionTitle'] = $request['question'];
-        $question['question_types_id'] = $request['question_type'];
-
-        if($request->has('require_answer')){
-            $question['required'] = 1;
-        }
-
-        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
-
-            $question->save();
-
-        }
-
-        else if($request->has('radio_input')){
-
-            $question->save();
-            $radios = $request->get('radio_input');
-
-            foreach ($radios as $rad){
-                if($rad!==''){
-                    Option::create([
-                        'questionOption' => $rad,
-                        'question_id' => $question->id,
-                        'inheritFlag' => 0,
-                    ]);
-                }
-            }
-
-        }
-
-        else if($request->has('checkbox_input')){
-
-            $question->save();
-            $checkboxes = $request->get('checkbox_input');
-
-            foreach ($checkboxes as $check){
-                if($check!==''){
-                    Option::create([
-                        'questionOption' => $check,
-                        'question_id' => $question->id,
-                        'inheritFlag' => 0,
-                    ]);
-                }
-            }
-        }
-
-        $question->sections()->attach($section);
+        return response()->json(['sds' => $request->all()]);
+//        $question = new Question();
+//        $question['strQuestionTitle'] = $request['question'];
+//        $question['question_types_id'] = $request['question_type'];
+//
+//        if($request->has('require_answer')){
+//            $question['required'] = 1;
+//        }
+//
+//        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
+//
+//            $question->save();
+//
+//        }
+//
+//        else if($request->has('radio_input')){
+//
+//            $question->save();
+//            $radios = $request->get('radio_input');
+//
+//            foreach ($radios as $rad){
+//                if($rad!==''){
+//                    Option::create([
+//                        'questionOption' => $rad,
+//                        'question_id' => $question->id,
+//                        'inheritFlag' => 0,
+//                    ]);
+//                }
+//            }
+//
+//        }
+//
+//        else if($request->has('checkbox_input')){
+//
+//            $question->save();
+//            $checkboxes = $request->get('checkbox_input');
+//
+//            foreach ($checkboxes as $check){
+//                if($check!==''){
+//                    Option::create([
+//                        'questionOption' => $check,
+//                        'question_id' => $question->id,
+//                        'inheritFlag' => 0,
+//                    ]);
+//                }
+//            }
+//        }
+//
+//        $question->sections()->attach($section);
         //$questions = Section::findOrFail($section)->questions;
         //$count = sizeof($questions);
 //        if($count>0){
