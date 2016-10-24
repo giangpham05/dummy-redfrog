@@ -48,23 +48,24 @@ class QuestionsController extends Controller
     public function store(Request $request,$user, $survey, $section)
     {
         //return response()->json(['sds' => $request->all()]);
-        $this->validate($request, [
-            'question'=>'required|max:255',
-        ]);
+//        $this->validate($request, [
+//            'question'=>'required|max:255',
+//        ]);
         //return response()->json(['test' => $request->all()]);
         $question = new Question();
         $question->strQuestionTitle = $request->get('question');
         $question->question_types_id = $request->get('question_type');
-
-        if($request->has('require_answer')){
-            $question->required = 1;
-        }
-
-        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
-
-            $question->save();
-
-        }
+        $question->save();
+//
+//        if($request->has('require_answer')){
+//            $question->required = 1;
+//        }
+//
+//        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
+//
+//            $question->save();
+//
+//        }
 //
 //        else if($request->has('radio_input')){
 //
@@ -98,7 +99,7 @@ class QuestionsController extends Controller
 //                }
 //            }
 //        }
-            return 'dsdsd';
+            //return 'dsdsd';
         //$question->sections->attach($section);
         //$questions = Section::findOrFail($section)->questions;
         //$count = sizeof($questions);
