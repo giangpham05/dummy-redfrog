@@ -98,8 +98,8 @@ class QuestionsController extends Controller
 //                }
 //            }
 //        }
-
-        $question->sections->attach($section);
+            return 'dsdsd';
+        //$question->sections->attach($section);
         //$questions = Section::findOrFail($section)->questions;
         //$count = sizeof($questions);
 //        if($count>0){
