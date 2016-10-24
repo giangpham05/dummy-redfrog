@@ -51,11 +51,11 @@ class QuestionsController extends Controller
 //        $this->validate($request, [
 //            'question'=>'required|max:255',
 //        ]);
-        //return response()->json(['test' => $request->all()]);
-        $question = new Question();
-        $question->strQuestionTitle = $request->input('question');
-        $question->question_types_id = $request->input('question_type');
-        $question->save();
+        return response()->json(['test' => $request->all()]);
+//        $question = new Question();
+//        $question->strQuestionTitle = $request->input('question');
+//        $question->question_types_id = $request->input('question_type');
+//        $question->save();
 //
 //        if($request->has('require_answer')){
 //            $question->required = 1;
