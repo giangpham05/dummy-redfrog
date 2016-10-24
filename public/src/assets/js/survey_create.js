@@ -382,11 +382,11 @@ $(document).ready(function () {
                     var begin ='<div class="option_error alert alert-danger"><ul>';
                     var li ='';
                     var end = '</ul></div>';
-                    // $.each(errors, function(i, item) {
-                    //     li +='<li>'+item[0]+'</li>';
-                    // });
+                    $.each(errors, function(i, item) {
+                        li +='<li>'+item[0]+'</li>';
+                    });
 
-                    var messages = begin + errors + end;
+                    var messages = begin + li + end;
                     //console.log(messages);
 
                     $(messages).insertBefore(form);
