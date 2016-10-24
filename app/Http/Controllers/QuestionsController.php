@@ -131,12 +131,21 @@ class QuestionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @param  Survey  $survey
+     * @param  Section  $section
+     * @param  Question  $question
+     * @return \Illuminate\Http\Response->json()
      */
-    public function edit($id)
+    public function edit($user, $survey, $section, $question)
     {
-        //
+        $question_model = Question::findOrFail($question);
+        $view = view('manage/ui_render/question_edit')
+            ->with(['username'=>$user,'survey'=>$survey,'section'=>$section,'question'=>$question_model])->render();
+        return response()->json(['question_edit'=>$view, 'status'=>'ok']);
+        //return response()->json(['status'=>'ok']);
+        //return 'hello';
+
     }
 
     /**
@@ -148,7 +157,7 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(['question'=>'testing']);
     }
 
     /**

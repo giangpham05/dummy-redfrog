@@ -80,7 +80,7 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     @foreach($survey->sections as $key=>$section)
-                        <div class="card section_page" id="section_{{$section->id}}">
+                        <div class="card section_page" id="{{$section->id}}">
                             <div class="header" style="padding: 15px">
                                 <h2 style="display: inline-block; padding-right: 5px">
                                     SECTION {{$key + 1}} OUT OF {{count($survey->sections)}}

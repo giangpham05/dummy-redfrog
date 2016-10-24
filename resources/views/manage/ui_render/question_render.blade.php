@@ -1,14 +1,14 @@
 <?php $username = Auth::user()->getUsername(); ?>
-<div class="questions_row row" id="test">
+<div class="questions_row row">
 
     <div data-question-type="single-choice" class="question_container col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="question-field-temp" data-question-id="question-id" class="question_field">
             <div class="question_editing row">
                 <div class="alert alert-danger" style="margin-top: 5px; display: none;">
-                    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+                    <strong>Danger!</strong> Whoops. Something went wrong.
                 </div>
 
-                <form class="question_form" tabindex="5"
+                <form class="question_form_temp" tabindex="5"
                       action="{{route('users.surveys.sections.questions.store',['user'=>$username, 'survey'=>$survey,'section'=>$section])}}"
                       id="new_question_in_section_{{$section}}" method="post">
                     {{ csrf_field() }}

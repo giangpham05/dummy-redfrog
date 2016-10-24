@@ -45,7 +45,7 @@ Route::get('/script-disabled', function (){
 Route::get('/survey/question/question_type', function (\Illuminate\Http\Request $request){
 
     $view = view('manage/ui_render/question_type_render')->with('question_option', $request['question_option'])->render();
-    return response()->json(['questionOption' => $view]);
+    return response()->json(['questionOption' => $view, 'all'=>$request->all()]);
 })->name('getQuestionOption');
 
 //Route::group(['middleware' => ['web']], function (){

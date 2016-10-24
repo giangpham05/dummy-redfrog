@@ -154,13 +154,13 @@ $(document).ready(function () {
                     var $position = element.closest('.btn-add-new-qs');
                     $position.before(response['question']);
 
-                    var jlist = $('#survey_container #survey-question-container #all_questions');
+                    //var jlist = $('#survey_container #survey-question-container #all_questions');
 
                     //var $list = $(jlist);
 
-                    var $current = jlist.find('.survey_row_question_active');
+                    //var $current = jlist.find('.survey_row_question_active');
 
-                    $current.after(response['question']);
+                   // $current.after(response['question']);
 
                     $('.selectpicker').selectpicker();
 
@@ -182,9 +182,9 @@ $(document).ready(function () {
                     //     scrollTop: $whereForm.offset().top-60
                     // }, 400);
                     //$whereForm.focus();
-                    $('html, body').animate({
-                        scrollTop: ($whereForm.first().offset().top-80)
-                    },100);
+                    // $('html, body').animate({
+                    //     scrollTop: ($whereForm.first().offset().top-80)
+                    // },100);
                     //fireReorder();
                 }
             });
@@ -268,6 +268,7 @@ $(document).ready(function () {
                 dataType: "json",
                 data: {question_option: option_selected_value},
                 success: function(response){
+                    console.log(response['all']);
                     $thisQuestionOptions.empty();
                     //console.log(response['questionOption']);
                     $thisQuestionOptions.append(response['questionOption']);
@@ -350,7 +351,7 @@ $(document).ready(function () {
         //     });
         // }
 
-        $('body').on('submit','.question_form',function(e){
+        $('body').on('submit','.question_form_temp',function(e){
             var form = jQuery(e.target);
             e.preventDefault();
             $.ajax({
@@ -360,7 +361,7 @@ $(document).ready(function () {
                 data: $(form).serialize(),
                 success: function (response) {
                     form.closest('.question_editing').find('.option_error').remove();
-                    console.log(response['test']);
+                    console.log(response['question']);
 
                     var question_field = form.closest('.question_field')
                     //$(question_field).data('question-id','question-id-'+ response['question_id'])
@@ -368,6 +369,7 @@ $(document).ready(function () {
 
                     question_field.closest('.questions_row').before(response['question']);
                     //var question_temp_form_holder = form.closest('.question_editing').detach();
+
                     question_field.closest('.questions_row').remove();
 
                     toastr.success("Question saved.", null, opts)
@@ -395,36 +397,127 @@ $(document).ready(function () {
         });
 
 
-        // $('body').on('click','.btn_save_question', function () {
-        //     var form = $(this).closest('form').attr('id');
-        //     $('#'+form).on('submit',function (e) {
-        //         $.ajax({
-        //             method: $(form).attr('method'),
-        //             url: $(form).attr('action'),
-        //             //dataType: 'json',
-        //             data: $(form).serialize(),
-        //             success: function (response) {
-        //                 console.log(response['test']);
-        //                 toastr.success("Question saved.", null, opts)
-        //                 //$('.survey_title_wrapper h4').text(response['questionOption']);
-        //
-        //                 //$('.survey_container .survey_edit_actions').hide();
-        //             }
-        //         });
-        //         e.preventDefault();
-        //     });
-        //
-        //
-        //
-        // });
-
-
         $('body').on('click','.btn_cancel_question', function () {
             $(this).closest('.questions_row').remove();
         });
 
 
+        /*
+         *   -------------------------------------------------------
+         *   EDITING QUESTIONS SECTION
+         *   -------------------------------------------------------
+         *
+         *
+         * */
 
+        $('body').on('submit','.question_form',function(e){
+            var form = jQuery(e.target);
+            e.preventDefault();
+            $.ajax({
+                method: $(form).attr('method'),
+                url: $(form).attr('action'),
+                //dataType: 'json',
+                data: $(form).serialize(),
+                success: function (response) {
+                    form.closest('.question_editing').find('.option_error').remove();
+                    console.log(response['question']);
+
+                    var question_field = form.closest('.question_field')
+                    //$(question_field).data('question-id','question-id-'+ response['question_id'])
+                    //$(question_field).attr('id', 'question-field-'+response['question_id']);
+
+                    question_field.closest('.questions_row').before(response['question']);
+                    //var question_temp_form_holder = form.closest('.question_editing').detach();
+
+                    question_field.closest('.questions_row').remove();
+
+                    toastr.success("Question saved.", null, opts)
+                    //$('.survey_title_wrapper h4').text(response['questionOption']);
+
+                    //$('.survey_container .survey_edit_actions').hide();
+                },
+                error: function (data) {
+                    form.closest('.question_editing').find('.option_error').remove();
+                    var errors = data.responseJSON;
+                    console.log(errors);
+                    var begin ='<div class="option_error alert alert-danger"><ul>';
+                    var li ='';
+                    var end = '</ul></div>';
+                    $.each(errors, function(i, item) {
+                        li +='<li>'+item[0]+'</li>';
+                    });
+
+                    var messages = begin + li + end;
+                    //console.log(messages);
+
+                    $(messages).insertBefore(form);
+                }
+            });
+        });
+
+
+        $("body").on('click','.field_edit',function(){
+
+
+            //close other dialog windows
+            $(this).closest('.questions_container').find('.question_editing').remove();
+
+
+            var this_container = $(this).closest('.question_open');
+           // alert(this_container);
+            var link = location.href.split('edit');
+            var section = $(this).closest('.section_page').attr('id');
+            var question_edit_url = link[0]+'sections/'+section+'/questions/'+ this_container.data('question-id')+'/edit';
+            $.ajax({
+                method: 'GET',
+                dataType: 'json',
+                url: question_edit_url,
+                success: function (response) {
+                    //var temp = .find('.question_open');
+                    $('#'+this_container.attr('id')).append(response['question_edit']);
+                    $('.selectpicker').selectpicker();
+
+                    $(".selectpicker").selectpicker('refresh');
+
+                    var $whereForm = this_container.find('form');
+                    $whereForm.validate({
+                        rules: {
+                            'question': {
+                                required: true
+                            },
+                        },
+                        messages: {
+                            'question': 'You must enter question text.',
+                        },
+                    });
+
+                    //console.log(response['question_edit']);
+                    this_container.find('fieldset').hide();
+                },
+                error: function (errorData) {
+
+                }
+            });
+
+        });
+
+        $('body').on('click','.btn_cancel_question_edit',function () {
+            $(this).closest('.question_open').find('.question_editing').prev().show();
+            $(this).closest('.question_editing').remove();
+
+        });
+
+
+        $('body').on('click','.add_choice', function () {
+            var prev = $(this).closest('.input-group').prev();
+            var newInsert =  prev.clone(true);
+            newInsert.find('input').val('');
+            newInsert.insertAfter(prev);
+        });
+
+        $('body').on('click','.add_other', function () {
+
+        });
 
     }
 
