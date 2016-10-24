@@ -278,6 +278,16 @@ CREATING SURVEY
     background-color: #4006aa;
 }
 
+
+.question_container{
+    outline-color: red;
+    cursor: pointer;
+}
+
+.question_container:hover{
+    border: 1px dashed #BBB;
+    opacity: 0.5;
+}
 .questions_row .question_body fieldset .option_show_text{
     margin: 0px!important;
     padding: 0px;

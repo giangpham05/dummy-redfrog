@@ -1,5 +1,5 @@
 <?php $username = Auth::user()->getUsername(); ?>
-<div class="questions_row row">
+<div class="questions_row row" id="test">
 
     <div data-question-type="single-choice" class="question_container col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div id="question-field-temp" data-question-id="question-id" class="question_field">
@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form_add_qs">
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="float: right">
                                             <div class="col-xs-4" style="float: right">

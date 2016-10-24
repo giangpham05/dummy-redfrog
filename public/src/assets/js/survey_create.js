@@ -183,9 +183,9 @@ $(document).ready(function () {
                     // }, 400);
                     //$whereForm.focus();
                     $('html, body').animate({
-                        scrollTop: ($whereForm.first().offset().top-90)
-                    },300);
-                    fireReorder();
+                        scrollTop: ($whereForm.first().offset().top-80)
+                    },100);
+                    //fireReorder();
                 }
             });
         }
@@ -419,6 +419,9 @@ $(document).ready(function () {
         // });
 
 
+        $('body').on('click','.btn_cancel_question', function () {
+            $(this).closest('.questions_row').remove();
+        });
 
 
 
