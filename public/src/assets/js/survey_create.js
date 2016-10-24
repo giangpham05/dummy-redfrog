@@ -184,7 +184,7 @@ $(document).ready(function () {
                     //$whereForm.focus();
                     $('html, body').animate({
                         scrollTop: ($whereForm.first().offset().top-90)
-                    },500);
+                    },300);
                     fireReorder();
                 }
             });
