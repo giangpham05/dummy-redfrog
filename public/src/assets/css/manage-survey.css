@@ -284,7 +284,7 @@ CREATING SURVEY
     cursor: pointer;
 }
 
-.question_container:hover{
+.question_container fieldset:hover{
     border: 1px dashed #BBB;
     opacity: 0.5;
 }
