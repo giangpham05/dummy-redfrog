@@ -29,6 +29,11 @@
 
 <body class="{{ $theme = session()->has('theme') ? session()->get('theme') : 'theme-red'}}">
 
+<noscript>
+    <META HTTP-EQUIV="Refresh" CONTENT="0;URL={{URL::route('no-script')}}">
+    {{--{{ URL::route('no-script') }}--}}
+</noscript>
+
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
