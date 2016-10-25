@@ -6,7 +6,7 @@ use App\Models\Option;
 use App\Models\Question;
 use App\Models\Section;
 use Illuminate\Http\Request;
-
+use DB;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
@@ -48,11 +48,10 @@ class QuestionsController extends Controller
      */
     public function store(Request $request,$user, $survey, $section)
     {
-        //return response()->json(['sds' => $request->all()]);
         $this->validate($request, [
             'question'=>'required|max:255',
         ]);
-        //return response()->json(['test' => $request->all()]);
+
         $question = new Question;
         $question['strQuestionTitle'] = $request->get('question');
         $question['question_types_id'] = $request->get('question_type');
@@ -104,16 +103,10 @@ class QuestionsController extends Controller
         $question->sections()->attach($section);
         $questions = Section::findOrFail($section)->questions;
         $count = sizeof($questions);
-//        if($count>0){
-//            $view = view('manage/ui_render/question_show')
-//                ->with(['question'=>$question,'question_number'=>$count])->render();
-//            return response()->json(['question'=>$view, 'question_number'=>$count]);
-//        }
-        //else{
-            $view = view('manage/ui_render/question_show')
-                ->with(['question'=>$question,'question_number'=>$count])->render();
-            return response()->json(['question'=>$view, 'question_number'=>$count]);
-        //}
+
+        $view = view('manage/ui_render/question_show')
+            ->with(['question'=>$question,'question_number'=>$count])->render();
+        return response()->json(['question'=>$view, 'question_number'=>$count]);
 
     }
 
@@ -152,12 +145,94 @@ class QuestionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User  $user
+     * @param  User  $survey
+     * @param  User  $section
+     * @param  User  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$user, $survey, $section,$question)
     {
-        return response()->json(['question'=>'testing']);
+
+        $this->validate($request, [
+            'question'=>'required|max:255',
+        ]);
+
+        $this_question = Question::findOrFail($question);
+
+        //return response()->json(['test' => $request->all()]);
+        $this_question['strQuestionTitle'] = $request->get('question');
+        $this_question['question_types_id'] = $request->get('question_type');
+        $this_question->save();
+
+        if($request->has('require_answer')){
+            $this_question['required'] = 1;
+        }
+
+        if(!$request->has('radio_input') && !$request->has('checkbox_input')){
+
+            $this_question->save();
+
+        }
+
+        else if($request->has('radio_input')){
+
+            $this_question->save();
+
+//            foreach ($this_question->options as $option){
+//                $option->delete();
+//            }
+            DB::table('options')->where('question_id','=', $this_question->id)->delete();
+            $radios = $request->get('radio_input');
+
+            foreach ($radios as $rad){
+                if($rad!==''){
+                    Option::create([
+                        'questionOption' => $rad,
+                        'question_id' => $this_question->id,
+                        'inheritFlag' => 0,
+                    ]);
+                }
+            }
+
+        }
+
+        else if($request->has('checkbox_input')){
+
+            $this_question->save();
+//            foreach ($this_question->options as $option){
+//                $option->delete();
+//            }
+
+            DB::table('options')->where('question_id','=', $this_question->id)->delete();
+
+            $checkboxes = $request->get('checkbox_input');
+
+            foreach ($checkboxes as $check){
+                if($check!==''){
+                    Option::create([
+                        'questionOption' => $check,
+                        'question_id' => $this_question->id,
+                        'inheritFlag' => 0,
+                    ]);
+                }
+            }
+        }
+
+        //$question->sections()->attach($section);
+        $questions = Section::findOrFail($section)->questions;
+        $count = sizeof($questions);
+
+        $view = view('manage/ui_render/question_show')
+            ->with(['question'=>$this_question,'question_number'=>$count])->render();
+
+
+
+        return response()->json(['question'=>$view, 'question_number'=>$count]);
+
+        //return response()->json(['question'=>$this_question->options]);
+
+
     }
 
     /**

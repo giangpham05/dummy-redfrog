@@ -5,7 +5,7 @@
         <div id="question-field-temp" data-question-id="question-id" class="question_field">
             <div class="question_editing row">
                 <div class="alert alert-danger" style="margin-top: 5px; display: none;">
-                    <strong>Danger!</strong> Whoops. Something went wrong.
+                    Whoops. Something went wrong.
                 </div>
 
                 <form class="question_form_temp" tabindex="5"
@@ -70,11 +70,11 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="row more_options">
-                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 headerDivider">
-                                            <span><i class="material-icons">content_copy</i></span>
-                                            <span><i class="material-icons">delete</i></span>
-                                        </div>
-                                        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+                                        {{--<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 headerDivider">--}}
+                                            {{--<span><i class="material-icons">content_copy</i></span>--}}
+                                            {{--<span><i class="material-icons">delete</i></span>--}}
+                                        {{--</div>--}}
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <div class="switch">
                                                 <span style="font-weight: bold">Required</span>
                                                 <label><input name="require_answer" type="checkbox"><span class="lever switch-col-red"></span></label>

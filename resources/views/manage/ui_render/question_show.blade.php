@@ -1,7 +1,7 @@
 <?php $username = Auth::user()->getUsername();?>
 <div class="questions_row row">
     <div data-question-type="single-choice" class="question_container col-lg-12 col-md-12 col-sm-12 col-xs-12" tabindex="10" id="field{{$question->id}}" data-field="{{$question->id}}">
-        <div id="question-field-{{$question->id}}" data-question-id="{{$question->id}}" class="question_open">
+        <div id="question-field-{{$question->id}}" data-question-id="{{$question->id}}" class="question_open question_field">
             <fieldset class="field_edit" style="margin-top: 2px">
                 <h4 id="question-title-{{$question->id}}">{{isset($question_number)?$question_number:'not'}}. {{$question->strQuestionTitle}}</h4>
                 <div class="question_body">
@@ -16,7 +16,7 @@
                             </div>
                             <div class="form-line" style="border-bottom-style: dotted;">
 
-                                <input type="text" class="" disabled="true" aria-label="Short-answer text"
+                                <input type="text" class="" disabled="true" aria-label="Long-answer text"
                                        style="border: none"/>
                             </div>
 
@@ -26,7 +26,7 @@
 
                             <div class="form-line" style="border-bottom-style: dotted;">
 
-                                <input type="text" class="" placeholder="Long-answer text"
+                                <input type="text" class="" placeholder="Short-answer text"
                                        disabled="true" aria-label="Short-answer text" style="border: none"/>
                             </div>
                         </div>
