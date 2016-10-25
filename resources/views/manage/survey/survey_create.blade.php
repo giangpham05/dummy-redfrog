@@ -73,7 +73,30 @@
                                     <h2 style="display: inline-block; padding-right: 5px">
                                         SECTION {{$key + 1}} OUT OF {{count($survey->sections)}}
                                     </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="material-icons">format_color_text</i>Rename
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);"
+                                                       data-route="{{route('users.surveys.sections.destroy',['user'=>$username,'survey'=>$survey->id,'section'=>$section->id])}}">
+                                                        <i class="material-icons">delete</i>Remove</a>
+                                                </li>
 
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="material-icons">remove_red_eye</i>Preview</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <div class="section_body" id="">
@@ -262,6 +285,7 @@
     <!-- Demo Js -->
 
     <script type="text/javascript" src="{{ URL::asset('src/assets/js/demo.js') }}"></script>
-    <script id="customScript" type="text/javascript" src="{{ URL::asset('src/assets/js/survey_create.js') }}?v=<?php echo date("YmdHis"); ?>"></script>
+    <script id="customScript" type="text/javascript" src="{{ URL::asset('src/assets/js/pages/survey_crud/survey_create.js') }}?v=<?php echo date("YmdHis"); ?>"></script>
+    <script id="customScript1" type="text/javascript" src="{{ URL::asset('src/assets/js/pages/survey_crud/survey_edit.js') }}?v=<?php echo date("YmdHis"); ?>"></script>
 @stop
 

@@ -26,6 +26,10 @@
 </head>
 
 <body class="login-page">
+<noscript>
+    <META HTTP-EQUIV="Refresh" CONTENT="0;URL={{URL::route('no-script')}}">
+    {{--{{ URL::route('no-script') }}--}}
+</noscript>
 <div class="login-box">
     <div class="logo">
         <a href="javascript:void(0);">Survey Management</a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survey;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -94,11 +95,27 @@ class SectionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  User  $user
+     * @param  Survey  $survey
+     * @param  Section  $section
+     * @return \Illuminate\Http\Json Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $user, $survey, $section)
     {
-        //
+        $this_section = Section::findOrFail($section);
+
+        $this_survey = Survey::findOrFail($survey);
+
+        $questions = $this_section->questions;
+
+        foreach ($questions as $question){
+            DB::table('options')->where('question_id','=', $question->id)->delete();
+            $this_section->questions()->detach($question->id);
+        }
+
+        $this_survey->sections()->detach($section);
+
+        return response()->json(['test'=>'ok']);
     }
 }

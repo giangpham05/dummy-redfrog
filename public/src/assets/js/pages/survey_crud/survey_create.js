@@ -38,7 +38,7 @@ $(document).ready(function () {
     //////////////////////////////////////
 
     function saveSurveyName() {
-        $('.survey_container .survey_row_title_container').on('click','',function (event) {
+        $('body').on('click','.survey_container .survey_row_title_container',function (event) {
             //Hide current survey editor if already opened
             $('.survey_container .survey_edit_actions').hide();
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
             //$(this).siblings('.survey_edit_actions').show();
         });
 
-        $('.survey_container .btn_save').on('click',function () {
+        $('body').on('click','.survey_container .btn_save',function () {
             var cur = $(this).closest('form').attr('id');
 
             check(cur);
@@ -108,7 +108,7 @@ $(document).ready(function () {
                         data: $(form).serialize(),
                         success: function (response) {
                             console.log(response['questionOption']);
-                            toastr.success("Survey saved.", null, opts)
+                            toastr.success("Survey saved.", null, opts);
                             $('.survey_title_wrapper h4').text(response['questionOption']);
 
                             $('.survey_container .survey_edit_actions').hide();
@@ -121,7 +121,7 @@ $(document).ready(function () {
         };
 
 
-        $('.survey_edit_actions').on('click','.btn_cancel', function () {
+        $('body').on('click','.survey_edit_actions .btn_cancel', function () {
             //$(this).closest('.survey_edit_actions')[0].reset();
             $(this).closest('.survey_container .survey_edit_actions').hide();
 
@@ -465,7 +465,7 @@ $(document).ready(function () {
 
         $("body").on('click','.field_edit',function(e){
 
-
+            $('.survey_container .survey_edit_actions').hide();
             //close other dialog windows
             var bigContain = $(this).closest('.questions_container');
             bigContain.find('.question_editing').remove();
@@ -612,20 +612,25 @@ $(document).ready(function () {
         });
 
         $('body').on('click','.addNewSection_row',function (e) {
-
-            //var test = $(e.target).closest('.page_controller');
-            //var lastChild = $(test).children('.section_page').last();
-            //$('body, html').animate({ scrollTop: $(lastChild).offset().top }, 1000);
+            var sectionsInserted;
             $.ajax({
                 method: 'post',
                 url: url_section,
                 data:{_token: token},
                 success: function (response) {
-                    console.log(response['section']);
+
                     var newSection = response['section'];
-                    var page_controller = $(e.target).closest('.page_controller')
+                    var page_controller = $(e.target).closest('.page_controller');
                     $(page_controller).after(newSection);
+
                     $('body, html').animate({ scrollTop: $(page_controller).next().offset().top-80 }, 1000);
+
+                    sectionsInserted = $('#sections_controller').find('.section_page');
+                    sectionsInserted.each(function (index) {
+                        $(this).find('h2').text('SECTION '+ (index+1)+ ' OUT OF '+ sectionsInserted.length);
+                    })
+
+
 
                 },
                 error: function () {

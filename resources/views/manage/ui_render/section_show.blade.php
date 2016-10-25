@@ -6,6 +6,31 @@
                 SECTION  OUT OF {{count($survey->sections)}}
             </h2>
 
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:void(0);">
+                                <i class="material-icons">format_color_text</i>Rename
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"
+                               data-route="{{route('users.surveys.sections.destroy',['user'=>$username,'survey'=>$survey->id,'section'=>$section->id])}}">
+                                <i class="material-icons">delete</i>Remove</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);">
+                                <i class="material-icons">remove_red_eye</i>Preview</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
         </div>
 
         <div class="section_body" id="">

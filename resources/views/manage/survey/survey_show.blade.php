@@ -52,35 +52,45 @@
                         @if(Auth::user()->isAdmin())
                             <div class="header row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <h2 style="display: inline-block; padding-right: 5px">
-                                        ALL SURVEYS
-                                    </h2>
-                                    <a href="{{URL::route('users.surveys.create',['user'=>$username])}}" class="btn bg-red waves-effect waves-light">+ Create survey</a>
+                                    <div class="row" style="margin-left: 0px; margin-right: 0px">
+                                        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                                            <h2 style="display: inline-block; padding-right: 5px">
+                                                ALL SURVEYS
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                                            <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
+                                               class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Create survey</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @else
                             {{-- Need to have something to do with survey selection created by admins --}}
-                            <div class="header">
-                                <h2>
-                                    ALL SURVEYS
-                                </h2>
-                                <ul class="header-dropdown m-r--5">
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="javascript:void(0);">Action</a></li>
-                                            <li><a href="javascript:void(0);">Another action</a></li>
-                                            <li><a href="javascript:void(0);">Something else here</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <div class="header row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row" style="margin-left: 0px; margin-right: 0px">
+                                        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                                            <h2 style="display: inline-block; padding-right: 5px">
+                                                ALL SURVEYS
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                                            <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
+                                               class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Create survey</a>
+                                        </div>
+
+                                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" >
+                                            <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
+                                               class="btn btn-block btn-lg bg-red waves-effect waves-light">+ User a template</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         @endif
                         {{-- For loop to get surveys go here --}}
 
-                        <div>
+                        <div class="survey_controller_index">
                             {{-- Survey shows for today --}}
                             <div class="">
                                 <div class="survey-header row">
@@ -124,9 +134,19 @@
                                                                 <i class="material-icons">more_vert</i>
                                                             </a>
                                                             <ul class="dropdown-menu pull-right">
-                                                                <li><a href="javascript:void(0);"><i class="material-icons">format_color_text</i>Rename</a></li>
-                                                                <li><a href="javascript:void(0);"><i class="material-icons">delete</i>Remove</a></li>
-                                                                <li><a href="javascript:void(0);"><i class="material-icons">remove_red_eye</i>Preview</a></li>
+                                                                <li>
+                                                                    <a href="javascript:void(0);" data-route="{{route('users.surveys.edit',['user'=>$username,'survey'=>$survey->id])}}">
+                                                                        <i class="material-icons">format_color_text</i>Rename
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:void(0);" data-route="{{route('users.surveys.destroy',['user'=>$username,'survey'=>$survey->id])}}">
+                                                                        <i class="material-icons">delete</i>Remove</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:void(0);" data-route="{{route('users.surveys.show',['user'=>$username,'survey'=>$survey->id])}}">
+                                                                        <i class="material-icons">remove_red_eye</i>Preview</a>
+                                                                </li>
                                                             </ul>
                                                         </li>
                                                     </ul>
