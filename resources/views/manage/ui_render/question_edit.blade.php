@@ -45,7 +45,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="switch">
                                     <span style="font-weight: bold">Required</span>
-                                    <label><input type="checkbox" name="require_answer"><span class="lever switch-col-red"></span></label>
+                                    <label><input type="checkbox" name="require_answer" {{$question->required==1 ? 'checked': ''}}><span class="lever switch-col-red"></span></label>
                                 </div>
                             </div>
                         </div>

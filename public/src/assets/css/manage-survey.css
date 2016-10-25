@@ -287,8 +287,8 @@ CREATING SURVEY
 }
 
 
-.question_container fieldset:hover{
-    /*!*border: 1px dashed #BBB;*!*/
+.question_container fieldset{
+    border: 1px dashed #BBB;
     /*background-color: #BBB;*/
     /*!*opacity: 0.5;*!*/
     /*!*position:absolute;*!*/
