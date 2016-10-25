@@ -11,7 +11,7 @@
 
                             <div class="form-line" style="border-bottom-style: dotted;">
 
-                                <input type="text" class="" placeholder="Long-answer text"
+                                <input type="text" class=""
                                        disabled="true" aria-label="Long-answer text" style="border: none"/>
                             </div>
                             <div class="form-line" style="border-bottom-style: dotted;">
@@ -53,6 +53,8 @@
 
                 </div>
             </fieldset>
+
+            <div class="field_border">ssdsd</div>
         </div>
     </div>
 
