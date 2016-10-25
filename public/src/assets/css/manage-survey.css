@@ -54,6 +54,8 @@ CREATING SURVEY
 
 }
 
+.section_page input[type="text"]:disabled{background-color:white;}
+
 
 
 .block-header-fixed {
@@ -285,13 +287,24 @@ CREATING SURVEY
 }
 
 
-/*.question_container fieldset:hover{*/
+.question_container fieldset:hover{
     /*!*border: 1px dashed #BBB;*!*/
     /*background-color: #BBB;*/
-    /*opacity: 0.5;*/
-    /*position:relative;*/
+    /*!*opacity: 0.5;*!*/
+    /*!*position:absolute;*!*/
     /*z-index:999999999;*/
-/*}*/
+}
+
+.question_open{
+    position: relative;
+}
+.field_border{
+    position: absolute;
+    border: 1px dotted #BBB;
+    width: 100%;
+
+    top:0;
+}
 .questions_row .question_body fieldset .option_show_text{
     margin: 0px!important;
     padding: 0px;
