@@ -10,15 +10,19 @@ class ClientsTableSeeder extends \Illuminate\Database\Seeder
 {
     public function run(){
 
-        $faker = \Faker\Factory::create('fr_FR');
+        $faker = \Faker\Factory::create();
 
 
 
-        \App\Models\Client::truncate();
+        //\App\Models\Client::truncate();
 
 
         for($i = 0; $i<10;$i++){
-            var_dump($faker->uuid);
+            \App\Models\Client::create([
+                'id'=> $faker->uuid,
+                'user_id'=>2,
+
+            ]);
         }
     }
 }
