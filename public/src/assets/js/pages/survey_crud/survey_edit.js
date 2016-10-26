@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     var opts = {
         "closeButton": false,
         "progressBar": true,

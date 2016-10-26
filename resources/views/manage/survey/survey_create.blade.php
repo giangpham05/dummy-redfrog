@@ -63,7 +63,7 @@
     <?php $username = Auth::user()->getUsername();?>
     <section class="content">
         <div class="container-fluid">
-            {{-- @include('manage.includes.block-header', ['title' => 'Surveys', 'icon'=>'view_list'])--}}
+             @include('manage.includes.block-header', ['title' => 'Create survey', 'icon'=>'view_list'])
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sections_controller">
                     @foreach($survey->sections as $key=>$section)
@@ -99,7 +99,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="section_body" id="">
+                                <div class="section_body">
                                     <div class="survey_container" id="survey_container">
                                         <div class="row survey_container_row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_row_title_container" data-survey-id="{{$survey->id}}"
@@ -143,11 +143,12 @@
                                                         </button>
                                                     </div>
                                                 </div>
-
                                             </div>
 
 
-                                            <?php $username = Auth::user()->getUsername()?>
+
+
+                                        <?php $username = Auth::user()->getUsername()?>
                                             <form class="survey_edit_actions form-horizontal" action="{{route('users.surveys.update',['user' =>$username, 'survey'=>md5($survey->id)])}}"
                                                   method="put" style="position: absolute;top:0; width: 100%" id="form_section{{$section->id}}">
                                                 {{--{{ csrf_field() }}--}}
@@ -261,7 +262,6 @@
     <!-- Custom Js -->
     <script type="text/javascript" src="{{ URL::asset('src/assets/js/admin.js') }}"></script>
 
-    <script type="text/javascript" src="{{ URL::asset('src/assets/js/jsrender.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 

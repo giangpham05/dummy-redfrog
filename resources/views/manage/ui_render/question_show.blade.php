@@ -1,5 +1,6 @@
 <?php $username = Auth::user()->getUsername();?>
-<div class="questions_row row">
+<div class="questions_row row demo-no-swipe">
+    {{--<div class="handle instant">&#9776;</div>--}}
     <div data-question-type="single-choice" class="question_container col-lg-12 col-md-12 col-sm-12 col-xs-12" tabindex="10" id="field{{$question->id}}" data-field="{{$question->id}}">
         <div id="question-field-{{$question->id}}" data-question-id="{{$question->id}}" class="question_open question_field">
             <fieldset class="field_edit" style="margin-top: 2px">

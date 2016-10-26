@@ -8,8 +8,7 @@
     <form class="question_form" method="put"
           action="{{route('users.surveys.sections.questions.update',['user'=>$username, 'survey'=>$survey,'section'=>$section,'question'=>$question])}}">
         {{ csrf_field() }}
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 demo-no-swipe">
-            <div class="handle instant">&#9776;</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="question-container">
                     <div class="col-lg-6 col-sm-12 col-xs-12" style="font-size: 24px">

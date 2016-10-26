@@ -11,8 +11,21 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <!-- Call Search -->
-                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                {{--<li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>--}}
                 <!-- #END# Call Search -->
+
+                <!-- PREVIEW AND PRINT -->
+                @if(Route::currentRouteName() == 'users.surveys.edit')
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Print">
+                            <i class="material-icons">print</i></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Preview">
+                            <i class="material-icons">remove_red_eye</i></a>
+                    </li>
+
+                @endif
                 <!-- Notifications -->
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -201,6 +214,7 @@
                 </li>
                 <!-- #END# Tasks -->
                 <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+
             </ul>
         </div>
     </div>
