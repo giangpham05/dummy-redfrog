@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class QuestionType extends Model
 {
     //protected $table = 'tbl_Question_Type';
+    public $timestamps = false;
+    protected $fillable = [
+        'strTypeName','strTypeDesc',
+    ];
     public function questions()
     {
         return $this->hasMany('App\Models\Question', 'intQuesTypeID');
