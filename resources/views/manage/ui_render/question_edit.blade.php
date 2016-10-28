@@ -26,7 +26,8 @@
                     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: 15px;">
                         <div class="form-group">
                             <div class="form-line">
-                                <input id="" type="text" class="form-control" name="question" placeholder="Question" required autofocus style="font-size: 20px;" value="{{$question->strQuestionTitle}}"/>
+                                <input type="text" class="form-control" name="question" placeholder="Question" required autofocus style="font-size: 20px;"
+                                       value="{{$question->strQuestionTitle}}"/>
                             </div>
                         </div>
                     </div>

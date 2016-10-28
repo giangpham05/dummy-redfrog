@@ -382,7 +382,7 @@ $(document).ready(function () {
 
                     question_field.closest('.questions_row').remove();
                     click = false;
-                    toastr.success("Question saved.", null, opts)
+                    toastr.success("Question saved.", null, opts);
                     //$('.survey_title_wrapper h4').text(response['questionOption']);
 
                     //$('.survey_container .survey_edit_actions').hide();
@@ -518,7 +518,7 @@ $(document).ready(function () {
 
 
                     $('html, body').animate({
-                        scrollTop: $whereForm.offset().top-60
+                        scrollTop: $whereForm.offset().top-90
                     }, 400);
                     $whereForm.find('input')[0].focus();
                 },

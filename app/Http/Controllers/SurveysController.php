@@ -110,19 +110,37 @@ class SurveysController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * Render form for editing survey name and title.
      *
+     * @param User $username
      * @param  string  $survey
      * @return \Illuminate\Http\Response
      */
     public function show($username,$survey)
     {
-        $id = Auth::user()->getId();
+        //$id = Auth::user()->getId();
+        $user = Auth::user();
         //$survey = Survey::findOrFail($id);
-        $this_survey = \App\Models\User::find($id)->surveys()->where('hash_id', '=', $survey)->firstOrFail();
-//        return view('manage/therapy/survey_assignments/therapy_survey_assign_show_each')
-//            ->with('$survey',$survey);
+        $this_survey = $user->surveys()->where('hash_id', '=', $survey)->firstOrFail();
         return response()->json(['survey_name' => $this_survey->strSurveyName, 'survey_desc'=>$this_survey->strSurveyDesc]);
+
+    }
+
+    /**
+     * Show the survey preview.
+     *
+     * @param User $username
+     * @param  string  $survey
+     * @return \Illuminate\Http\Response
+     */
+
+    public function surveyPreview($username,$survey)
+    {
+        $user = Auth::user();
+
+        $this_survey =  $user->surveys()->where('hash_id',$survey)->firstOrFail();
+        return view('clients/surveys/pages/client_survey_show')
+            ->with('survey',$this_survey);
     }
 
     /**
@@ -133,11 +151,11 @@ class SurveysController extends Controller
      */
     public function edit($username, $survey)
     {
-        $id = Auth::user()->getId();
+        $user = Auth::user();
 
         //get surveys belongs to the current user
 
-        $this_survey = \App\Models\User::find($id)->surveys()->where('hash_id', '=', $survey)->firstOrFail();
+        $this_survey = $user->surveys()->where('hash_id', '=', $survey)->firstOrFail();
 
 
 
@@ -153,13 +171,13 @@ class SurveysController extends Controller
      */
     public function update(Request $request,$user, $survey_hash)
     {
-        $id = Auth::user()->getId();
+        //$id = Auth::user()->getId();
 
         $this->validate($request, [
             'survey-name' => 'required|max:255',
         ]);
 
-        $this_survey = \App\Models\User::find($id)->surveys()->where('hash_id', '=', $survey_hash)->firstOrFail();
+        $this_survey = Auth::user()->surveys()->where('hash_id', '=', $survey_hash)->firstOrFail();
 
         $strSurveyName = $request['survey-name'];
         $this_survey['strSurveyName'] = $strSurveyName;

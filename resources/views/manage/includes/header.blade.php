@@ -21,7 +21,7 @@
                             <i class="material-icons">print</i></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Preview">
+                        <a href="{{route('users.surveys.preview',['user'=>Auth::user()->getUsername(), 'survey'=>md5($survey->id)])}}" data-toggle="tooltip" data-placement="bottom" title="Preview" target="_blank">
                             <i class="material-icons">remove_red_eye</i></a>
                     </li>
 

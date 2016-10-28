@@ -1,0 +1,99 @@
+/*@media screen and (max-width: 768px) {*/
+    /*body { padding-top: 116px; }*/
+/*}*/
+
+/* fix fixed-bar */
+/*body { padding-top: 20px; }*/
+
+
+@media (min-width: 993px) {
+    section.content{
+        margin: 116px 0px 0 0px;
+        -moz-transition: 0.5s;
+        -o-transition: 0.5s;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+}
+
+@media (max-width: 992px) {
+body { padding-top: 100px; }
+}
+@media (max-width: 768px) {
+    body { padding-top: 100px; }
+    section.content{
+        margin: 100px 0px 0 0px;
+        -moz-transition: 0.5s;
+        -o-transition: 0.5s;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+}
+
+@media (max-width: 480px) {
+    body { padding-top: 140px; }
+    section.content{
+        margin: 100px 0px 0 0px;
+        -moz-transition: 0.5s;
+        -o-transition: 0.5s;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+}
+
+@media (max-width: 320px) {
+    body { padding-top: 170px; }
+    section.content{
+        margin: 100px 0px 0 0px;
+        -moz-transition: 0.5s;
+        -o-transition: 0.5s;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+}
+
+
+
+
+
+/*@media screen and (max-width: 1200px) {*/
+    /*body { padding-top: 120px; }*/
+/*}*/
+
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.ls-closed section.content {
+     margin-left: 0px;
+}
+
+.ls-closed section.content {
+     margin-left: 0px;
+}
+
+
+/*
+*   INPUT CUSTOM, RADIO, CHECKBOXES
+*/
+
+
+[type="radio"]:not(:checked) + label {
+    padding-left: 26px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    font-weight: normal;
+    width: 100%;
+}
+
+[type="checkbox"] + label {
+    padding-left: 26px;
+    height: 25px;
+    line-height: 21px;
+    font-size: 13px;
+    font-weight: normal;
+    width: 100%;
+}

@@ -99,10 +99,20 @@ class QuestionsController extends Controller
                 }
             }
         }
-
-        $question->sections()->attach($section);
         $questions = Section::findOrFail($section)->questions;
-        $count = sizeof($questions);
+        $count = 1;
+        if($questions->isEmpty()){
+            $question->sections()->attach($section, ['orderNo'=>$count]);
+
+        }
+
+        else{
+            $count  = sizeof($questions);
+            $count = $count +1;
+            $question->sections()->attach($section, ['orderNo'=>$count]);
+
+        }
+
 
         $view = view('manage/ui_render/question_show')
             ->with(['question'=>$question,'question_number'=>$count])->render();

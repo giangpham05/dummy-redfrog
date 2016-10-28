@@ -66,8 +66,9 @@
                         </div>
 
                         <div class="row clearfix">
-                            <P>A PDF FORMAT MAY GO HERE!</P>
-                            <P>OR IF NOT, YOU CAN CREATE A LAYOUT THAT DOES NOT ALLOW USER PROVIDE ANY INPUT
+                            @foreach($questionAnswer as $answer)
+                                    <h1>{{$answer->questionAnswer}}</h1>
+                            @endforeach
                             </P>
                         </div>
 

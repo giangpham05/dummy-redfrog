@@ -83,19 +83,10 @@
                             <h2 style="display: inline-block; padding-right: 5px">
                                 CREATE SURVEY
                             </h2>
-                            {{--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">--}}
-                            {{----}}
-                            {{--</div>--}}
-                            {{--<div class="col-lg-4 col-md-4 col-sm-8 col-xs-8" style="display:inline-block">--}}
-                            {{--<button type="button" class="btn bg-deep-orange btn-circle waves-effect waves-circle waves-light">--}}
-                            {{--<i class="material-icons">add</i>Create survey--}}
-                            {{--</button>--}}
-
-                            {{--</div>--}}
-
                         </div>
 
-                        <?php $username = Auth::user()->getUsername();?>
+                        @if(Auth::user()->isAdmin())
+
                         <div class="body">
                             @if ($errors->has('survey_name'))
                                 <div class="alert alert-danger" id="survey_name_error">
@@ -151,31 +142,151 @@
                                 </div>
                             </form>
                         </div>
+                        @else
+                           <div class="row">
+                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                   <div class="body">
+                                       <div class="row clearfix">
+                                           <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+                                               <div class="panel-group" id="accordion_17" role="tablist" aria-multiselectable="true">
+                                                   <div class="panel panel-col-cyan">
+                                                       <div class="panel-heading" role="tab" id="headingTwo_17">
+                                                           <h4 class="panel-title">
+                                                               <a class="" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseTwo_17" aria-expanded="true" aria-controls="collapseTwo_17">
+                                                                   <i class="material-icons">note_add</i> Build a New Survey from Scratch
+                                                               </a>
+                                                           </h4>
+                                                       </div>
+                                                       <div id="collapseTwo_17" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo_17" aria-expanded="true">
+                                                           <div class="panel-body">
+                                                               @if ($errors->has('survey_name'))
+                                                                   <div class="alert alert-danger" id="survey_name_error">
+                                                                       <strong>{{ $errors->first('survey_name') }}</strong>
+                                                                   </div>
+                                                               @endif
+                                                               @if ($errors->has('survey_description'))
+                                                                   <div class="alert alert-danger" id="survey_description_error">
+                                                                       <strong>{{ $errors->first('survey_description') }}</strong>
+                                                                   </div>
+                                                               @endif
+                                                               <form class="form-horizontal" action="{{route('users.surveys.store', ['user'=>$username])}}" method="post">
+                                                                   {{ csrf_field() }}
+                                                                   <div class="row clearfix">
+                                                                       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                                           <label for="survey_name">Survey name</label>
+                                                                       </div>
+                                                                       <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                           <div class="form-group">
+                                                                               <div class="form-line">
+                                                                                   <input type="text" id="survey_name" name="survey_name" class="form-control" placeholder="Enter a survey name" required autofocu>
+                                                                               </div>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
 
+                                                                   <div class="row clearfix">
+                                                                       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                                           <label for="survey_description">Description(optional)</label>
+                                                                       </div>
+                                                                       <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                           <div class="form-group">
+                                                                               <div class="form-line">
+                                                                                   <textarea name="survey_description" rows="4" class="form-control no-resize" placeholder="Survey description"></textarea>
+                                                                               </div>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
+
+                                                                   <div class="row clearfix">
+                                                                       <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                                           <button type="submit" class="btn btn-primary m-t-15 waves-effect">CREATE</button>
+                                                                       </div>
+                                                                   </div>
+                                                               </form>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+
+                                                   <div class="panel panel-col-pink">
+                                                       <div class="panel-heading" role="tab" id="headingOne_17">
+                                                           <h4 class="panel-title">
+                                                               <a role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseOne_17" aria-expanded="false" aria-controls="collapseOne_17" class="collapsed">
+                                                                   <i class="material-icons">content_copy</i> Use a Template
+                                                               </a>
+                                                           </h4>
+                                                       </div>
+                                                       <div id="collapseOne_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_17" aria-expanded="false" style="height: 0px;">
+                                                           <div class="panel-body">
+                                                               @if ($errors->has('survey_name'))
+                                                                   <div class="alert alert-danger" id="survey_name_error">
+                                                                       <strong>{{ $errors->first('survey_name') }}</strong>
+                                                                   </div>
+                                                               @endif
+                                                               @if ($errors->has('survey_description'))
+                                                                   <div class="alert alert-danger" id="survey_description_error">
+                                                                       <strong>{{ $errors->first('survey_description') }}</strong>
+                                                                   </div>
+                                                               @endif
+                                                               <form class="form-horizontal" action="{{route('users.surveys.store', ['user'=>$username])}}" method="post">
+                                                                   {{ csrf_field() }}
+                                                                   <div class="row clearfix">
+                                                                       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                                           <label for="survey_name">Survey name</label>
+                                                                       </div>
+                                                                       <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                           <div class="form-group">
+                                                                               <div class="form-line">
+                                                                                   <input type="text" id="survey_name" name="survey_name" class="form-control" placeholder="Enter a survey name" required autofocu>
+                                                                               </div>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
+
+                                                                   <div class="row clearfix">
+                                                                       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                                           <label for="survey_description">Description(optional)</label>
+                                                                       </div>
+                                                                       <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                           {{--<div class="form-group">--}}
+                                                                           {{--<div class="form-line">--}}
+                                                                           {{--<textarea rows="4" cols="50" name="survey_description" class="form-control no-resize" placeholder="Survey description">--}}
+
+                                                                           {{--</textarea>--}}
+                                                                           {{--<input type="text" id="survey_description" name="survey_description" class="form-control" placeholder="Enter a survey description" autofocu>--}}
+                                                                           {{--</div>--}}
+                                                                           {{--</div>--}}
+
+                                                                           <div class="form-group">
+                                                                               <div class="form-line">
+                                                                                   <textarea name="survey_description" rows="4" class="form-control no-resize" placeholder="Survey description"></textarea>
+                                                                               </div>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
+
+                                                                   <div class="row clearfix">
+                                                                       <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                                           <button type="submit" class="btn btn-primary m-t-15 waves-effect">CREATE</button>
+                                                                       </div>
+                                                                   </div>
+                                                               </form>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        @endif
 
                         {{-- CREATATION OF SURVEY GOES HERE --}}
 
                     </div>
                 </div>
-                {{--<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" style="margin-left: 0px;padding-left: 0px">--}}
-                {{--<div class="col_sidebar" style="position: relative">--}}
-                {{--<div id="sidebar">--}}
-                {{--<button type="button" id="create_question"--}}
-                {{--class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Add a new--}}
-                {{--question--}}
-                {{--</button>--}}
 
-                {{--<button type="button" id="create_question" class="btn btn-default btn-circle waves-effect waves-circle waves-flat">--}}
-                {{--<i class="material-icons">add_circle</i>--}}
-                {{--</button>--}}
-
-                {{--<button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-flat">--}}
-                {{--<i class="material-icons">view_stream</i>--}}
-                {{--</button>--}}
-
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
             </div>
             <!-- #END# Basic Examples -->
         </div>

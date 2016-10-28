@@ -13,10 +13,7 @@
 //
 
 
-//Route::get('/home', 'HomeController@index');
-
-
-Route::get('/', function (){
+Route::get('/', function () {
     //return view('welcome');
     return redirect(route('login'));
 
@@ -26,148 +23,58 @@ Route::get('/', function (){
 //    return view('auth/login');
 //})->name('login');
 
-Route::get('/script-disabled', function (){
+/**
+ * Javascript disabled route
+ */
+Route::get('/script-disabled', function () {
     return view('errors.no-script');
 })->name('no-script');
-//CHANGE THEME
-    Route::post('/updateTheme', function (\Illuminate\Http\Request $request){
-        session(['theme' => $request['theme']]);
-        session(['active' => $request['active']]);
-        session(['id' => $request['id']]);
-        return response()->json(['message' => $request['theme']]);
-    })->name('updateTheme');
 
-//GET QUESTION
-//Route::get('/survey/question', function (){
-//    return response()->json(['question' => view('manage/ui_render/question_render')->render()]);
-//})->name('getQuestion');
+/**
+ * Route for update theme, just a minor function
+ */
+Route::post('/updateTheme', function (\Illuminate\Http\Request $request) {
+    session(['theme' => $request['theme']]);
+    session(['active' => $request['active']]);
+    session(['id' => $request['id']]);
+    return response()->json(['message' => $request['theme']]);
+})->name('updateTheme');
 
-Route::get('/survey/question/question_type', function (\Illuminate\Http\Request $request){
+/**
+ * Route for getting question UI, this is done on the server side since we are unable
+ * to render html markups from the client side
+ */
+Route::get('/survey/question/question_type', function (\Illuminate\Http\Request $request) {
 
     $view = view('manage/ui_render/question_type_render')->with('question_option', $request['question_option'])->render();
-    return response()->json(['questionOption' => $view, 'all'=>$request->all()]);
+    return response()->json(['questionOption' => $view, 'all' => $request->all()]);
 })->name('getQuestionOption');
 
-//Route::group(['middleware' => ['web']], function (){
-//
-//    //CHANGE THEME
-//    Route::post('/updateTheme', function (\Illuminate\Http\Request $request){
-//        session(['theme' => $request['theme']]);
-//        session(['active' => $request['active']]);
-//        session(['id' => $request['id']]);
-//        return response()->json(['message' => $request['theme']]);
-//    })->name('updateTheme');
-//
-//    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    //ADMIN SECTION
-//
-//    //GET DASHBOARD
-//    Route::get('/','AdminsController@index');
-//
-//
-//    //ALL SURVEY PAGES
-//    Route::get('/all-surveys',[
-//        'uses' => 'AdminsController@showAllSurveys',
-//        'as'  => 'admin.surveys.show'
-//    ]);
-//
-//
-//    //ALL SURVEY ASSIGNMENT PAGES
-//    Route::post('/survey-assignments/create-new',[
-//        'uses' => 'AdminsController@createNewSurveyAssignment',
-//        'as' => 'admin.surveysAssign.create'
-//    ]);
-//
-//    Route::get('/survey-assignments/create-new',[
-//        'uses' => 'AdminsController@showCreateAssignPage',
-//        'as' => 'admin.surveysAssign.show'
-//    ]);
-//
-//    Route::get('/survey-assignments/show-all-survey-assignments',[
-//        'uses' => 'AdminsController@showAllAssignSurveysPage',
-//        'as' => 'admin.surveysAssign.showAll'
-//    ]);
-//
-//
-//    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    //ADMIN SECTION
-//    //GET DASHBOARD
-//    Route::get('/therapy','TherapyController@index');
-//
-//
-//    //ALL SURVEY PAGES
-//    Route::get('/therapy/all-surveys',[
-//        'uses' => 'AdminsController@showAllSurveys',
-//        'as'  => 'therapy.surveys.show'
-//    ]);
-//
-//
-//    //ALL SURVEY ASSIGNMENT PAGES
-//    Route::post('/therapy/survey-assignments/create-new',[
-//        'uses' => 'AdminsController@createNewSurveyAssignment',
-//        'as' => 'therapy.surveysAssign.create'
-//    ]);
-//
-//    Route::get('/therapy/survey-assignments/create-new',[
-//        'uses' => 'AdminsController@showCreateAssignPage',
-//        'as' => 'therapy.surveysAssign.show'
-//    ]);
-//
-//    Route::get('/therapy/survey-assignments/show-all-survey-assignments',[
-//        'uses' => 'AdminsController@showAllAssignSurveysPage',
-//        'as' => 'therapy.surveysAssign.showAll'
-//    ]);
-//
-//
-//
-//
-//    //CLIENT/NON-ADMIN SECTION
-////        Route::get('/','SurveysController@index');
-////    Route::resource('survey','SurveysController');
-////Route::get('/survey',[
-////    'as'     => 'survey',
-////    'uses' => 'SurveysController@create'
-////]);
-//
-////Route::get('/survey/{survey_id}', [
-////    'uses' => 'SurveysController@test',
-////    'as' =>'survey.show'
-////]);
-//    Route::get('/surveys/survey={survey_id}',[
-//        'uses' => 'SurveysController@showForm',
-//        'as' =>'survey.show'
-//    ]);
-//
-//    Route::get('/survey/{survey_id}/section/{section_id}',[
-//        'uses' => 'SurveysController@showSection',
-//        'as' =>'section.show'
-//    ]);
-//
-//    Route::post('/survey/{survey_id}/section/{section_id}', [
-//        'as' => 'section_submit', 'uses' => 'SurveysController@store'
-//    ]);
-//
-//});
-
-
+/**
+ * AUTHORISED ROUTES
+ */
 Auth::routes();
-Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm'])->middleware('validateBackHistory');
-Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory']],function (){
 
+Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm'])->middleware('validateBackHistory');
 
+Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'validateBackHistory']], function () {
+
+    /**
+     * Route for dashboard
+     */
     Route::get('users/dashboard', 'HomeController@index')->name('manage_dashboard');
-    //Route::resource('{username}','UsersController');
-    //Route::resource('survey-assignments','SurveyAssignmentsController');
-    Route::resource('users','UsersController');
+
+    Route::resource('users', 'UsersController');
+
     /**
      * Survey routes for both admin and therapy
      */
-    Route::get('users/{user}/surveys/current','SurveysController@showCurrentSurveys')->name('users.surveys.current');
-
-    Route::post('users/{user}/surveys','SurveysController@store')
-        ->name('users.surveys.store');
-
-    Route::get('users/{user}/surveys','SurveysController@index')->name('users.surveys.index');
+//    Route::get('users/{user}/surveys/current', 'SurveysController@showCurrentSurveys')->name('users.surveys.current');
+//
+//    Route::post('users/{user}/surveys', 'SurveysController@store')
+//        ->name('users.surveys.store');
+//
+//    Route::get('users/{user}/surveys', 'SurveysController@index')->name('users.surveys.index');
 
 //    Route::get('users/{user}/surveys/create','SurveysController@create')
 //        ->name('users.surveys.create');
@@ -185,17 +92,20 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory
 //        ->name('users.surveys.edit');
 
 
+    Route::get('users/{user}/surveys/{survey}/preview','SurveysController@surveyPreview')
+        ->name('users.surveys.preview');
 
-  Route::resource('users.surveys','SurveysController');
+    Route::resource('users.surveys', 'SurveysController');
 
-    Route::resource('users.surveys.sections','SectionsController',['except' => ['index']]);
+    Route::resource('users.surveys.sections', 'SectionsController', ['except' => ['index']]);
 
-    Route::resource('users.surveys.sections.questions','QuestionsController',['except' => ['index']]);
+    Route::resource('users.surveys.sections.questions', 'QuestionsController', ['except' => ['index']]);
+
 
     /**
      * Routes belong to therapists
      */
-    Route::group([''],function (){
+    Route::group(['middleware'=>'therapy'], function () {
 
         //Route::resource('{username}','UsersController');
         //Route::resource('survey-assignments','SurveyAssignmentsController');
@@ -203,23 +113,27 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth','validateBackHistory
         /**
          * Survey assignment routes
          */
-        Route::resource('users.survey-assignments','SurveyAssignmentsController');
+        Route::resource('users.survey-assignments', 'SurveyAssignmentsController');
 
         /**
          * Survey response routes
          */
-        Route::get('users/{username}/survey-response','SurveyResponsesController@index')->name('survey-response.index');
-        Route::get('users/{username}/survey-response/{id}','SurveyResponsesController@show')->name('survey-response.show');
 
-        Route::delete('users/{username}/survey-response/{id}','SurveyResponsesController@destroy')->name('survey-response.destroy');
+        //Route::resource('users.survey-responses', 'SurveyAssignmentsController');
 
-        /**
-         * Client management routes
-         */
+        Route::get('users/{username}/survey-response', 'SurveyResponsesController@index')->name('survey-response.index');
+        Route::get('users/{username}/survey-response/{uuid}/{survey_id}', 'SurveyResponsesController@show')->name('survey-response.show');
 
+        Route::delete('users/{username}/survey-response/{id}', 'SurveyResponsesController@destroy')->name('survey-response.destroy');
 
     });
 });
+
+/**
+ * Client management routes
+ */
+
+
 
 
 

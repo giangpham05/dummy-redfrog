@@ -49,114 +49,94 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        @if(Auth::user()->isAdmin())
-                            <div class="header row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="row" style="margin-left: 0px; margin-right: 0px">
-                                        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-                                            <h2 style="display: inline-block; padding-right: 5px">
-                                                ALL SURVEYS
-                                            </h2>
-                                        </div>
-                                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                                            <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
-                                               class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Create survey</a>
-                                        </div>
+                        <div class="header row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row" style="margin-left: 0px; margin-right: 0px">
+                                    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                                        <h2 style="display: inline-block; padding-right: 5px">
+                                            ALL SURVEYS
+                                        </h2>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                                        <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
+                                           class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Create survey</a>
                                     </div>
                                 </div>
                             </div>
-                        @else
-                            {{-- Need to have something to do with survey selection created by admins --}}
-                            <div class="header row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="row" style="margin-left: 0px; margin-right: 0px">
-                                        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-                                            <h2 style="display: inline-block; padding-right: 5px">
-                                                ALL SURVEYS
-                                            </h2>
-                                        </div>
-                                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                                            <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
-                                               class="btn btn-block btn-lg bg-red waves-effect waves-light">+ Create survey</a>
-                                        </div>
-
-                                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" >
-                                            <a href="{{URL::route('users.surveys.create',['user'=>$username])}}"
-                                               class="btn btn-block btn-lg bg-red waves-effect waves-light">+ User a template</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
+                        </div>
                         {{-- For loop to get surveys go here --}}
 
                         <div class="survey_controller_index">
                             {{-- Survey shows for today --}}
                             <div class="">
-                                <div class="survey-header row">
-                                    <div class="surveys-homescreen-cell surveys-homescreen-cell-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10">
-                                        Survey By Title
+                                @if(sizeof($surveys)>0)
+                                    <div class="survey-header row">
+                                        <div class="surveys-homescreen-cell surveys-homescreen-cell-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10">
+                                            Survey By Title
+                                        </div>
+                                        <div class="surveys-homescreen-cell surveys-homescreen-cell-created-at col-lg-3 col-md-3 col-sm-3 hidden-xs">
+                                            Created At
+                                        </div>
+                                        <div class="surveys-homescreen-cell surveys-homescreen-cell-updated-at col-lg-3 col-md-3 col-sm-3 hidden-xs">
+                                            Updated At
+                                        </div>
+                                        <div class="surveys-homescreen-cell surveys-homescreen-cell-buttons col-lg-1 col-md-1 col-sm-1 col-xs-2"
+                                             style="text-align: right;cursor: pointer;">
+                                            <i class="material-icons" style="vertical-align: middle; display: inline-block;">sort_by_alpha</i>
+                                        </div>
                                     </div>
-                                    <div class="surveys-homescreen-cell surveys-homescreen-cell-created-at col-lg-3 col-md-3 col-sm-3 hidden-xs">
-                                        Created At
-                                    </div>
-                                    <div class="surveys-homescreen-cell surveys-homescreen-cell-updated-at col-lg-3 col-md-3 col-sm-3 hidden-xs">
-                                        Updated At
-                                    </div>
-                                    <div class="surveys-homescreen-cell surveys-homescreen-cell-buttons col-lg-1 col-md-1 col-sm-1 col-xs-2"
-                                         style="text-align: right;cursor: pointer;">
-                                        <i class="material-icons" style="vertical-align: middle; display: inline-block;">sort_by_alpha</i>
-                                    </div>
-                                </div>
-                                <div class="surveys-container row">
-                                    @foreach($surveys as $survey)
-                                        <div class="surveys-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12" data-survey-id="{{$survey->id}}">
-                                            <div class="row">
-                                                <div class="survey-cell survey-cell-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10" style="display: inline-flex;">
-                                                    <div class="icon-empty special visible-xs-inline"></div>
-                                                    <span style="display: inline-block; margin-right: 10px;">
+
+                                    <div class="surveys-container row">
+                                        @foreach($surveys as $survey)
+                                            <div class="surveys-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12" data-survey-id="{{$survey->id}}">
+                                                <div class="row">
+                                                    <div class="survey-cell survey-cell-surveyname col-lg-5 col-md-5 col-sm-5 col-xs-10" style="display: inline-flex;">
+                                                        <div class="icon-empty special visible-xs-inline"></div>
+                                                        <span style="display: inline-block; margin-right: 10px;">
                                                         <i class="material-icons surveys-homescreen-list-item-icon">view_list</i>
                                                     </span>
-                                                    <span class="surveys-homescreen-list-item-survey-value" style="display: inline-block; margin-top: 2px;">
+                                                        <span class="surveys-homescreen-list-item-survey-value" style="display: inline-block; margin-top: 2px;">
                                                     <a style="color: black" href="{{route('users.surveys.edit', ['user'=> Auth::user()->getUsername(), 'survey' => md5($survey->id)])}}">
                                                         {{$survey->strSurveyName}}
                                                     </a>
                                                      </span>
-                                                </div>
-                                                <div class="survey-cell survey-cell-created-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Created at">{{$survey->created_at}}</div>
-                                                <div class="survey-cell survey-cell-updated-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Updated at">{{$survey->updated_at}}</div>
-                                                <div class="survey-cell survey-cell-popup col-lg-1 col-md-1 col-sm-1 col-xs-2"
-                                                     role="button" aria-haspopup="true"
-                                                     aria-label="More actions. Popup button." aria-expanded="false" style="padding-right: 0px">
-                                                    <ul class="header-dropdown m-r--5" style="float: right;">
-                                                        <li class="dropdown">
-                                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="material-icons">more_vert</i>
-                                                            </a>
-                                                            <ul class="dropdown-menu pull-right">
-                                                                <li>
-                                                                    <a href="javascript:void(0);" data-route="{{route('users.surveys.edit',['user'=>$username,'survey'=>$survey->id])}}">
-                                                                        <i class="material-icons">format_color_text</i>Rename
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);" data-route="{{route('users.surveys.destroy',['user'=>$username,'survey'=>$survey->id])}}">
-                                                                        <i class="material-icons">delete</i>Remove</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);" data-route="{{route('users.surveys.show',['user'=>$username,'survey'=>$survey->id])}}">
-                                                                        <i class="material-icons">remove_red_eye</i>Preview</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
+                                                    </div>
+                                                    <div class="survey-cell survey-cell-created-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Created at">{{$survey->created_at}}</div>
+                                                    <div class="survey-cell survey-cell-updated-at col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs" aria-label="Updated at">{{$survey->updated_at}}</div>
+                                                    <div class="survey-cell survey-cell-popup col-lg-1 col-md-1 col-sm-1 col-xs-2"
+                                                         role="button" aria-haspopup="true"
+                                                         aria-label="More actions. Popup button." aria-expanded="false" style="padding-right: 0px">
+                                                        <ul class="header-dropdown m-r--5" style="float: right;">
+                                                            <li class="dropdown">
+                                                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="material-icons">more_vert</i>
+                                                                </a>
+                                                                <ul class="dropdown-menu pull-right">
+                                                                    <li>
+                                                                        <a href="javascript:void(0);" data-route="{{route('users.surveys.edit',['user'=>$username,'survey'=>$survey->id])}}">
+                                                                            <i class="material-icons">format_color_text</i>Rename
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:void(0);" data-route="{{route('users.surveys.destroy',['user'=>$username,'survey'=>$survey->id])}}">
+                                                                            <i class="material-icons">delete</i>Remove</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="{{route('users.surveys.preview',['user'=>$username, 'survey'=>md5($survey->id)])}}" title="Preview" target="_blank">
+                                                                            <i class="material-icons">remove_red_eye</i>Preview</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
 
 
-                                </div>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
 

@@ -45,7 +45,7 @@
                                 <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: 15px;">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input id="" type="text" class="form-control" placeholder="Question"
+                                            <input type="text" class="form-control" placeholder="Question"
                                                    name="question" autofocus style="font-size: 20px;"/>
                                         </div>
                                     </div>
@@ -56,12 +56,12 @@
 
                                         <div class="form-line" style="border-bottom-style: dotted;">
 
-                                        <input type="text" class="" placeholder="Long-answer text"
+                                        <input type="text" placeholder="Long-answer text"
                                         disabled="true" aria-label="Long-answer text" style="border: none"/>
                                         </div>
                                         <div class="form-line" style="border-bottom-style: dotted;">
 
-                                        <input type="text" class="" disabled="true" aria-label="Long-answer text" style="border: none"/>
+                                        <input type="text" disabled="true" aria-label="Long-answer text" style="border: none"/>
                                         </div>
 
                                     </div>
@@ -69,10 +69,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="row more_options">
-                                        {{--<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 headerDivider">--}}
-                                            {{--<span><i class="material-icons">content_copy</i></span>--}}
-                                            {{--<span><i class="material-icons">delete</i></span>--}}
-                                        {{--</div>--}}
+
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <div class="switch">
                                                 <span style="font-weight: bold">Required</span>

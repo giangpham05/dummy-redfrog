@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\ClientAnswer;
+use App\Models\Survey;
+use App\Models\SurveyAssignment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class SurveyResponsesController extends Controller
 {
@@ -15,7 +21,51 @@ class SurveyResponsesController extends Controller
      */
     public function index()
     {
-        return view('manage/therapy/survey_response/show_all_responses');
+        $user = Auth::user();
+        $clients = $user->clients;
+
+        $collection = collect([]);
+
+        foreach ($clients as $client){
+            $client_answers = ClientAnswer::where('uuid', $client->id)->get();
+            if(!$client_answers->isEmpty()){
+                $collection->put($client->id, $client_answers);
+
+            }
+        }
+
+
+        $collectionAfterFiltered = collect([]);
+
+        foreach ($collection as $key=>$value){
+            //$this_client_survey = $collection->get($key);
+            //$this_client = Client::find($key);
+
+            //$col = $collection->get($key);
+
+            $col2 = $value->groupBy('survey_id');
+
+            $collectionAfterFiltered->put($key, $col2);
+
+//            $surveyAssign = $this_client->survey_assignments;
+//
+//            foreach ($surveyAssign as $value){
+//
+//                $filtered = $col->filter(function ($value, $key) {
+//                    return $value == $value->survey_id;
+//                });
+//            }
+            //$client_survey_assign = SurveyAssignment::findOrFail($this_client_survey);
+
+        }
+
+        //return dd($collectionAfterFiltered);
+
+
+
+
+        return view('manage/therapy/survey_response/show_all_responses')
+            ->with('collection', $collectionAfterFiltered);
     }
 
     /**
@@ -45,9 +95,19 @@ class SurveyResponsesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $username, $uuid, $survey_id)
     {
-        return view('manage/therapy/survey_response/show_each');
+        $id = Survey::where('hash_id', $survey_id)->first()->id;
+        $questionsAnswered = DB::table('clients_answers')->where([
+            ['uuid', '=', $uuid],
+            ['survey_id', '=', $id],
+        ])->get();
+        return view('manage/therapy/survey_response/show_each')
+            ->with([
+                'questionAnswer' =>$questionsAnswered,
+                'uuid'=>$uuid,
+                'survey_id' =>$id
+            ]);
     }
 
     /**

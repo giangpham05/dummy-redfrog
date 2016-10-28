@@ -69,29 +69,6 @@
 
 @yield('script')
 
-{{--<!-- Jquery CountTo Plugin Js -->--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-countto/jquery.countTo.js')}}"></script>--}}
-
-{{--<!-- Morris Plugin Js -->--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/raphael/raphael.min.js')}}"></script>--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/morrisjs/morris.js')}}"></script>--}}
-
-{{--<!-- ChartJs -->--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/chartjs/Chart.bundle.js')}}"></script>--}}
-
-{{--<!-- Flot Charts Plugin Js -->--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/flot-charts/jquery.flot.js')}}"></script>--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/flot-charts/jquery.flot.resize.js')}}"></script>--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/flot-charts/jquery.flot.pie.js')}}"></script>--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/flot-charts/jquery.flot.categories.js')}}"></script>--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/flot-charts/jquery.flot.time.js')}}"></script>--}}
-
-{{--<!-- Sparkline Chart Plugin Js -->--}}
-{{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-sparkline/jquery.sparkline.js')}}"></script>--}}
-
-<!-- Custom Js -->
-
-{{--<script src="{{ URL::asset('src/admin-assets/test.js')}}"></script>--}}
 
 <script type="text/javascript">
     var token = '{{Session::token()}}';

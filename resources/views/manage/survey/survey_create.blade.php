@@ -84,11 +84,13 @@
                                                         <i class="material-icons">format_color_text</i>Rename
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="javascript:void(0);"
-                                                       data-route="{{route('users.surveys.sections.destroy',['user'=>$username,'survey'=>$survey->id,'section'=>$section->id])}}">
-                                                        <i class="material-icons">delete</i>Remove</a>
-                                                </li>
+                                                @if(sizeof($survey->sections)>1)
+                                                    <li>
+                                                        <a href="javascript:void(0);"
+                                                           data-route="{{route('users.surveys.sections.destroy',['user'=>$username,'survey'=>$survey->id,'section'=>$section->id])}}">
+                                                            <i class="material-icons">delete</i>Remove</a>
+                                                    </li>
+                                                @endif
 
                                                 <li>
                                                     <a href="javascript:void(0);">
@@ -127,8 +129,11 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 questions_container" id="questions-container">
 
                                             @if(count($section->questions))
-                                                @foreach($section->questions as $q_key=> $question)
+                                                <?php $questions = $section->questions()->orderBy('pivot_orderNo', 'desc')->get(); ?>
+                                                {{--{{dd($questions)}}--}}
+                                                @foreach($questions as $q_key=> $question)
                                                     @include('manage.ui_render.question_show', ['question' => $question,'question_number'=>$q_key+1])
+                                                    {{--@include('manage.ui_render.question_show', ['question' => $question,'question_number'=>$question->pivot->orderNo])--}}
                                                 @endforeach
                                             @endif
                                             <!------------------------- NEW QUESTION GOES HERE -------------------------->

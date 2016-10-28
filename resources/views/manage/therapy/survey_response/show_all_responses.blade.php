@@ -66,6 +66,35 @@
                         </div>
 
                         <div class="row clearfix">
+                            {{--{{dd($collection)}}--}}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th colspan="2">Survey</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($collection as $master=> $client_survey)
+
+                                    <h1>CLIENT: {{$master}}</h1>
+                                    <h2>All surveys for {{$master}}:</h2>
+                                    @foreach($client_survey as $key => $suv)
+                                        <tr>
+                                            <td>{{$master}}</td>
+                                            <td>{{\App\Models\Survey::findOrFail($key)->strSurveyName}}</td>
+                                            <td>
+                                                <a href="{{route('survey-response.show',['user'=>$username, 'uuid'=>$master, 'survey_id'=>md5($key)])}}">View</a>
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
+                                @endforeach
+                                </tbody>
+                                {{--{{dd($collection)}}--}}
+
+                            </table>
+
                             <P>DETAILS ABOUT ALL SURVEY RESPONSES GO HERE!!</P>
                         </div>
 
