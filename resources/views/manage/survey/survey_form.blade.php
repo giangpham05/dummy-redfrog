@@ -217,59 +217,8 @@
                                                        </div>
                                                        <div id="collapseOne_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_17" aria-expanded="false" style="height: 0px;">
                                                            <div class="panel-body">
-                                                               @if ($errors->has('survey_name'))
-                                                                   <div class="alert alert-danger" id="survey_name_error">
-                                                                       <strong>{{ $errors->first('survey_name') }}</strong>
-                                                                   </div>
-                                                               @endif
-                                                               @if ($errors->has('survey_description'))
-                                                                   <div class="alert alert-danger" id="survey_description_error">
-                                                                       <strong>{{ $errors->first('survey_description') }}</strong>
-                                                                   </div>
-                                                               @endif
-                                                               <form class="form-horizontal" action="{{route('users.surveys.store', ['user'=>$username])}}" method="post">
-                                                                   {{ csrf_field() }}
-                                                                   <div class="row clearfix">
-                                                                       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                                                           <label for="survey_name">Survey name</label>
-                                                                       </div>
-                                                                       <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                                                           <div class="form-group">
-                                                                               <div class="form-line">
-                                                                                   <input type="text" id="survey_name" name="survey_name" class="form-control" placeholder="Enter a survey name" required autofocu>
-                                                                               </div>
-                                                                           </div>
-                                                                       </div>
-                                                                   </div>
-
-                                                                   <div class="row clearfix">
-                                                                       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                                                           <label for="survey_description">Description(optional)</label>
-                                                                       </div>
-                                                                       <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                                                           {{--<div class="form-group">--}}
-                                                                           {{--<div class="form-line">--}}
-                                                                           {{--<textarea rows="4" cols="50" name="survey_description" class="form-control no-resize" placeholder="Survey description">--}}
-
-                                                                           {{--</textarea>--}}
-                                                                           {{--<input type="text" id="survey_description" name="survey_description" class="form-control" placeholder="Enter a survey description" autofocu>--}}
-                                                                           {{--</div>--}}
-                                                                           {{--</div>--}}
-
-                                                                           <div class="form-group">
-                                                                               <div class="form-line">
-                                                                                   <textarea name="survey_description" rows="4" class="form-control no-resize" placeholder="Survey description"></textarea>
-                                                                               </div>
-                                                                           </div>
-                                                                       </div>
-                                                                   </div>
-
-                                                                   <div class="row clearfix">
-                                                                       <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                                                           <button type="submit" class="btn btn-primary m-t-15 waves-effect">CREATE</button>
-                                                                       </div>
-                                                                   </div>
-                                                               </form>
+                                                              <?php $faker = Faker\Factory::create();?>
+                                                                {{$faker->text($maxNbChars = 1000)}}
                                                            </div>
                                                        </div>
                                                    </div>

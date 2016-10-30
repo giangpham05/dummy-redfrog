@@ -19,6 +19,7 @@
     <!-- Custom Css -->
     <link href="{{ URL::asset('src/assets/css/pages/client_surveys/style.css')}}" rel="stylesheet" type="text/css">
 
+    <link href="{{ URL::asset('src/assets/css/pages/client_surveys/client_survey.show.css')}}" rel="stylesheet" type="text/css">
     {{--<link href="{{ URL::asset('src/assets/css/survey-index.css')}}" rel="stylesheet" type="text/css">--}}
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
@@ -48,7 +49,7 @@
                                         <div class="row survey_container_row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_row_title_container"
                                                  data-survey-id="{{$survey->id}}">
-                                                <div class="survey_title_wrapper row">
+                                                <div class="survey_title_wrapper">
                                                     <h2>{{$survey->strSurveyName}}</h2>
                                                 </div>
 
@@ -75,9 +76,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="buttons row">
-                                    <button type="submit" class="btn btn-primary" style="vertical-align: middle; margin-bottom: 2px; display: inline-block">Save And Continue</button>
-                                    <button type="submit" class="btn btn-primary" style="vertical-align: middle;margin-bottom: 2px;display: inline-block">Save And Exit</button>
+                                <div class="buttons" style="width: 100%;margin: 0 auto; text-align:center;">
+                                    <button type="submit" class="btn btn-primary" style="vertical-align: middle; text-align: center; margin-bottom: 2px; display: inline-block">Save And Continue</button>
                                 </div>
 
                             </form>

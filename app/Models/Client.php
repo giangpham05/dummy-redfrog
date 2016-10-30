@@ -9,7 +9,7 @@ class Client extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['id', 'user_id'];
+    protected $fillable = ['id', 'user_id', 'created_at'];
 
     public function clients_answers()
     {

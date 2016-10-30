@@ -23,9 +23,44 @@ class SurveyAssignmentsController extends Controller
      */
     public function index()
     {
-        $survey_assignments = SurveyAssignment::all();
+        $user = Auth::user();
+        $clients = $user->clients;
+
+        $collection = collect([]);
+
+        foreach ($clients as $client){
+            $survey_ass = SurveyAssignment::where('uuid', $client->id)->get();
+            if(!$survey_ass->isEmpty()){
+                $collection->put($client->id, $survey_ass);
+
+            }
+        }
+
+
+        $collectionAfterFiltered = collect([]);
+
+//        if(sizeof($collection)>0){
+//            foreach ($collection as $key=>$value){
+//
+//                $col2 = $value->groupBy('survey_id');
+//
+//                $collectionAfterFiltered->put($key, $col2);
+//
+//
+//            }
+//
+//        }
         return view('manage/therapy/survey_assignments/therapy_survey_assign_show')
-            ->with('survey_assignments', $survey_assignments);
+            ->with('survey_assignments', $collection);
+
+
+
+
+//            ->with('collection', $collectionAfterFiltered);
+
+
+        //$survey_assignments = SurveyAssignment::all();
+
     }
 
     /**
@@ -91,19 +126,6 @@ class SurveyAssignmentsController extends Controller
                 }
             }
 
-//            $user = Auth::user();
-//
-//            $clients = $user->clients;
-//
-//            $collection = collect([]);
-//
-//            foreach ($clients as $client){
-//                $survey_assignments = SurveyAssignment::where('uuid', $client->id)->get();
-//                if(count($survey_assignments)>0){
-//                    $collection->put($client->id, $survey_assignments);
-//
-//                }
-//            }
 
             if(count($status)<1){
 
@@ -111,15 +133,11 @@ class SurveyAssignmentsController extends Controller
                 //dd($collection);
                 Session::flash('success', 'All surveys have been assigned!');
                 return redirect()->back();
-//                return view('manage/therapy/survey_assignments/therapy_survey_assign_create')
-//                    ->with(['success' => 'All surveys have been assigned!']);
             }
 
             else{
                 Session::flash('status', $status);
                 return redirect()->back();
-//                return view('manage/therapy/survey_assignments/therapy_survey_assign_create')
-//                    ->with('status',$status);
             }
         }
         else{

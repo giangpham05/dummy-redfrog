@@ -5,8 +5,9 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
+                <?php $url = Request::path(); $last = explode('/',$url); $current = $last[count($last)-1]?>
                 @foreach($survey->sections as $section)
-                <li class="">
+                <li class="{{$current==$section->id? 'active':''}}">
                     <a href="{{route('clients.surveys.section.show',['uuid'=>$uuid,'survey_id'=>$survey_id,'section_id'=>$section->id])}}">
                         <i class="material-icons">assignment</i>
                         <span>{{$section->strSectionTitle == null? 'Untitled section':$section->strSectionTitle}}</span>

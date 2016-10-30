@@ -15,13 +15,13 @@
                     @if($type==1)
                             <div class="form-group">
                                 <div class="form-line">
-                                    <textarea name="{{$question->id}}" rows="4" PLACEHOLDER="Your answer" class="form-control no-resize"></textarea>
+                                    <textarea name="{{$question->id}}" rows="4" PLACEHOLDER="Your answer" class="form-control no-resize" {{$question->required ==1 ? 'required':''}}></textarea>
                                 </div>
                             </div>
                     @elseif($type==2)
                         <div class="form-group">
                             <div class="form-line">
-                                <input class="form-control" name="{{$question->id}}" type="text" PLACEHOLDER="Your answer" aria-label="Short-answer text"/>
+                                <input class="form-control" name="{{$question->id}}" type="text" PLACEHOLDER="Your answer" aria-label="Short-answer text" {{$question->required ==1 ? 'required':''}}/>
                             </div>
                         </div>
                     @elseif($type==3)
@@ -67,38 +67,59 @@
                         @if($type==1)
                             <div class="form-group">
                                 <div class="form-line">
-                                    <textarea name="{{$question->id}}" rows="4" PLACEHOLDER="Your answer" class="form-control no-resize">{{$isFound->questionAnswer}}</textarea>
+                                    <textarea name="{{$question->id}}" rows="4" PLACEHOLDER="Your answer"
+                                              class="form-control no-resize" {{$question->required ==1 ? 'required':''}}>{{$isFound->questionAnswer}}</textarea>
                                 </div>
                             </div>
                         @elseif($type==2)
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input class="form-control" name="{{$question->id}}" type="text" PLACEHOLDER="Your answer" aria-label="Short-answer text" value="{{$isFound->questionAnswer}}"/>
+                                    <input class="form-control" name="{{$question->id}}" type="text" PLACEHOLDER="Your answer"
+                                           aria-label="Short-answer text" value="{{$isFound->questionAnswer}}" {{$question->required ==1 ? 'required':''}}/>
                                 </div>
                             </div>
                         @elseif($type==3)
-                            <?php $paths = explode('_@_',$isFound->questionAnswer)?>
+                            <?php
+                                $paths = explode('_|@|_',$isFound->questionAnswer);
+                                $paths = array_values( array_filter($paths));
+                                $plucked = $question->options->pluck('id')->toArray(); $result =  array_diff($plucked,$paths);
+                                ?>
+                            <input type="hidden" name="{{$question->id}}[]" value="q{{$question->id}}">
                             @foreach($paths as $path)
-                            @if($path!='')
                             <div class="input-group">
                                 <input type="checkbox" name="{{$question->id}}[]" id="{{$question->id}}_{{$path}}" class="filled-in chk-col-red" value="{{$path}}" checked/>
                                 <label for="{{$question->id}}_{{$path}}">{{\App\Models\Option::find($path)->questionOption}}</label>
 
                             </div>
-                            @endif
+                            @endforeach
+                            @foreach($result as $k=>$item)
+                            <div class="input-group">
+                                <input type="checkbox" name="{{$question->id}}[]" id="{{$question->id}}_{{$item}}" class="filled-in chk-col-red" value="{{$item}}"/>
+                                <label for="{{$question->id}}_{{$item}}">{{\App\Models\Option::find($item)->questionOption}}</label>
+
+                            </div>
                             @endforeach
                         @elseif($type==4)
-                            <?php $paths = explode('_@_',$isFound->questionAnswer)?>
+                            <?php
+                            $paths = explode('_|@|_',$isFound->questionAnswer);
+                            $paths = array_values( array_filter($paths));
+                            $plucked = $question->options->pluck('id')->toArray(); $result =  array_diff($plucked,$paths);
+                            ?>
+                                <input type="hidden" name="{{$question->id}}[]" value="q{{$question->id}}">
                             @foreach($paths as $path)
-                            @if($path!='')
                             <div class="input-group">
                             <input type="radio" name="{{$question->id}}[]" id="{{$question->id}}_{{$path}}" value="{{$path}}" class="radio-col-red" checked/>
                             <label for="{{$question->id}}_{{$path}}">{{\App\Models\Option::find($path)->questionOption}}</label>
 
                             </div>
-                            @endif
                             @endforeach
+                            @foreach($result as $k=>$item)
+                            <div class="input-group">
+                                <input type="radio" name="{{$question->id}}[]" id="{{$question->id}}_{{$item}}" value="{{$item}}" class="radio-col-red"/>
+                                <label for="{{$question->id}}_{{$item}}">{{\App\Models\Option::find($item)->questionOption}}</label>
 
+                            </div>
+                            @endforeach
                         @endif
 
                     </div>

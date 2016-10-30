@@ -34,13 +34,15 @@ $(document).ready(function () {
 
         },
         submitHandler: function (form) {
-            $('#myModalForm').modal('hide');
             $.ajax({
                 method: $(form).attr('method'),
                 url: $(form).attr('action'),
-                //dataType: 'json',
+                dataType: 'json',
                 data: $(form).serialize(),
                 success: function (response) {
+                    $('#myModalForm').modal('hide');
+                    location.reload();
+                    console.log(response['test']);
 
                 },
                 error: function (data) {
@@ -52,8 +54,11 @@ $(document).ready(function () {
                     $.each(errors, function(i, item) {
                         li +='<li>'+item[0]+'</li>';
                     });
-
                     var messages = begin + li + end;
+
+                    $('#myModalForm').modal('hide');
+                    $(form).closest('#myModalForm').after(messages);
+
                 }
             });
             return false; // required to block normal submit since you used ajax

@@ -40,7 +40,7 @@ class FrontEndSurveyController extends Controller
      */
     public function store(Request $request, $uuid, $survey_id,$section_id)
     {
-
+        //dd($request->all());
         $this_survey = Survey::where('hash_id',$survey_id)->firstOrFail();
 
         //dd($request->all());
@@ -50,7 +50,13 @@ class FrontEndSurveyController extends Controller
                 if($input!='' || $input!=null){
                     if(is_array($input)){
                         foreach ($input as $innerKey=>$value){
-                            $answer_string.= $value.'_@_';
+                            if(strpos($value, 'q')===false){
+                                $answer_string.= $value.'_|@|_';
+                            }
+                            else{
+
+                            }
+
                         }
                     }
                     else{

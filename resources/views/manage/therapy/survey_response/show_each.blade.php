@@ -22,7 +22,6 @@
     <!-- Custom Css -->
     <link href="{{ URL::asset('src/assets/css/style.css')}}" rel="stylesheet" type="text/css">
 
-    <link href="{{ URL::asset('src/assets/css/admin.main.css')}}" rel="stylesheet" type="text/css">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ URL::asset('src/assets/css/themes/all-themes.css') }}" rel="stylesheet" type="text/css">
@@ -55,20 +54,28 @@
         <div class="container-fluid">
             {{-- @include('manage.includes.block-header', ['title' => 'Surveys', 'icon'=>'view_list'])--}}
 
-            <div class="row clearfix" style="margin-top: -30px">
+            <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header" style="padding: 10px">
                             <h2 style="display: inline-block; padding-right: 5px">
-                                SURVEY RESPONSE - WHICH ONE
+                                SURVEY RESPONSE - {{\App\Models\Survey::find($survey_id)->strSurveyName}}
                             </h2>
 
                         </div>
 
                         <div class="row clearfix">
-                            @foreach($questionAnswer as $answer)
-                                    <h1>{{$answer->questionAnswer}}</h1>
-                            @endforeach
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                               <div style="padding-right: 15px; padding-left: 15px;">
+                                   @foreach($questionAnswer as $answer)
+                                       <div style="border-bottom: 1px solid rgba(204, 204, 204, 0.35);">
+                                           <h4>{{\App\Models\Question::find($answer->question_id)->strQuestionTitle}}</h4>
+                                           <p>{{$answer->questionAnswer}}</p>
+                                       </div>
+                                   @endforeach
+                               </div>
+                           </div>
+
                             </P>
                         </div>
 

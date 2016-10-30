@@ -14,6 +14,7 @@ return [
     */
     'require_client'        => 'The :attribute is required.',
     'due_date_for_this_survey' => 'Each survey you select must must have a due date.',
+    'client_exist'          =>'Client already exists.',
     'requiredarray'        => 'The :attribute must required all element.',
     'at_least_one_option'  => 'You are required to have at least one choice.',
     'accepted'             => 'The :attribute must be accepted.',

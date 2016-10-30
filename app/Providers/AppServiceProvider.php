@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -50,6 +51,18 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::extend('require_client', function($attribute, $value, $parameters, $validator) {
             if($value == 'default')
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        });
+
+        Validator::extend('client_exist', function($attribute, $value, $parameters, $validator) {
+            $client = Client::where('id','=',$value)->first();
+            if($client != null)
             {
                 return false;
             }

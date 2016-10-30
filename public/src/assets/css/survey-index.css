@@ -129,3 +129,10 @@ i.surveys-homescreen-list-item-icon{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.header-dropdown{
+    list-style-type: none!important;
+}
+.header-dropdown li{
+    list-style-type: none!important;
+}

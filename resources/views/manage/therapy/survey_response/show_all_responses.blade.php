@@ -22,8 +22,6 @@
     <!-- Custom Css -->
     <link href="{{ URL::asset('src/assets/css/style.css')}}" rel="stylesheet" type="text/css">
 
-    <link href="{{ URL::asset('src/assets/css/admin.main.css')}}" rel="stylesheet" type="text/css">
-
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ URL::asset('src/assets/css/themes/all-themes.css') }}" rel="stylesheet" type="text/css">
 @stop
@@ -34,13 +32,6 @@
     {{--<script type="text/javascript" src="{{ URL::asset('src/admin-assets/plugins/jquery/jquery.min.js') }}"></script>--}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-    {{--<script language="JavaScript">--}}
-    {{--window.onbeforeunload = confirmExit;--}}
-    {{--function confirmExit()--}}
-    {{--{--}}
-    {{--return "You have attempted to leave this page.  If you have made any changes to the fields without clicking the Save button, your changes will be lost.  Are you sure you want to exit this page?";--}}
-    {{--}--}}
-    {{--</script>--}}
 @stop
 @section('allSurveyCss')
     <!-- JQuery DataTable Css -->
@@ -55,7 +46,7 @@
         <div class="container-fluid">
             {{-- @include('manage.includes.block-header', ['title' => 'Surveys', 'icon'=>'view_list'])--}}
 
-            <div class="row clearfix" style="margin-top: -30px">
+            <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header" style="padding: 10px">
@@ -67,35 +58,34 @@
 
                         <div class="row clearfix">
                             {{--{{dd($collection)}}--}}
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Client</th>
-                                    <th colspan="2">Survey</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($collection as $master=> $client_survey)
 
-                                    <h1>CLIENT: {{$master}}</h1>
-                                    <h2>All surveys for {{$master}}:</h2>
-                                    @foreach($client_survey as $key => $suv)
-                                        <tr>
-                                            <td>{{$master}}</td>
-                                            <td>{{\App\Models\Survey::findOrFail($key)->strSurveyName}}</td>
-                                            <td>
-                                                <a href="{{route('survey-response.show',['user'=>$username, 'uuid'=>$master, 'survey_id'=>md5($key)])}}">View</a>
-                                            </td>
-                                        </tr>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th colspan="2">Survey</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($collection as $master=> $client_survey)
+                                        @foreach($client_survey as $key => $suv)
+                                            <tr>
+                                                <td>{{$master}}</td>
+                                                <td>{{\App\Models\Survey::findOrFail($key)->strSurveyName}}</td>
+                                                <td>
+                                                    <a href="{{route('survey-response.show',['user'=>$username, 'uuid'=>$master, 'survey_id'=>md5($key)])}}">View</a>
+                                                </td>
+                                            </tr>
 
+                                        @endforeach
                                     @endforeach
-                                @endforeach
-                                </tbody>
-                                {{--{{dd($collection)}}--}}
+                                    </tbody>
+                                    {{--{{dd($collection)}}--}}
 
-                            </table>
+                                </table>
+                            </div>
 
-                            <P>DETAILS ABOUT ALL SURVEY RESPONSES GO HERE!!</P>
                         </div>
 
 

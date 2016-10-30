@@ -73,7 +73,8 @@
                                                     Add New Client
                                                 </h4>
                                             </div>
-                                            <form role="form" id="addNewClientForm" method="get">
+                                            <form role="form" id="addNewClientForm" method="post" action="{{route('client.store',['user'=>$username->getUsername()])}}">
+                                                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                                                 <!-- Modal Body -->
                                                 <div class="modal-body">
 
@@ -262,22 +263,5 @@
     </script>
     <script type="text/javascript" src="{{ URL::asset('src/assets/js/demo.js') }}"></script>
 
-
-
-
 @stop
 
-@section('allSurveyScript')
-
-
-
-    {{--<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.material.min.js"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>--}}
-    {{--<script src="{{ URL::asset('src/admin-assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>--}}
-
-@stop
