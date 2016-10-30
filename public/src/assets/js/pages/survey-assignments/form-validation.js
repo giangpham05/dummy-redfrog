@@ -1,5 +1,7 @@
 function validate_form() {
     // var form = $('#form_validation');
+    var selectPicker = $('#form_validation').find('.selectpicker');
+    var option_selected = selectPicker.children('option:selected');
 
     var pass = true;
     var surveysSelected = $('#surveySelect input[type="checkbox"]:checked');
@@ -8,12 +10,18 @@ function validate_form() {
     var inputs = $('#surveySelect input[type="text"]');
     var list = [];
 
-    //var input1 = $('#clients-selected #clientFromDialog #radClientSelect:checked');
-    //var label1 = $('#clients-selected #clientFromDialog #radClientSelect').next();
-    if ($('#clients-selected #clientSelectHidden').val()=='' || $('#clients-selected #clientSelectHidden').val() ==null) {
+    if(option_selected.val() == 'default'){
         list.push('There is no client selected.');
         pass = false;
     }
+
+
+    //var input1 = $('#clients-selected #clientFromDialog #radClientSelect:checked');
+    //var label1 = $('#clients-selected #clientFromDialog #radClientSelect').next();
+    // if ($('#clients-selected #clientSelectHidden').val()=='' || $('#clients-selected #clientSelectHidden').val() ==null) {
+    //     list.push('There is no client selected.');
+    //     pass = false;
+    // }
 
     if (surveysSelected.length < 1) {
         list.push('There is no survey selected.');
@@ -52,27 +60,14 @@ function validate_form() {
 };
 
 // DISABLE DATE PICKER WHEN THERE IS NO SURVEY SELECTED
-$(function() {
-    var surveysSelected = $('#surveySelect input[type="checkbox"]');
-    var inputs = $('#surveySelect input[type="text"]');
-
-    surveysSelected.click(function () {
-        var label = $(inputs[surveysSelected.index(this)]);
-        label.prop('disabled', function(i, v) { return !v; });
-        //alert('index: ' + surveysSelected.index(this));
-    });
-});
-
-
-// $('#form-validate-error ul li').remove( ":contains('There is no client selected.')" );
-
-// surveysSelected.each(function (index) {
-//     // $(this).toggle(function(){
-//     //     var $this = $(inputs[index]);
-//     //     $this.is(":disabled") ? $this.removeAttr('disabled') : $this.attr('disabled');
-//     // });
-//     $(this).click(alert($(this).index()));
-//     // $(this).click
-//     // $(inputs[index]).removeAttr('disabled');
+// $(function() {
+//     var surveysSelected = $('#surveySelect input[type="checkbox"]');
+//     var inputs = $('#surveySelect input[type="text"]');
+//
+//     surveysSelected.click(function () {
+//         var label = $(inputs[surveysSelected.index(this)]);
+//         label.prop('disabled', function(i, v) { return !v; });
+//         //alert('index: ' + surveysSelected.index(this));
+//     });
 // });
-//}
+

@@ -36,23 +36,6 @@ class SurveysController extends Controller
     {
         return view('manage/survey/survey_form');
 
-//        if(Auth::user()->isAdmin())
-//        {
-//
-//            return view('manage/survey/survey_create');
-//        }
-//        else if(Auth::user()->isTherapist())
-//        {
-//            //therapy user
-//            //get template surveys
-//            $templateSurveys = Survey::where('inheritFlag', '=', 0)->get();
-//
-//            return view('manage/survey/survey_create')
-//                ->with(['templateSurveys' => $templateSurveys]);
-//
-//       }
-
-
     }
 
     /**
@@ -139,8 +122,10 @@ class SurveysController extends Controller
         $user = Auth::user();
 
         $this_survey =  $user->surveys()->where('hash_id',$survey)->firstOrFail();
+
+        $section = $this_survey->sections->paginate(1);
         return view('clients/surveys/pages/client_survey_show')
-            ->with('survey',$this_survey);
+            ->with('section',$section);
     }
 
     /**

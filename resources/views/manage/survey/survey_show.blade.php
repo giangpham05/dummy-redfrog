@@ -30,6 +30,8 @@
 
     <link href="{{ URL::asset('src/assets/css/survey-index.css')}}" rel="stylesheet" type="text/css">
 
+    <!-- Custom Js -->
+    <script type="text/javascript" src="{{ URL::asset('src/assets/js/admin.js') }}"></script>
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ URL::asset('src/assets/css/themes/all-themes.css') }}" rel="stylesheet" type="text/css">
 @stop

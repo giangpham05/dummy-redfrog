@@ -12,6 +12,16 @@
 */
 //
 
+/**
+ * Client management routes
+ */
+
+
+Route::get('/surveys/{uuid}/{survey_id}', 'FrontEndSurveyController@index')->name('start');
+Route::get('/surveys/{uuid}/{survey_id}/sections/{section_id}', 'FrontEndSurveyController@show')->name('clients.surveys.section.show');
+
+Route::post('/surveys/{uuid}/{survey_id}/sections/{section_id}', 'FrontEndSurveyController@store')->name('clients.surveys.section.store');
+
 
 Route::get('/', function () {
     //return view('welcome');
@@ -53,6 +63,8 @@ Route::get('/survey/question/question_type', function (\Illuminate\Http\Request 
 /**
  * AUTHORISED ROUTES
  */
+
+
 Auth::routes();
 
 Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm'])->middleware('validateBackHistory');
@@ -110,6 +122,8 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'validateBackHistor
         //Route::resource('{username}','UsersController');
         //Route::resource('survey-assignments','SurveyAssignmentsController');
 
+
+        Route::post('users/{user}/client','ClientController@store')->name('client.store');
         /**
          * Survey assignment routes
          */
@@ -128,10 +142,6 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'validateBackHistor
 
     });
 });
-
-/**
- * Client management routes
- */
 
 
 

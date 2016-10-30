@@ -19,7 +19,6 @@
 
     @yield('css')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     @yield('header_script')
 
     <script>
@@ -30,13 +29,8 @@
 
 </head>
 
-<body>
+<body class="theme-red">
 
-
-<!-- Start your project here-->
-
-@include('clients.surveys.includes.header')
-<!-- #END# Search Bar -->
 
 <div class="page-loader-wrapper">
     <div class="loader">
@@ -49,11 +43,15 @@
     </div>
 </div>
 
+<div class="overlay"></div>
+
+@include('clients.surveys.includes.header')
+@include('clients.surveys.includes.left-side')
+
 @yield('content')
 
 
 @yield('script')
-<!-- /Start your project here-->
 
 </body>
 

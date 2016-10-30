@@ -72,7 +72,8 @@
 
                         <div class="survey-assign-container">
                             {{--{{var_dump($survey_assignment->isEmpty())}}--}}
-                            @if($survey_assignments->isEmpty())
+
+                            @if(count($survey_assignments)<1)
                                 <div>
                                     <h2 style="text-align: center">
                                         No assignments yet
@@ -111,6 +112,7 @@
                                         <div class="survey-assignment-item-section row">
 
                                             <div class="surveys-assignments-homescreen-list-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
                                                 @foreach($survey_assignments as $survey_assignment)
                                                     <div class="row">
                                                         <div class="surveys-homescreen-list-item-cell surveys-homescreen-list-item-surveyname col-lg-4 col-md-4 col-sm-5 col-xs-10"
@@ -176,6 +178,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+
                                             </div>
 
 
@@ -184,6 +187,7 @@
                                     </div>
                                 </div>
                             @endif
+
                         </div>
 
                     </div>

@@ -2,106 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientAnswer;
+use App\Models\Survey;
+use App\Models\SurveyAssignment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use DB;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 class FrontEndSurveyController extends Controller
 {
-    use SurveyTrait;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+    public function index(Request $request, $uuid, $survey_id)
     {
-        $this->index();
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //public function doSomething($squirrel)
+        $this_survey = Survey::where('hash_id',$survey_id)->firstOrFail();
+
+        $assignment = SurveyAssignment::where([
+            ['uuid', '=', $uuid],
+            ['survey_id', '=', $this_survey->id],
+        ])->firstOrFail();
 
 
+        $after_check_survey = Survey::findOrFail($assignment->survey_id);
+            return view('clients/surveys/pages/client_survey_index')
+                ->with(['survey' => $after_check_survey,'survey_id'=>$survey_id,'uuid'=>$uuid]);
 
-    }
-    public function test($survey_id)
-    {
-//        //$data['surveyName'] = $surveyName;
-//        //return View::make('simple', $data);
-//        $data = DB::table('tbl_Survey')->pluck($surveyId);
-//        //$survey = Survey::all();
-
-        return view('surveys.pages.form')->with('survey',$survey_id);
-    }
-
-    public function showForm($survey_id)
-    {
-        //$survey = collect(['section'=>1,'survey number'=>Survey::where('id',$survey_id)->get()]);
-        $survey = Survey::find($survey_id);
-        //$test = $survey->sections;
-        //$survey = 'test';
-        //return View::make('surveys/form', ['survey' => $survey]);
-        //$user = App\User::find(1);
-        //$sections = $survey->sections;
-        //$survey->put('sections','someesss');
-        //$survey->put('another one','someesss');
-        //$sections = $survey->sections->toJSon();
-        //$section_count = 0;
-        //$sections = $survey->sections;
-        //$survey->all_section = $sections;
-        //$test = $survey->get('all_section');
-//        if(Session::has('section_count')){
-//            $section_count = Session::get('section_count');
-//            //$section_count =0;
-//            if($section_count < $test->count()){
-//                $section_count++;
-//            }
-//            else{
-//                $section_count = 0;
-//            }
-//            Session::put('section_count',$section_count);
-//
-//        }
-//        else{
-//            Session::put('section_count',0);
-//        }
-//        //session(['section_count' => 'value']);
-//        $test2 = $test[Session::get('section_count')];
-
-//        if(isset($test2)){
-        //Session::forget('section_count');
-        return view('surveys.pages.sections')
-            ->with('survey', $survey);
-        //return view('surveys.form', compact('survey',$survey));
-        //}
-
-    }
-
-    public function showSection($survey_id, $section_id)
-    {
-        $survey = Survey::find($survey_id);
-        $sections = $survey->sections;
-        $section_out = null;
-        foreach ($sections as $section){
-            if($section->id == $section_id){
-                $section_out = $section;
-                break;
-            }
-            else{
-                $section_out ='';
-            }
-            //$section_out = isset($sections[$section_id]) ? $sections[$section_id] : '';
-        }
-
-        //$section = $sections[$section_id];
-        return view('surveys.pages.form')
-            ->with(['survey' => $survey,'section'=> $section_out]);
     }
     /**
      * Store a newly created resource in storage.
@@ -111,47 +38,77 @@ class FrontEndSurveyController extends Controller
      * @param Section $section_id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $survey_id, $section_id)
+    public function store(Request $request, $uuid, $survey_id,$section_id)
     {
-        $sections = Survey::find($survey_id)->sections;
-        $section_out = null;
-        foreach ($sections as $section){
-            if($section->id == $section_id){
-                $section_out = $section;
-                break;
-            }
-        }
-        $output = '';
 
-        if(isset($_POST['submit'])){
-            if($section_out!=null){
-                foreach ($section_out->questions as $question){
-                    $id = (string)($question->id);
-                    $radName = 'question_number'.$id;
-                    $result = $request[$radName];
-                    if($result!=null){
+        $this_survey = Survey::where('hash_id',$survey_id)->firstOrFail();
 
-                        $client = Client::find('a69fda20-4a29-11e6-a20e-d565001a30f8');
-                        $client_answer = new ClientAnswer;
-                        $client_answer->uuid = $client->id;
-                        $client_answer->survey_id = $survey_id;
-                        $client_answer->question_id = $question->id;
-                        $client_answer->questionAnswer = $result;
+        //dd($request->all());
+        foreach ($request->all() as $key=> $input){
+            if($key!='_token' && $key!='referrerScript'){
+                $answer_string ='';
+                if($input!='' || $input!=null){
+                    if(is_array($input)){
+                        foreach ($input as $innerKey=>$value){
+                            $answer_string.= $value.'_@_';
+                        }
+                    }
+                    else{
+                        $answer_string = $input;
+                    }
+
+
+                    $client_answer =null;
+                    $under_test = ClientAnswer::where('question_id',$key)->first();
+
+                    if($under_test==null){
+
+                        $client_answer = new ClientAnswer();
+
+                        $client_answer['uuid'] = $uuid;
+
+                        $client_answer['survey_id'] = $this_survey->id;
+                        $client_answer['question_id'] = $key;
+                        $client_answer['questionAnswer'] = $answer_string;
+                        $client_answer['created_at'] = Carbon::now();
+
+
                         $client_answer->save();
+                    }
+
+                    else{
+                        $update = [['questionAnswer' => $answer_string],['created_at' => Carbon::now()]];
+                        DB::table('clients_answers')
+                            ->where([
+                                ['uuid', '=', $uuid],
+                                ['survey_id', '=', $this_survey->id],
+                                ['question_id', '=', $key],
+                            ])
+                            ->update(['questionAnswer' => $answer_string]);
 
                     }
 
-//                    $output = $output.'<h6>'.$request->$test.'</h6>';
-                    //$output.=$result;
-                    //echo $result;
-                }
-//                $selected_val = $_POST['Color'];  // Storing Selected Value In Variable
-                //echo "You have selected :";  // Displaying Selected Value
-            }
 
+                }
+
+
+
+            }
         }
 
-        return ClientAnswer::all();
+        $next_section = $this_survey->sections->where('id','>', $section_id)->min('id');
+        //Session::flash('referrer',$section_id);
+
+        if($next_section!=null){
+            return redirect(route('clients.surveys.section.show',['uuid'=>$uuid, 'survey_id'=>$survey_id, 'section_id'=>$next_section]));
+
+        }
+        else{
+            return redirect(route('start',['uuid'=>$uuid, 'survey_id'=>$survey_id]));
+        }
+
+
+
     }
 
     /**
@@ -160,10 +117,24 @@ class FrontEndSurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid, $survey_id, $section_id)
     {
-        //
+        $this_survey = Survey::where('hash_id',$survey_id)->firstOrFail();
+
+        $assignment = SurveyAssignment::where([
+            ['uuid', '=', $uuid],
+            ['survey_id', '=', $this_survey->id],
+        ])->firstOrFail();
+
+
+       // $after_check_survey = Survey::findOrFail($assignment->survey_id);
+        $section = $this_survey->sections->where('id',$section_id)->first();
+
+        return view('clients/surveys/pages/client_survey_show')
+            ->with(['survey' => $this_survey,'survey_id'=>$survey_id,'uuid'=>$uuid, 'section'=>$section]);
+
     }
+
 
     /**
      * Show the form for editing the specified resource.

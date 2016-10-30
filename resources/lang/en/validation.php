@@ -12,6 +12,9 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
+    'require_client'        => 'The :attribute is required.',
+    'due_date_for_this_survey' => 'Each survey you select must must have a due date.',
+    'requiredarray'        => 'The :attribute must required all element.',
     'at_least_one_option'  => 'You are required to have at least one choice.',
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
@@ -99,6 +102,10 @@ return [
         'survey_description' => [
             'required' => 'Please enter a valid description',
         ],
+       'client_selected' =>[
+           'requireClient' => 'Please select a client.',
+       ],
+
     ],
 
     /*

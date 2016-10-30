@@ -33,6 +33,32 @@ class AppServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+
+        Validator::extend('due_date_for_this_survey', function($attribute, $value, $parameters, $validator) {
+            $label = 'dueDateFor'.$value;
+            $dateReturn = array_get($validator->getData(), $label, 'default');
+//            if($dateReturn=='default'){
+//                return false;
+//            }
+//            else if($dateReturn ==''){
+//                return false;
+//            }
+            return false;
+        });
+
+
+        Validator::extend('require_client', function($attribute, $value, $parameters, $validator) {
+            if($value == 'default')
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        });
+
     }
 
     /**

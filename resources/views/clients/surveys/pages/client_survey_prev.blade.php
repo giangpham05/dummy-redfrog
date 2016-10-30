@@ -32,11 +32,11 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sections_controller">
                     {{--@foreach($survey->sections as $mykey=> $section)--}}
-                       {{----}}
+                    {{----}}
                     {{--@endforeach--}}
                     <div class="page_controller" id="{{$section->id}}">
                         <div class="card section_page" id="{{$section->id}}">
-                            <form role="form" method="post" action="{{route('clients.surveys.section.store',['uuid'=>$uuid, 'survey_id'=>$survey_id, 'section_id'=>$section->id])}}">
+                            <form role="form" method="post" action="{{route('client.surveys.store',['uuid'=>$uuid, 'survey_id'=>$survey_id])}}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="referrerScript" value="{{$section->id}}">
                                 <div style="position: relative">
@@ -64,9 +64,9 @@
 
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 questions_container">
 
-                                                    @if(count($section->questions)>0)
+                                                    @if(count($section->questions))
                                                         @foreach($section->questions as $q_key=> $question)
-                                                            @include('clients.surveys.includes.client_question', ['question' => $question,'question_number'=>$q_key+1])
+                                                            @include('clients.surveys.includes.client_question_next', ['question' => $question,'question_number'=>$q_key+1])
                                                         @endforeach
                                                     @endif
                                                 </div>

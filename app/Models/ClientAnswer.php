@@ -9,7 +9,7 @@ class ClientAnswer extends Model
     protected $table = 'clients_answers';
     public $incrementing = false;
     public $timestamps = false;
-    protected $fillable = array('uuid', 'survey_id', 'question_id','questionAnswer');
+    protected $fillable = array('uuid', 'survey_id', 'question_id','questionAnswer', 'created_at');
     public function client(){
         return $this->belongsTo('App\Models\Client', 'uuid');
     }
