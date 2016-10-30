@@ -228,7 +228,22 @@ CREATING SURVEY
     -webkit-transition: bottom 0.1s ease-out,top 0.1s ease-out,right 0.1s ease-out;
     transition: bottom 0.1s ease-out,top 0.1s ease-out,right 0.1s ease-out;
 }
-.survey_edit_actions{
+
+.section_title_edit_actions,.question_editing{
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+    border-left: 3px solid red;
+    border-right: 3px solid red;
+    background-color: white;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: bottom 0.1s ease-out,top 0.1s ease-out,right 0.1s ease-out;
+    transition: bottom 0.1s ease-out,top 0.1s ease-out,right 0.1s ease-out;
+}
+
+.survey_edit_actions, .section_title_edit_actions{
     display: none;
 }
 

@@ -104,7 +104,7 @@
                                 <div class="section_body">
                                     <div class="survey_container" id="survey_container">
                                         <div class="row survey_container_row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_row_title_container" data-survey-id="{{$survey->id}}"
+                                            <div type="-5" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 survey_row_title_container" data-survey-id="{{$survey->id}}"
                                                  data-route="{{route('users.surveys.show',['user' =>$username, 'survey'=>md5($survey->id)])}}">
                                                 <div class="survey_title_wrapper row" tabindex="-2">
                                                     <h4>{{$survey->strSurveyName}}</h4>
@@ -113,7 +113,8 @@
 
                                             </div>
 
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section_row_title_container" data-survey-id="{{$section->id}}">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 section_row_title_container" data-survey-id="{{$section->id}}"
+                                                 data-route="{{route('users.surveys.sections.show',['user' =>$username, 'survey'=>md5($survey->id), 'section'=>$section->id])}}">
                                                 <div class="section_title_wrapper row" tabindex="-2">
                                                     @if($section->strSectionTitle ===null || $section->strSectionTitle ==='')
 
@@ -196,6 +197,55 @@
                                                             </div>
                                                             <div class="col-xs-5">
                                                                 <button class="btn btn-block bg-black waves-effect btn_cancel" type="button">CANCEL</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <form class="section_title_edit_actions form-horizontal" action="{{route('users.surveys.sections.update',['user' =>$username, 'survey'=>md5($survey->id), 'section'=>$section->id])}}"
+                                                  method="put" style="position: absolute;top:0; width: 100%" id="section{{$section->id}}">
+                                                {{--{{ csrf_field() }}--}}
+                                                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+
+                                                <div class="row clearfix row_edit">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label for="section_title">Section title</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line" style="font-size: 28px">
+                                                                <input type="text" class="form-control section_title" placeholder="Section title" name="section_title"
+                                                                       value="{{$section->strSectionTitle}}" style="font-size: 24px;font-weight: bold">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row clearfix row_edit">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label for="section_description">Description(optional)</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                    <textarea name="section_description" rows="4" class="form-control section_description no-resize"
+                                                              placeholder="Survey description">{{$section->strSectionDesc!=='Not provided' ? $section->strSectionDesc : "Section description"}}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 buttons" style="margin-top: 10px;margin-bottom: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <div class="col-xs-5">
+                                                                <button class="btn btn-block bg-black waves-effect btn_section_save" type="submit">SAVE</button>
+                                                            </div>
+                                                            <div class="col-xs-5">
+                                                                <button class="btn btn-block bg-black waves-effect btn_section_cancel" type="button">CANCEL</button>
                                                             </div>
 
                                                         </div>

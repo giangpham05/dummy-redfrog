@@ -20,6 +20,8 @@ $(document).ready(function () {
     *   SECTION DELETING
     * */
 
+
+
     $('#sections_controller').on('click','.dropdown .dropdown-menu a', function () {
         var section_page = $(this).closest('.section_page');
 

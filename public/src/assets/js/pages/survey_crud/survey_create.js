@@ -19,7 +19,14 @@ $(document).ready(function () {
         "hideMethod": "fadeOut"
     };
 
+
+
+
     $.validator.methods.survey_description = function( value, element ) {
+        return this.optional( element ) || ("" !== value.trim())
+    };
+
+    $.validator.methods.section_description = function( value, element ) {
         return this.optional( element ) || ("" !== value.trim())
     };
 
@@ -27,11 +34,12 @@ $(document).ready(function () {
         return this.optional( element ) || ("" !== value.trim())
     };
 
+
     $.validator.addMethod("xrequire_from_group", $.validator.methods.require_from_group, 'You are required to have at least one of these choices.');
     fireReorder();
     saveSurveyName();
     questionManipulate();
-
+    saveSection();
 
 
 
@@ -93,6 +101,91 @@ $(document).ready(function () {
 
 
         }
+    }
+
+    function saveSection() {
+        $('body').on('click','.survey_container .section_row_title_container', function () {
+
+            $('.survey_container .section_title_edit_actions').hide();
+            var questions_sibs = $(this).siblings('.questions_container').find('.questions_row');
+            questions_sibs.find('.question_editing').remove();
+            //Hide error message if it is already opened
+            var $sib = $(this).siblings('.section_title_edit_actions');
+            $sib.find('#survey-name-error').hide();
+
+
+            $.ajax({
+                method: 'get',
+                url: $(this).data('route'),
+                //dataType: 'json',
+                success: function (response) {
+                    console.log(response['section_title']);
+                    console.log(response['section_desc']);
+
+                    $sib.find('.section_title').val(response['section_title'])
+                    $sib.find('.survey_description').val(response['section_desc'])
+                    $sib.show();
+                },
+            });
+
+        });
+
+        $('body').on('click','.survey_container .btn_section_cancel', function () {
+            $(this).closest('.survey_container .section_title_edit_actions').hide();
+        });
+
+        $('body').on('click','.survey_container .btn_section_save', function () {
+            var cur = $(this).closest('form');
+
+            check1(cur);
+        });
+
+
+
+        function check1 (test) {
+            $(test).validate({
+                rules: {
+                    'section_title': {
+                        required: true
+                    },
+                    'section_description': {
+                        required: false,
+                        section_description: true
+                    },
+
+                },
+                highlight: function (input) {
+                    $(input).parents('.form-line').addClass('error');
+                },
+                unhighlight: function (input) {
+                    $(input).parents('.form-line').removeClass('error');
+                },
+                errorPlacement: function (error, element) {
+                    $(element).parents('.form-group').append(error);
+                },
+                messages: {
+                    'section_title': 'Please enter a valid title.',
+                    'section_description': 'Please enter a valid description',
+
+                },
+                submitHandler: function (form) {
+                    $.ajax({
+                        method: $(form).attr('method'),
+                        url: $(form).attr('action'),
+                        //dataType: 'json',
+                        data: $(form).serialize(),
+                        success: function (response) {
+                            toastr.success("Section saved.", null, opts);
+                            $('.section_title_wrapper h4').text(response['questionOption']);
+
+                            $('.survey_container .section_title_edit_actions').hide();
+                        }
+                    });
+                    return false; // required to block normal submit since you used ajax
+                },
+            });
+
+        };
     }
 
     function saveSurveyName() {

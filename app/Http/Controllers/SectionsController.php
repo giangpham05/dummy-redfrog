@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 use App\Models\Section;
+use Illuminate\Support\Facades\Auth;
 class SectionsController extends Controller
 {
     /**
@@ -64,9 +65,13 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $user, $survey, $section)
     {
-        //
+        //$id = Auth::user()->getId();
+        $user = Auth::user();
+        //$survey = Survey::findOrFail($id);
+        $this_section = Section::find($section);
+        return response()->json(['section_title' => $this_section->strSectionTitle, 'section_desc'=>$this_section->strSectionDesc]);
     }
 
     /**
@@ -87,9 +92,36 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user, $survey, $section)
     {
-        //
+        $this->validate($request, [
+            'section_title' => 'required|max:255',
+        ]);
+
+
+        $this_section = Section::find($section);
+
+        $this_survey = Auth::user()->surveys()->where('hash_id', '=', $survey)->firstOrFail();
+
+        $strSectionTitle = $request['section_title'];
+        $this_section['strSectionTitle'] = $strSectionTitle;
+
+        if($request['section_description'] === '' || $request['section_description']===null){
+            $this_section->save();
+        }
+        else{
+            $this->validate($request, [
+                'section_description' => 'required',
+            ]);
+
+            $this_section['strSectionDesc'] = $request['strSectionDesc'];
+
+            $this_section->save();
+        }
+
+        //get surveys belongs to the current user
+
+        return response()->json(['questionOption' => $strSectionTitle]);
     }
 
     /**
