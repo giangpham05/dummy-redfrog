@@ -5,7 +5,7 @@
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
             <a class="navbar-brand" href="{{ URL::route('manage_dashboard',['user' => Auth::user()->getUsername()]) }}">
-                {{Auth::user()->isAdmin() ? 'ADMINISTRATION DASHBOARD': 'THERAPY DASHBOARD'}}
+                {{Auth::user()->isAdmin() ? 'ADMINISTRATION DASHBOARD': 'THERAPIST DASHBOARD'}}
             </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
