@@ -724,7 +724,9 @@ $(document).ready(function () {
                     sectionsInserted = $('#sections_controller').find('.section_page');
                     sectionsInserted.each(function (index) {
                         $(this).find('h2').text('SECTION '+ (index+1)+ ' OUT OF '+ sectionsInserted.length);
-                    })
+                    });
+
+                    saveSection();
 
 
 
