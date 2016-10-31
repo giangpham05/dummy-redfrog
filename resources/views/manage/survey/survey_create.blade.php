@@ -26,6 +26,8 @@
 
     <link href="{{ URL::asset('src/assets/css/manage-survey.css')}}" rel="stylesheet" type="text/css">
 
+    <link href="{{ URL::asset('src/assets/css/form.css')}}" rel="stylesheet" type="text/css">
+
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ URL::asset('src/assets/css/themes/all-themes.css') }}" rel="stylesheet" type="text/css">
 @stop
