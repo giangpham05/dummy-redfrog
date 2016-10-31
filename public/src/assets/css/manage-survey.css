@@ -215,7 +215,7 @@ CREATING SURVEY
 .btn-add-new-qs:hover{
 
 }
-.survey_edit_actions,.question_editing{
+.survey_edit_actions,.question_editing, .section_title_edit_actions{
     box-shadow: 0 2px 10px rgba(0,0,0,0.45);
     border-left: 3px solid red;
     border-right: 3px solid red;
