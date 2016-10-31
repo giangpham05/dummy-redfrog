@@ -101,7 +101,7 @@ class SectionsController extends Controller
 
         $this_section = Section::find($section);
 
-        $this_survey = Auth::user()->surveys()->where('hash_id', '=', $survey)->firstOrFail();
+//        $this_survey = Auth::user()->surveys()->where('hash_id', '=', $survey)->firstOrFail();
 
         $strSectionTitle = $request['section_title'];
         $this_section['strSectionTitle'] = $strSectionTitle;
