@@ -107,6 +107,7 @@ class SectionsController extends Controller
         $this_section['strSectionTitle'] = $strSectionTitle;
 
         if($request['section_description'] === '' || $request['section_description']===null){
+            $this_section['strSectionDesc'] = 'Not provided';
             $this_section->save();
         }
         else{
@@ -114,7 +115,9 @@ class SectionsController extends Controller
                 'section_description' => 'required',
             ]);
 
+            $this_section['strSectionDesc'] = 'Not provided';
             $this_section['strSectionDesc'] = $request['strSectionDesc'];
+            $this_section['strSectionDesc'] = 'Not provided';
 
             $this_section->save();
         }
