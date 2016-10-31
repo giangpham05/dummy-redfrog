@@ -251,6 +251,11 @@ CREATING SURVEY
     margin-left: 0px;
     margin-right: 0px;
 }
+
+.row_edit{
+    margin-left: 0px;
+    margin-right: 0px;
+}
 .survey_edit_actions .form-group{
     padding-left: 15px;
     padding-right: 15px;
