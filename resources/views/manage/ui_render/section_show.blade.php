@@ -128,19 +128,19 @@
                             </div>
                         </div>
                     </form>
-                    <form class="section_title_edit_actions form-horizontal" action="{{route('users.surveys.sections.edit',['user' =>$username, 'survey'=>md5($survey->id), 'section'=>$section->id])}}"
-                          method="put" style="position: absolute;top:0; width: 100%" id="form_section{{$section->id}}">
+                    <form class="section_title_edit_actions form-horizontal" action="{{route('users.surveys.sections.update',['user' =>$username, 'survey'=>md5($survey->id), 'section'=>$section->id])}}"
+                          method="put" style="position: absolute;top:0; width: 100%" id="section{{$section->id}}">
                         {{--{{ csrf_field() }}--}}
                         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
 
                         <div class="row clearfix row_edit">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="survey-name">Survey name</label>
+                                <label for="section_title">Section title</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line" style="font-size: 28px">
-                                        <input type="text" class="form-control section-name" placeholder="Section title" name="section-title"
+                                        <input type="text" class="form-control section_title" placeholder="Section title" name="section_title"
                                                value="{{$section->strSectionTitle}}" style="font-size: 24px;font-weight: bold">
                                     </div>
                                 </div>
@@ -149,12 +149,12 @@
 
                         <div class="row clearfix row_edit">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="section-description">Description(optional)</label>
+                                <label for="section_description">Description(optional)</label>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
                                     <div class="form-line">
-                                                    <textarea name="section-description" rows="4" class="form-control section-description no-resize"
+                                                    <textarea name="section_description" rows="4" class="form-control section_description no-resize"
                                                               placeholder="Survey description">{{$section->strSectionDesc!=='Not provided' ? $section->strSectionDesc : "Section description"}}</textarea>
                                     </div>
                                 </div>
