@@ -51,6 +51,7 @@ Before you clone the project, please select the directory in which you want the 
 You can run this command to move to the desire directory:
 
 Windows OS: cd [disk]:\[desire directory] eg cd C:\Program Files
+
 Unix based OS: cd /[desire directory] eg cd /usr
 
 To clone the project, run this command in the terminal/command line:
