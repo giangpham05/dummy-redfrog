@@ -40,6 +40,7 @@ You can also download a full package that contains MySQL Server, PHP and Apache 
  - [MAMP](https://www.mamp.info/en/)
  - [WAMP](http://www.wampserver.com/en/)
  - [XAMPP](https://www.apachefriends.org/index.html)
+ - If you use any of these packages, please ensure that you run the project with PHP version 5.6. You can confure this in the startup panel of the package
  - By defaut, the project does not require to have any of these packages installed on your machine. The project runs on Nginx web server. 
 
 #### 3. Composer
