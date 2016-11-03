@@ -145,6 +145,5 @@ This command will procude this line: Laravel development server started on http:
 
 Please copy http://localhost:8000/ and past it in the url bar of your favorite browser. The project aimed to support IE version 10 to the lastest version, Microsoft edge, Google Chrome, Safari, Opera and Firefox
 
-If you like to see a production version, please visit the website via this [link](http://188.166.236.187/)
 
 
