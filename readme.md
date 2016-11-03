@@ -134,7 +134,7 @@ The default user credentials are as follows.
 | Email Address           | Password | User Type |
 |-------------------------|----------|-----------|
 | admin@admin.com         | 123456   | Admin     |
-| therapist@therapist.com | 123456   | User      |
+| therapist@therapist.com | 123456   | Therapist |
 
 #### 4. Starting the server
 You should now have everything ready. Let's start exporing the application.
