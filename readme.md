@@ -70,42 +70,55 @@ Run this command in the terminal/command line: "composer install"
 This command will install all the dependencies for the project including the vendor folder that Laravel requires. Because the project is deployed via Github, this folder is ignored by Github by default.
 
 #### 2. Database setup
-#### a) Changing the .env.example to .env
+##### a) Changing the .env.example to .env
 You should have a .env.example file in the dummy-refrog directory. To be able to see this file, you will need to setup your computer in a way that it can see this file. The best way to to see this file is to open the dummy-redfrog folder in a text editor like Sublime Text or Notepad++ or a power IDE like PHPStorm.
 
 The .env.example file contains the database credentials. You will need to change the extension of this file to .env or you can create a new file called .env in the same directory and copy the content from .env.example to this file.
 Change the database credentials to your local database like so: (Please ensure that you are doing this in the .env file)
 ------------------------------------------------------------------------------
 ...................
+
 DB_CONNECTION=mysql
+
 DB_HOST=127.0.0.1
+
 DB_PORT=3306
+
 DB_DATABASE=your_database
+
 DB_USERNAME=user who has permission to your database, eg root
+
 DB_PASSWORD=could be none or if you have a password, please specify it here
+
 ...................
+
 ------------------------------------------------------------------------------
-#### b) Generating an encrypt/app key
+##### b) Generating an encrypt/app key
 
 You should see these lines at the beginning of the .env file:
+
 APP_ENV=local
+
 APP_KEY=
+
 APP_DEBUG=true
+
 APP_LOG_LEVEL=debug
+
 APP_URL=http://localhost
 
-Please run this command to generate the key: php artisan key:generate
+Please run this command to generate the key: "php artisan key:generate"
 
-#### c) Database migrations
+##### c) Database migrations
 Now that you have the database connection setup, you will need a number of tables in your database so that the application can run properly.
-##### Creating tables
+###### Creating tables
 Please ensure that you are still in the dummy-redfrog directory. Run this command from the dummy-redfrog directory: "php artisan migrate". This command will create all required tables for the application to run.
-##### Creating dummy data
+###### Creating dummy data
 Inside the dummy-redfrog/database/seeds, you should see you all the files that create the initial data for the application. An example of this is username and password to log into the application.
 
 To create the username and password, please run the command: "php artisan db:seed". This command will create 2 users for the application
 
-##### Logging in
+#### 3. Logging in
 
 The default user credentials are as follows.
 
@@ -114,7 +127,7 @@ The default user credentials are as follows.
 | admin@admin.com         | 123456   | Admin     |
 | therapist@therapist.com | 123456   | User      |
 
-###### Starting the server
+#### 4. Starting the server
 You should now have everything ready. Let's start exporing the application.
 
 To start the server, run this command: "php artisan serve". 
