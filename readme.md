@@ -50,8 +50,8 @@ You can download a free version and read the instructions of how to install on y
 Before you clone the project, please select the directory in which you want the project to be located at.
 You can run this command to move to the desire directory:
 
-Windows OS: cd [disk]:\[desire directory] eg cd C:\Program Files__
-Unix based OS: cd /[desire directory] eg cd /usr__
+Windows OS: cd [disk]:\[desire directory] eg cd C:\Program Files
+Unix based OS: cd /[desire directory] eg cd /usr
 
 To clone the project, run this command in the terminal/command line:
 git clone https://github.com/giangpham05/dummy-redfrog.git
