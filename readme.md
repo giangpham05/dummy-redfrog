@@ -64,8 +64,7 @@ This will download all the required files for the project from this repo
 ### III. What's next?
 Now that you have everything installed on your computer, what you need to do is the following:
 #### 1. Run composer
-Please ensure that you are in the dummy-redfrog directory. 
-
+Please ensure that you are in the dummy-redfrog directory. (eg, cd [your folder]/dummy-redfrog)
 Run this command in the terminal/command line: "composer install"
 
 This command will install all the dependencies for the project including the vendor folder that Laravel requires. Because the project is deployed via Github, this folder is ignored by Github by default.
