@@ -55,14 +55,18 @@ Windows OS: cd [disk]:\[desire directory] eg cd C:\Program Files
 Unix based OS: cd /[desire directory] eg cd /usr
 
 To clone the project, run this command in the terminal/command line:
+
 git clone https://github.com/giangpham05/dummy-redfrog.git
+
 This will download all the required files for the project from this repo
 
 ### III. What's next?
 Now that you have everything installed on your computer, what you need to do is the following:
 #### 1. Run composer
 Please ensure that you are in the dummy-redfrog directory. 
+
 Run this command in the terminal/command line: "composer install"
+
 This command will install all the dependencies for the project including the vendor folder that Laravel requires. Because the project is deployed via Github, this folder is ignored by Github by default.
 
 #### 2. Database setup
@@ -93,7 +97,7 @@ Please run this command to generate the key: php artisan key:generate
 #### c) Database migrations
 Now that you have the database connection setup, you will need a number of tables in your database so that the application can run properly.
 ##### Creating tables
-Please ensure that you are still in the dummy-redfrog directory. Run this command from the dummy-redfrog directory: "php artisan migrate". line break,This command will create all required tables for the application to run.
+Please ensure that you are still in the dummy-redfrog directory. Run this command from the dummy-redfrog directory: "php artisan migrate". This command will create all required tables for the application to run.
 ##### Creating dummy data
 Inside the dummy-redfrog/database/seeds, you should see you all the files that create the initial data for the application. An example of this is username and password to log into the application.
 
@@ -110,7 +114,12 @@ The default user credentials are as follows.
 
 ###### Starting the server
 You should now have everything ready. Let's start exporing the application.
-To start the server, run this command: "php artisan serve". This command will procude this line: Laravel development server started on http://localhost:8000/. Please copy http://localhost:8000/ and past it in the url bar of your favorite browser. The project aimed to support IE version 10 to the lastest version, Microsoft edge, Google Chrome, Safari, Opera and Firefox
+
+To start the server, run this command: "php artisan serve". 
+
+This command will procude this line: Laravel development server started on http://localhost:8000/.
+
+Please copy http://localhost:8000/ and past it in the url bar of your favorite browser. The project aimed to support IE version 10 to the lastest version, Microsoft edge, Google Chrome, Safari, Opera and Firefox
 
 
 
