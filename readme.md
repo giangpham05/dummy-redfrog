@@ -33,7 +33,7 @@ You will need to have MySQL Server and a PHP interpreter already installed on yo
 #### 1. MySQL Community Server
 From [MySQL Community Server](https://dev.mysql.com/downloads/mysql/) website and select the version that suits your OS.
 #### 2. PHP interpreter
-From [PHP website](http://php.net/downloads.php)
+From [PHP website](http://php.net/downloads.php) and select the PHP 5.6 version
 
 #### Alternatives
 You can also download a full package that contains MySQL Server, PHP and Apache server. Some of these includes: 
