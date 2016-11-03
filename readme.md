@@ -91,7 +91,7 @@ Please run this command to generate the key: php artisan key:generate
 #### c) Database migrations
 Now that you have the database connection setup, you will need a number of tables in your database so that the application can run properly.
 ##### Creating tables
-Please ensure that you are still in the dummy-redfrog directory. Run this command from the dummy-redfrog directory: "php artisan migrate". This command will create all required tables for the application to run.
+Please ensure that you are still in the dummy-redfrog directory. Run this command from the dummy-redfrog directory: "php artisan migrate". line break,This command will create all required tables for the application to run.
 ##### Creating dummy data
 Inside the dummy-redfrog/database/seeds, you should see you all the files that create the initial data for the application. An example of this is username and password to log into the application.
 
