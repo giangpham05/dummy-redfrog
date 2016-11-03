@@ -98,6 +98,10 @@ DB_PASSWORD=could be none or if you have a password, please specify it here
 
 You should see these lines at the beginning of the .env file:
 
+----------------------------------------------------------------------------
+
+...................
+
 APP_ENV=local
 
 APP_KEY=
@@ -107,6 +111,10 @@ APP_DEBUG=true
 APP_LOG_LEVEL=debug
 
 APP_URL=http://localhost
+
+...................
+
+----------------------------------------------------------------------------
 
 Please run this command to generate the key: "php artisan key:generate"
 
