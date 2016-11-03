@@ -29,21 +29,21 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Instructions
 
 ### Pre-requisites(before you clone the project):
-You will need to have MySQl Server and a PHP interpreter already installed on you machine. You can download a standalone version of these technologies from the following links:
+You will need to have MySQL Server and a PHP interpreter already installed on you machine. You can download a standalone version of these technologies from the following links:
 #### 1. MySQL Community Server
 From https://dev.mysql.com/downloads/mysql/ and select the version that suits your OS.
 #### 2. PHP interpreter
 From http://php.net/downloads.php
 
 #### Alternatives
-You can also download a full package that contains MySQl Server, PHP and Apache server. Some of these includes: 
+You can also download a full package that contains MySQL Server, PHP and Apache server. Some of these includes: 
  - MAMP: https://www.mamp.info/en/
  - WAMP: http://www.wampserver.com/en/
  - XAMPP: https://www.apachefriends.org/index.html
  - By defaut, the project does not require to have any of these packages installed on your machine. The project runs on Nginx web server. 
 
 #### Composer
-The project requires you to have composer installed on your machine
+The project requires you to have composer installed on your machine.
 It is is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. You can download a free version and read the instructions of how to install on your machine from https://getcomposer.org/doc/00-intro.md#using-the-installer.
 
 ### Cloning the project
