@@ -28,19 +28,39 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Instructions
 
-###Pre-requisites(before you clone the project):
+### Pre-requisites(before you clone the project):
 You will need to have MySQl Server and a PHP interpreter already installed on you machine. You can download a standalone version of these technologies from the following links:
-##1. MySQL Community Server
+#### 1. MySQL Community Server
 From https://dev.mysql.com/downloads/mysql/ and select the version that suits your OS.
-##2. PHP interpreter
+#### 2. PHP interpreter
 From http://php.net/downloads.php
 
-##Alternatives
+#### Alternatives
 You can also download a full package that contains MySQl Server, PHP and Apache server. Some of these includes: 
  - MAMP: https://www.mamp.info/en/
  - WAMP: http://www.wampserver.com/en/
  - XAMPP: https://www.apachefriends.org/index.html
- - By defaut, the project does not require to have any of these packages installed on your machine. The poject runs on Nginx web server. 
+ - By defaut, the project does not require to have any of these packages installed on your machine. The project runs on Nginx web server. 
 
-To clone the project, run this command in the terminal:
+#### Composer
+The project requires you to have composer installed on your machine
+It is is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. You can download a free version and read the instructions of how to install on your machine from https://getcomposer.org/doc/00-intro.md#using-the-installer.
+
+### Cloning the project
+Before you clone the project, please select the directory in which you want the project to be located at.
+You can run this command to move to the desire directory:
+Windows OS: cd [disk]:\[desire directory] eg cd C:\Program Files
+Unix based OS: cd /[desire directory] eg cd /usr
+
+To clone the project, run this command in the terminal/command line:
 git clone https://github.com/giangpham05/dummy-redfrog.git
+This will download all the required files for the project from this repo
+### What's next?
+Now that you have everything installed on your computer, what you need to do is the following:
+#### + Run composer
+Please ensure that you are in the dummy-redfrog directory. 
+Run this command in the terminal/command line: "composer install"
+This command will install all the dependencies for the project including the vendor folder that Laravel requires. Because the project is deployed via Github, this folder is ignored by Github by default.
+
+
+
