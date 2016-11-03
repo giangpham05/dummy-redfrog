@@ -75,6 +75,7 @@ You should have a .env.example file in the dummy-refrog directory. To be able to
 
 The .env.example file contains the database credentials. You will need to change the extension of this file to .env or you can create a new file called .env in the same directory and copy the content from .env.example to this file.
 Change the database credentials to your local database like so: (Please ensure that you are doing this in the .env file)
+------------------------------------------------------------------------------
 ...................
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -83,6 +84,7 @@ DB_DATABASE=your_database
 DB_USERNAME=user who has permission to your database, eg root
 DB_PASSWORD=could be none or if you have a password, please specify it here
 ...................
+------------------------------------------------------------------------------
 #### b) Generating an encrypt/app key
 
 You should see these lines at the beginning of the .env file:
